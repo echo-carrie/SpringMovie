@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Press</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="My Show Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='#css?family=Oxygen:400,700,300' rel='stylesheet' type='text/css'>
+<link href='#css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!-- start menu -->
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/menu.css" />
+<script src="js/login.js"></script>
+
+<!---- start-smoth-scrolling---->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+				});
+			});
+		</script>
+<!---- start-smoth-scrolling---->
+</head>
+<body>
+	<!-- header-section-starts -->
+		
+		<div class="header-top-strip" id="home">
+			<div class="container">
+				<div class="header-top-left">
+					<p><a href="support.html">24/7 Customer Care</a> | <a class="play-icon popup-with-zoom-anim" href="#small-dialog" href="#"> Resend Booking Confirmation</a> </p>
+				<div id="small-dialog" class="mfp-hide">
+						<div class="select-city">
+							<h3>Resend Confirmation</h3>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+							<div class="confirmation">
+							<form>
+								<input type="text" class="email" placeholder="Email" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" title="Enter a valid email"/>
+								<input type="text" class="email" placeholder="Mobile Number" maxlength="10" pattern="[1-9]{1}\d{9}" title="Enter a valid mobile number" />
+								<input type="submit" value="SEND">
+							</form>
+						</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>	
+				</div>
+				<div class="header-top-right">
+					<div class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title">模态标题</h4>
+								</div>
+								<div class="modal-body">
+									<p>&hellip;</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary">保存更改</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal-dialog -->
+					</div><!-- /.modal -->
+					<!-- Button trigger modal -->
+		
+					<a class="play-icon popup-with-zoom-anim" href="#small-dialog1">充值会员</a>
+					<a onclick="logout()">退出登录</a>
+					<!---pop-up-box---->  
+					<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+					<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+		
+					<!---//pop-up-box---->
+					<div id="small-dialog1" class="mfp-hide">
+						<img src="images/会员充值页.png" alt="" onclick="buy()">
+					</div>	
+		
+					<script>
+							$(document).ready(function() {
+							$('.popup-with-zoom-anim').magnificPopup({
+								type: 'inline',
+								fixedContentPos: false,
+								fixedBgPos: true,
+								overflowY: 'auto',
+								closeBtnInside: false,
+								preloader: false,
+								midClick: true,
+								removalDelay: 300,
+								mainClass: 'my-mfp-zoom-in'
+							});
+																							
+							});
+					</script>
+					<!-- Large modal -->
+		
+		<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: block;">登录</button>
+		<div class="user-head vip" style="display: none"></div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		
+		<!-- 注册面板 -->
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;</button>
+					<h4 class="modal-title" id="myModalLabel">
+						不要等待，立即登录!</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#Login" data-toggle="tab">登录</a></li>
+								<li><a href="#Registration" data-toggle="tab">注册</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane active" id="Login">
+									<form role="form" class="form-horizontal">
+										<div class="form-group">
+											<label for="email" class="col-sm-2 control-label">
+												电子邮件</label>
+											<div class="col-sm-10">
+												<input type="email" class="form-control" id="email1" placeholder="电子邮件" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="exampleInputPassword1" class="col-sm-2 control-label">
+												密码</label>
+											<div class="col-sm-10">
+												<input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2">
+											</div>
+											<div class="col-sm-10">
+												<button type="submit" class="btn btn-primary btn-sm">
+													提交</button>
+												<a href="javascript:;">忘记密码？</a>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="tab-pane" id="Registration">
+									<form role="form" class="form-horizontal">
+										<div class="form-group">
+											<label for="name" class="col-sm-2 control-label">
+												姓名</label>
+											<div class="col-sm-10">
+												<div class="row">
+													<div class="col-md-3">
+														<select class="form-control">
+															<option>先生</option>
+															<option>女士</option>
+														</select>
+													</div>
+													<div class="col-md-9">
+														<input type="text" class="form-control" placeholder="姓名" id="re-name"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="email" class="col-sm-2 control-label" >
+												电子邮件</label>
+											<div class="col-sm-10">
+												<input type="email" class="form-control" id="email2" placeholder="电子邮件" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="mobile" class="col-sm-2 control-label">
+												手机</label>
+											<div class="col-sm-10">
+												<input type="email" class="form-control" id="mobile" placeholder="手机" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password" class="col-sm-2 control-label">
+												密码</label>
+											<div class="col-sm-10">
+												<input type="password" class="form-control" id="password" placeholder="密码" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2">
+											</div>
+											<div class="col-sm-10">
+												<button type="button" class="btn btn-primary btn-sm save">
+													保存并继续</button>
+												<button type="button" class="btn btn-default btn-sm">
+													取消</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div id="OR" class="hidden-xs">
+								或者</div>
+						</div>
+						<div class="col-md-4">
+							<div class="row text-center sign-with">
+								<div class="col-md-12">
+									<h3 class="other-nw">
+										使用以下方式登录</h3>
+								</div>
+								<div class="col-md-12">
+									<div class="btn-group btn-group-justified">
+										<a href="#" class="btn btn-primary">Facebook</a> 
+										<a href="#" class="btn btn-danger">Google +</a>
+									</div>
+								</div>
+							</div>
+							<div class="row text-center">
+								<div class="col-md-12">
+									<button class="btn btn-info">Wechat</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- <script>
+			document.addEventListener('DOMContentLoaded', function () {
+			// 登录表单提交事件
+			document.querySelector('#Login form').addEventListener('submit', function (event) {
+				event.preventDefault();
+				const email = document.getElementById('email1').value;
+				const password = document.getElementById('exampleInputPassword1').value;
+		
+				const storedEmail = localStorage.getItem('email');
+				const storedPassword = localStorage.getItem('password');
+		
+				if (email === storedEmail && password === storedPassword) {
+					alert('登录成功');
+					// 这里可以重定向到登录后的页面
+				} else {
+					alert('电子邮件或密码错误');
+				}
+			});
+		
+			// 注册表单提交事件
+			const savebtn = document.querySelector('.save')
+			console.log(savebtn)
+			savebtn.addEventListener('click', function (event) {
+		
+				const name = document.querySelector('#re-name').value;
+				const email = document.querySelector('#email2').value;
+				const mobile = document.querySelector('#mobile').value;
+				const password = document.querySelector('#password').value;
+		
+				console.log(name, email, mobile, password)
+				localStorage.setItem('name', name);
+				localStorage.setItem('email', email);
+				localStorage.setItem('mobile', mobile);
+				localStorage.setItem('password', password);
+		
+				alert('注册成功');
+				// 这里可以重定向到注册后的页面
+			});
+		});
+		
+		</script> -->
+		
+		
+		</div>
+		<script>
+			if(!islogin){
+				$('#myModal').modal('show');
+			}
+		</script>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="container">
+		  <div class="main-content">
+			<div class="header">
+				<div class="logo">
+					<a href="index.html"><h1>排行</h1></a>
+				</div>
+				<div class="search">
+					<div class="search2">
+					  <form>
+						<i class="fa fa-search"></i>
+						 <input type="text" value="搜索电影" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '搜索电影';}"/>
+					  </form>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="bootstrap_container">
+				<nav class="navbar navbar-default w3_megamenu" role="navigation">
+					<div class="navbar-header">
+						  <button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand"><i class="fa fa-home"></i></a>
+					</div><!-- end navbar-header -->
+			
+				<div id="defaultmenu" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="index.html">首页</a></li>	
+						<!-- Mega Menu -->
+						<li class="dropdown w3_megamenu-fw"><a href="movies.html" data-toggle="dropdown" class="dropdown-toggle">电影<b class="caret"></b></a>
+							<ul class="dropdown-menu fullwidth">
+								<li class="w3_megamenu-content">
+									<div class="row">
+									<h5 class="movies-page">更多 - <a href="trailers-now-showing.html">点击这里</a> </h5>
+										<div class="col-sm-4">
+											  <h3 class="title">在映</h3>
+											<ul class="mov_list">
+							<li>99%</li>
+							<li><a href="movie-single.html">Baahubali (Telugu) (U/A)</a></li>
+						</ul>
+						<ul class="mov_list">
+							<li>100%</li>
+							<li><a href="movie-single.html">Baahubali (Hindi) (U/A)</a></li>
+						</ul>
+						<ul class="mov_list">
+							<li>98%</li>
+							<li><a href="movie-single.html">Baahubali (English) (U/A)</a></li>
+						</ul>
+						<ul class="mov_list">
+							<li>80%</li>
+							<li><a href="movie-single.html">Jurassic World (3D Hindi) (U/A)</a></li>
+						</ul>
+						<ul class="mov_list">
+							<li>65%</li>
+							<li><a href="movie-single.html">Hamari Adhuri Kahani (U)</a></li>
+						</ul>
+										</div><!-- end col-4 -->
+										<div class="col-sm-4 movie-dd">
+											  <h3 class="title">重映电影</h3>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+										</div><!-- end col-4 -->
+										<div class="col-sm-4 movie-dd">
+											  <h3 class="title">即将上映</h3>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
+											<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>                                    		
+										</div><!-- end col-4 -->
+										<div class="clearfix"></div>
+										<div class="menu-featured-movies">
+											<h3 class="title">精彩推荐</h3>
+											<div class="col-md-2 menu-featured-movies-img">
+												<a href="movie-single.html"><img src="images/mf1.jpg" alt="" /></a>
+											</div>
+											<div class="col-md-2 menu-featured-movies-img">
+												<a href="movie-single.html"><img src="images/mf2.jpg" alt="" /></a>
+											</div>
+											<div class="col-md-2 menu-featured-movies-img">
+												<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
+											</div>
+											<div class="col-md-2 menu-featured-movies-img">
+												<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
+											</div>
+											<div class="col-md-2 menu-featured-movies-img">
+												<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
+											</div>
+											<div class="col-md-2 menu-featured-movies-img">
+												<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div><!-- end row -->
+									<hr>
+						
+								</li>
+							</ul>
+						</li>
+	
+						<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">活动<b class="caret"></b></a>
+						<ul class="dropdown-menu half">
+							<li class="w3_megamenu-content withdesc">
+								<div class="row">
+									<h5 class="movies-page">活动页面 - <a href="events.html">点击这里</a> </h5>
+									<h3 class="title">精选活动</h3>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="events.html"><img src="images/f2.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="events.html"><img src="images/f3.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="events.html"><img src="images/f4.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="events.html"><img src="images/f1.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">戏剧<b class="caret"></b></a>
+						<ul class="dropdown-menu half3">
+							<li class="w3_megamenu-content withoutdesc">
+								<div class="row">
+									<h5 class="movies-page">戏剧页面 - <a href="plays.html">点击这里</a> </h5>
+									<h3 class="title">精选戏剧</h3>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="plays.html"><img src="images/f2.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="plays.html"><img src="images/f3.jpg" alt=""></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="plays.html"><img src="images/f4.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="plays.html"><img src="images/f1.jpg" alt="" /></a>
+											</div>
+											<div class="e-buy-tickets">
+												<a href="event-payment.html">购买门票</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">体育<b class="caret"></b></a>
+						<ul class="dropdown-menu half3">
+							<li class="w3_megamenu-content withoutdesc">
+								<div class="row">
+									<h5 class="movies-page">体育页面 - <a href="sports.html">点击这里</a> </h5>
+									<h3 class="title">精选体育活动</h3>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="sports.html"><img src="images/me1.jpg" alt="" /></a>
+												<a class="plays-go" href="#">排球是一项团队运动</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="sports.html"><img src="images/me2.jpg" alt="" /></a>
+												<a class="plays-go" href="#">追逐，我们会赢得比赛。</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="sports.html"><img src="images/me3.jpg" alt="" /></a>
+												<a class="plays-go" href="#">2015年溜冰运动</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="e-movie">
+											<div class="e-movie-img">
+												<a href="sports.html"><img src="images/me4.jpg" alt="" /></a>
+												<a class="plays-go" href="#">SVM保龄球与游戏</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+	
+						<!-- end dropdown-menu -->
+					</li>
+					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">页面<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="about.html">关于我们</a></li>
+							<li><a href="blog.html">博客</a></li>
+							<li><a href="404.html">404 错误</a></li>
+							<li><a href="contact.html">联系我们</a></li>
+							<li><a href="faq.html">常见问题</a></li>
+							<li><a href="about.html">当前职位</a></li>
+							<li class="dropdown-submenu">
+								<a href="#">新闻</a>
+								<ul class="dropdown-menu">
+									<li><a href="press.html">新闻发布</a></li>
+									<li><a href="public-relations.html">公共关系</a></li>
+									<li><a href="press.html">媒体报道</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>				
+						</ul><!-- end dropdown-menu -->
+							</li><!-- end dropdown-submenu -->
+							</ul>
+						   <!-- end dropdown-menu -->
+						</li><!-- end standard drop down -->
+						<!-- end dropdown w3_megamenu-fw -->
+					</ul><!-- end nav navbar-nav -->
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<form id="contact1" action="#" name="contactform" method="post">
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<input type="text" name="name" id="name1" class="form-control" placeholder="姓名"> 
+											<input type="text" name="email" id="email1" class="form-control" placeholder="邮箱"> 
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<input type="text" name="phone" id="phone1" class="form-control" placeholder="手机">
+											<input type="text" name="subject" id="subject1" class="form-control" placeholder="主题"> 
+										</div>                 
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<textarea class="form-control" name="comments" id="comments1" rows="6" placeholder="联系内容"></textarea>
+										</div>   
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="pull-right">
+												<input type="submit" value="发送" id="submit1" class="btn btn-primary small">
+											</div>  
+										</div>
+										<div class="clearfix"></div>  
+									</form>
+								</li>
+							</ul>
+						</li>
+					</ul><!-- end nav navbar-nav navbar-right -->
+				</div><!-- end #navbar-collapse-1 -->
+				
+				</nav><!-- end navbar navbar-default w3_megamenu -->
+			</div><!-- end container -->
+    
+<!-- AddThis Smart Layers END -->
+
+	<ol class="breadcrumb">
+			  <li><a href="index.html">Home</a></li>
+			  <li class="active">Press</li>
+			</ol>
+	<!----->
+	<div class="press">
+		<h3>在映电影播放排行</h3>
+		<div class="tabs-box">
+			<ul class="tabs-menu">
+				<li><a href="#tab1"><span> </span>按好评排序</a></li>
+				<li><a href="#tab2"><span> </span>本周排行</a></li>
+				<li><a href="#tab3"><span> </span>本月排行</a></li>
+				<li><a href="#tab4"><span> </span>全部排行</a></li>
+			</ul>
+			<div class="clearfix"> </div>
+
+			<style>
+				.tab-grid{
+					/* border: 1px red solid; */
+				}
+				.container {
+					width: 80%;
+					margin: auto;
+					overflow: hidden;
+				}
+				.movie-ranking {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+				}
+
+				.movie-item {
+					background: #fff;
+					border-radius: 5px;
+					box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+					display: flex;
+					padding: 10px;
+					transition: transform 0.3s ease;
+				}
+
+				.movie-item:hover {
+					transform: translateY(-5px);
+				}
+
+				.movie-rank {
+					font-size: 1.5em;
+					font-weight: bold;
+					margin-right: 20px;
+				}
+
+				.movie-info {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+				}
+
+				.movie-title {
+					font-size: 1.2em;
+					margin: 0;
+				}
+
+				.movie-views {
+					font-size: 0.9em;
+					color: #666;
+				}
+
+			</style>
+			<script>
+				document.addEventListener('DOMContentLoaded', () => {
+				const movies = [
+					{ title: '疯狂动物城', views: 1500000 },
+					{ title: '当幸福来敲门', views: 1200000 },
+					{ title: '复仇者联盟4', views: 1000000 },
+					{ title: '一步之遥', views: 900000 },
+					{ title: '无敌破坏王', views: 850000 }
+				];
+				const weekmovies = [
+					{ title: '钢铁侠', views: 1500000 },
+					{ title: '霸王别姬', views: 1200000 },
+					{ title: '沙丘', views: 1000000 },
+					{ title: '星际穿越', views: 900000 },
+					{ title: '流浪地球', views: 850000 }
+				];
+				const monthmovies = [
+					{ title: '绿皮书', views: 1500000 },
+					{ title: '阿甘正传', views: 1200000 },
+					{ title: '泰坦尼克号', views: 1000000 },
+					{ title: '千与千寻', views: 900000 },
+					{ title: '这个杀手不太冷', views: 850000 }
+				];
+				const totalmovies = [
+					{ title: '美丽人生', views: 1500000 },
+					{ title: '盗梦空间', views: 1200000 },
+					{ title: '黑客帝国', views: 1000000 },
+					{ title: '海上钢琴师', views: 900000 },
+					{ title: '放牛班的春天', views: 850000 },
+					{ title: '汽车总动员', views: 850000 },
+					{ title: '无间道', views: 850000 }
+				];
+
+				const movieRankingContainer = document.getElementById('movie-ranking');
+				const WeekRanker = document.querySelector('#week-ranking')
+				const MonthRanker = document.querySelector('#month-ranking')
+				const TotalRanker = document.querySelector('#total-ranking')
+
+				movies.forEach((movie, index) => {
+					const movieItem = document.createElement('div');
+					movieItem.classList.add('movie-item');
+
+					const movieRank = document.createElement('div');
+					movieRank.classList.add('movie-rank');
+					movieRank.textContent = `#${index + 1}`;
+
+					const movieInfo = document.createElement('div');
+					movieInfo.classList.add('movie-info');
+
+					const movieTitle = document.createElement('div');
+					movieTitle.classList.add('movie-title');
+					movieTitle.textContent = movie.title;
+
+					const movieViews = document.createElement('div');
+					movieViews.classList.add('movie-views');
+					movieViews.textContent = `${movie.views.toLocaleString()} views`;
+
+					movieInfo.appendChild(movieTitle);
+					movieInfo.appendChild(movieViews);
+
+					movieItem.appendChild(movieRank);
+					movieItem.appendChild(movieInfo);
+
+					movieRankingContainer.appendChild(movieItem);
+				});
+				weekmovies.forEach((movie, index) => {
+					const movieItem = document.createElement('div');
+					movieItem.classList.add('movie-item');
+
+					const movieRank = document.createElement('div');
+					movieRank.classList.add('movie-rank');
+					movieRank.textContent = `#${index + 1}`;
+
+					const movieInfo = document.createElement('div');
+					movieInfo.classList.add('movie-info');
+
+					const movieTitle = document.createElement('div');
+					movieTitle.classList.add('movie-title');
+					movieTitle.textContent = movie.title;
+
+					const movieViews = document.createElement('div');
+					movieViews.classList.add('movie-views');
+					movieViews.textContent = `${movie.views.toLocaleString()} views`;
+
+					movieInfo.appendChild(movieTitle);
+					movieInfo.appendChild(movieViews);
+
+					movieItem.appendChild(movieRank);
+					movieItem.appendChild(movieInfo);
+
+					WeekRanker.appendChild(movieItem);
+				});
+				monthmovies.forEach((movie, index) => {
+					const movieItem = document.createElement('div');
+					movieItem.classList.add('movie-item');
+
+					const movieRank = document.createElement('div');
+					movieRank.classList.add('movie-rank');
+					movieRank.textContent = `#${index + 1}`;
+
+					const movieInfo = document.createElement('div');
+					movieInfo.classList.add('movie-info');
+
+					const movieTitle = document.createElement('div');
+					movieTitle.classList.add('movie-title');
+					movieTitle.textContent = movie.title;
+
+					const movieViews = document.createElement('div');
+					movieViews.classList.add('movie-views');
+					movieViews.textContent = `${movie.views.toLocaleString()} views`;
+
+					movieInfo.appendChild(movieTitle);
+					movieInfo.appendChild(movieViews);
+
+					movieItem.appendChild(movieRank);
+					movieItem.appendChild(movieInfo);
+
+					MonthRanker.appendChild(movieItem);
+				});
+				totalmovies.forEach((movie, index) => {
+					const movieItem = document.createElement('div');
+					movieItem.classList.add('movie-item');
+
+					const movieRank = document.createElement('div');
+					movieRank.classList.add('movie-rank');
+					movieRank.textContent = `#${index + 1}`;
+
+					const movieInfo = document.createElement('div');
+					movieInfo.classList.add('movie-info');
+
+					const movieTitle = document.createElement('div');
+					movieTitle.classList.add('movie-title');
+					movieTitle.textContent = movie.title;
+
+					const movieViews = document.createElement('div');
+					movieViews.classList.add('movie-views');
+					movieViews.textContent = `${movie.views.toLocaleString()} views`;
+
+					movieInfo.appendChild(movieTitle);
+					movieInfo.appendChild(movieViews);
+
+					movieItem.appendChild(movieRank);
+					movieItem.appendChild(movieInfo);
+
+					TotalRanker.appendChild(movieItem);
+				});
+			
+			});
+			</script>
+			<div class="tab-grids">
+				<div id="tab1" class="tab-grid">
+					<div class="container">
+						<div class="movie-ranking" id="movie-ranking">
+						</div>
+					</div>
+
+				</div>
+				<div id="tab2" class="tab-grid">
+					<div class="container">
+						<div class="movie-ranking" id="week-ranking">
+						</div>
+					</div>
+				</div>
+				<div id="tab3" class="tab-grid">
+					<div class="container">
+						<div class="movie-ranking" id="month-ranking">
+						</div>
+					</div>
+				</div>
+				<div id="tab4" class="tab-grid">
+					<div class="container">
+						<div class="movie-ranking" id="total-ranking">
+						</div>
+					</div>
+				</div>
+				</div>
+			
+			<div class="clearfix"> </div>
+		</div>
+	<!--start-carrer-->
+	<!----- Comman-js-files ----->
+		<script>
+			$(document).ready(function() {
+				$("#tab2").hide();
+				$("#tab3").hide();
+				$("#tab4").hide();
+				$(".tabs-menu a").click(function(event){
+					event.preventDefault();
+					var tab=$(this).attr("href");
+					$(".tab-grid").not(tab).css("display","none");
+					$(tab).fadeIn("slow");
+				});
+			});
+		</script>
+	</div>
+		<div class="footer-top-strip">
+		<p><span>Showing in cities : </span><a href="movies.html">Bengaluru</a>, <a href="movies.html">Hyderabad</a>, <a href="movies.html">Khammam</a>, <a href="movies.html">Kurnool</a>, <a href="movies.html">Nizamabad</a>, <a href="movies.html">Vijayawada</a>, <a href="#">Vizag</a>, <a href="movies.html">Vizianagaram</a>, <a href="movies.html">Warangal</a></p>
+		<p><span>Cinemas Nearby : </span><a href="movie-single.html"> INOX: Jyoti Mall, Kurnool </a>|
+			<p><span>Next Change <i>(Friday, 19 Jun) </i>: </span><a href="movie-single.html">Disney's ABCD 2 (3D) (U)</a>, <a href="movie-single.html"> 2 Premi Premache</a> , <a href="movie-single.html">Dekh Ke (Bhojpuri)</a> , <a href="movie-single.html">Disney's ABCD 2 (2D) (U)</a>, <a href="movie-single.html">Dekh Ke (Bhojpuri)</a></p>
+			<p><span>Coming Soon :</span><a href="movie-single.html"> 2 Premi Premache</a>, <a href="movie-single.html">Acharam, Dekh Ke (Bhojpuri)</a>, <a href="movie-single.html">Entourage</a>, <a href="movie-single.html">Kuttram Kadithal</a></p>
+		</div>
+	</div>
+		<div class="footer">
+			<div class="col-md-3 footer-left">
+				<div class="f-mov-list">
+					<h4>最新电影</h4>
+					<ul>
+						<li><a href="now-showing.html">正在上映</a></li>
+						<li><a href="comming-soon.html">即将上映</a></li>
+						<li><a href="celebrities.html">电影名人</a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="f-mov-list">
+					<h4>电影评论</h4>
+					<ul>
+						<li><a href="404.html" target="target_blank">娱乐新闻</a></li>
+						<li><a href="blog.html" target="target_blank">Rajeev Masand</a></li>
+						<li><a href="blog.html" target="target_blank">影评</a></li>
+						<li><a href="write-us.html" target="target_blank">访客博客</a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="f-mov-list">
+					<h4>电影预告片</h4>
+					<ul>
+						<li><a href="trailers-now-showing.html">正在上映</a></li>
+						<li><a href="trailers-comming-soon.html">即将上映</a></li>                        
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="col-md-3 footer-left">
+				<div class="f-mov-list">
+					<h4>电影院和地区</h4>
+					<ul>
+						<li><a href="regions.html">所有地区</a></li>
+						<li><a href="cinema-chain.html">电影院连锁</a></li>
+						<li><a href="cinemas.html">电影院</a></li>                        
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="f-mov-list">
+					<h4>按语言分类的电影</h4>
+					<ul>
+						<li><a href="movies.html">印地语</a></li>
+						<li><a href="movies.html">英语</a></li>
+						<li><a href="movies.html">马拉地语</a></li>
+						<li><a href="movies.html">孟加拉语</a></li>
+						<li><a href="movies.html">泰米尔语</a></li>
+						<li><a href="movies.html">泰卢固语</a></li>
+						<li><a href="movies.html">马拉雅拉姆语</a></li>
+						<li><a href="movies.html">博杰普尔语</a></li>
+						<li><a href="movies.html">卡纳达语</a></li>                    
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="col-md-3 footer-left">
+				<div class="f-mov-list">
+					<h4>独家内容</h4>
+					<ul>
+						<li><a href="donate.html">预订微笑</a></li>
+						<li><a href="vochers.html">企业代金券</a></li>
+						<li><a href="gift-cards.html">礼品卡</a></li>
+					</ul>
+					<div class="clearfix"></div>                    
+				</div>    
+				<div class="f-mov-list">
+					<h4>帮助</h4>
+					<ul>
+						<li><a href="site-map.html">网站地图</a></li>
+						<li><a href="feed-back.html">反馈</a></li>
+						<li><a href="faq.html">常见问题</a></li>
+						<li><a href="terms-and-conditions.html">条款和条件</a></li>
+						<li><a href="privacy-policy.html">隐私政策</a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>            
+			</div>
+			<div class="col-md-3 footer-left">
+				<div class="f-mov-list">
+					<h4>按类型分类的电影</h4>
+					<ul>
+						<li><a href="movies.html">动作片</a></li>
+						<li><a href="movies.html">爱情片</a></li>
+						<li><a href="movies.html">喜剧片</a></li>
+						<li><a href="movies.html">成人片</a></li>
+						<li><a href="movies.html">冒险片</a></li>
+						<li><a href="movies.html">经典片</a></li>
+						<li><a href="movies.html">犯罪片</a></li>
+						<li><a href="movies.html">剧情片</a></li>
+						<li><a href="movies.html">家庭片</a></li>
+						<li><a href="movies.html">奇幻片</a></li>
+						<li><a href="movies.html">音乐片</a></li>
+						<li><a href="movies.html">悬疑片</a></li>
+						<li><a href="movies.html">惊悚片</a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-12">
+				<div class="footer-right">
+					<div class="follow-us">
+						<h5 class="f-head">关注我们</h5>
+						<ul class="social-icons">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="subscribe">
+						<h5 class="f-head">订阅我们的新闻</h5>
+						<input type="text" class="text" value="输入电子邮件地址" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '输入电子邮件地址';}">
+						<input type="submit" value="提交">
+						<div class="clearfix"></div>
+					</div>
+					<div class="recent_24by7">
+						<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i class="fa fa-calendar-o"></i>重新发送预订确认</a>
+						<a href="support.html"><i class="fa fa-question"></i>24/7 客户服务</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		</div>
+	</div>
+ <script src="js/responsive-tabs.js"></script>
+    <script type="text/javascript">
+      $( '#myTab a' ).click( function ( e ) {
+        e.preventDefault();
+        $( this ).tab( 'show' );
+      } );
+
+      $( '#moreTabs a' ).click( function ( e ) {
+        e.preventDefault();
+        $( this ).tab( 'show' );
+      } );
+
+      ( function( $ ) {
+          // Test for making sure event are maintained
+          $( '.js-alert-test' ).click( function () {
+            alert( 'Button Clicked: Event was maintained' );
+          } );
+          fakewaffle.responsiveTabs( [ 'xs', 'sm' ] );
+      } )( jQuery );
+
+    </script>
+ <script type="text/javascript">
+	$(document).ready(function() {
+		/*
+		var defaults = {
+			containerID: 'toTop', // fading element id
+			containerHoverID: 'toTopHover', // fading element hover id
+			scrollSpeed: 1200,
+			easingType: 'linear' 
+		};
+		*/
+		
+		$().UItoTop({ easingType: 'easeOutQuart' });
+		
+	});
+</script>
+				<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+</body>
+</html>
