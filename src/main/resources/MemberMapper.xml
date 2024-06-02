@@ -11,4 +11,20 @@
         INSERT INTO members (username, password, is_vip) VALUES (#{username}, #{password}, #{vip})
     </insert>
 
+    <!-- ResultMap for User entity -->
+    <resultMap id="userResultMap" type="com.example.project.entity.User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="type" column="type" />
+        <!-- 映射其他字段 -->
+    </resultMap>
+
+    <!-- SQL statement to select a user by ID -->
+    <select id="selectUserById" parameterType="java.lang.Long" resultMap="userResultMap">
+        SELECT id, username, password, type
+        FROM users
+        WHERE id = #{id}
+    </select>
+
 </mapper>
