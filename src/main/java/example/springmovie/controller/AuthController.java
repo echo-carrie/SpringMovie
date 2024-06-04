@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -44,45 +45,47 @@ public class AuthController {
         return message;
     }
 
-        @PostMapping("/login")
-        public String login(@RequestBody LoginRequest loginRequest) {
-            User user = userService.findUserByUsername(loginRequest.getUsername());
-            if (user != null) {
-                // 使用Sa-Token的BCrypt方法验证密码
-                boolean passwordMatch = BCrypt.checkpw(loginRequest.getPassword(), user.getPassword());
-                if (passwordMatch) {
-                    // 登录成功，使用Sa-Token生成Token
-                    StpUtil.login(user.getId());
-
-                    return "Login successful";
-                } else {
-                    return "Invalid password";
-                }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        User user = userService.findUserByUsername(loginRequest.getUsername());
+        if (user != null) {
+            // 使用 BCrypt 验证密码
+            boolean passwordMatch = BCrypt.checkpw(loginRequest.getPassword(), user.getPassword());
+            if (passwordMatch) {
+                // 登录成功，使用 Sa-Token 生成 Token
+                StpUtil.login(user.getId());
+                return ResponseEntity.ok("Login successful");
             } else {
-                return "User not found";
+                return ResponseEntity.status(401).body("Invalid password");
             }
+        } else {
+            return ResponseEntity.status(404).body("User not found");
         }
+    }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest registerRequest) {
-        // 使用Sa-Token的BCrypt方法生成盐和密码散列值
+    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+        // 使用 BCrypt 生成盐和密码散列值
         String salt = BCrypt.gensalt();
         String hashedPassword = BCrypt.hashpw(registerRequest.getPassword(), salt);
 
-        // 查找是否存在用户，如果存在就返回已经存在
+        // 检查是否存在用户，如果存在就返回已经存在
         User existingUser = userService.findUserByUsername(registerRequest.getUsername());
         if (existingUser != null) {
-            return "User already exists";
+            return ResponseEntity.status(409).body("User already exists");
         }
 
-        // 将散列密码存储到数据库中
+        // 创建并存储新的用户
         User newUser = new User();
         newUser.setUsername(registerRequest.getUsername());
         newUser.setPassword(hashedPassword);
-        newUser.setType(registerRequest.getType());
-        // 存储用户到数据库的逻辑
+        newUser.setEmail(registerRequest.getEmail());
+        newUser.setIsVip(registerRequest.getIsVip());
+        newUser.setCreatedAt(LocalDateTime.now());
+        newUser.setUpdatedAt(LocalDateTime.now());
         userService.registerUser(newUser);
-        return "User registered successfully";
+
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @GetMapping("/check")

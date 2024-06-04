@@ -5,25 +5,33 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM user WHERE username = #{username}")
+    @Select("SELECT * FROM users WHERE username = #{username}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "username", column = "username"),
             @Result(property = "password", column = "password"),
-            @Result(property = "type", column = "type")
+            @Result(property = "email", column = "email"),
+            @Result(property = "isVip", column = "is_vip"),
+            @Result(property = "createdAt", column = "created_at"),
+            @Result(property = "updatedAt", column = "updated_at")
     })
     User findByUsername(String username);
 
-    @Select("SELECT * FROM user WHERE id = #{id}")
+    @Select("SELECT * FROM users WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "username", column = "username"),
             @Result(property = "password", column = "password"),
-            @Result(property = "type", column = "type")
+            @Result(property = "email", column = "email"),
+            @Result(property = "isVip", column = "is_vip"),
+            @Result(property = "createdAt", column = "created_at"),
+            @Result(property = "updatedAt", column = "updated_at")
     })
-    User selectUserById(Integer id); // 参数类型为Integer
+    User selectUserById(Long id);
 
-    @Insert("INSERT INTO user(username, password, type) VALUES(#{username}, #{password}, #{type})")
+    @Insert("INSERT INTO users(username, password, email, is_vip, created_at) VALUES(#{username}, #{password}, #{email}, #{isVip}, #{createdAt})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(User user);
+
+
 }

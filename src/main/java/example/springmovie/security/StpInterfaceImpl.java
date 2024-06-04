@@ -21,23 +21,17 @@ public class StpInterfaceImpl implements StpInterface {
     /**
      * 返回一个账号所拥有的权限码集合
      */
-    @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
         List<String> permissions = new ArrayList<>();
-        // 确保getUserById方法存在于UserService中
-        User user = userService.getUserById(loginId.toString());
+        User user = userService.getUserById(Long.parseLong(loginId.toString()));
 
         if (user != null) {
-            switch (user.getType()) {
-                case "vip":
-                    permissions.add("VIP");
-                    // 其他VIP权限
-                    break;
-                case "non-vip":
-                default:
-                    permissions.add("NON-VIP");
-                    // 其他非VIP权限
-                    break;
+            if (user.getIsVip() != null && user.getIsVip()) {
+                permissions.add("VIP");
+                // 其他VIP权限
+            } else {
+                permissions.add("NON-VIP");
+                // 其他非VIP权限
             }
         }
 
@@ -50,17 +44,13 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         List<String> roles = new ArrayList<>();
-        User user = userService.getUserById(loginId.toString());
+        User user = userService.getUserById(Long.parseLong(loginId.toString()));
 
         if (user != null) {
-            switch (user.getType()) {
-                case "vip":
-                    roles.add("VIP");
-                    break;
-                case "non-vip":
-                default:
-                    roles.add("NON-VIP");
-                    break;
+            if (user.getIsVip() != null && user.getIsVip()) {
+                roles.add("VIP");
+            } else {
+                roles.add("NON-VIP");
             }
         }
 

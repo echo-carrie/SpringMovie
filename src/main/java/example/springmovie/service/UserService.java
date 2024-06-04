@@ -18,9 +18,7 @@ public class UserService {
         userMapper.insertUser(user);
     }
 
-    public User getUserById(String userId) {
-        // 将字符串转换为Integer类型
-        Integer id = Integer.parseInt(userId);
-        return userMapper.selectUserById(id);
+    public User getUserById(Long userId) {
+        return userMapper.selectUserById(userId);
     }
 }
