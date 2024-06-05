@@ -11,7 +11,10 @@ import lombok.Data;
 @Data
 @Getter
 @Setter
+//使用data进行依赖注入
+//setter、getter方法会对get、set进行注入
 public class Movie {
+//    标识主键
     @TableId
     private Long id;
 

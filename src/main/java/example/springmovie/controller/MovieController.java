@@ -1,44 +1,34 @@
 package example.springmovie.controller;
 
+import com.github.pagehelper.PageInfo;
 import example.springmovie.entity.Movie;
 import example.springmovie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import example.springmovie.util.pageHelperUtil.PageBean;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-    private final MovieService movieService;
 
     @Autowired
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
+    private MovieService movieService;
+
+//    在postman中输入下列网址进行访问，其中如果有10页，访问了第十一页，那么返回的依然是第十页的数据，在编代码时要注意这一点。
+    @GetMapping("/popular")
+//    测试：http://localhost:8080/movies/popular?page=1&size=10
+    public PageInfo<Movie> getMoviesByPopularity(@RequestParam int pageNum, @RequestParam int pageSize) {
+        return movieService.getMoviesByPopularity(pageNum, pageSize);
     }
 
-    // 按热播排行展示电影，支持分页
-    @GetMapping("/hot")
-    public PageBean<Movie> getHotMovies(@RequestParam(defaultValue = "1") int pageNum,
-                                        @RequestParam(defaultValue = "10") int pageSize) {
-        return movieService.getHotMovies(pageNum, pageSize);
-    }
-
-    // 按类型展示电影，支持分页
     @GetMapping("/genre")
-    public PageBean<Movie> getMoviesByGenre(@RequestParam (defaultValue = "犯罪")String genre,
-                                            @RequestParam(defaultValue = "1") int pageNum,
-                                            @RequestParam(defaultValue = "10") int pageSize) {
+//    测试：http://localhost:8080/movies/genre?genre="犯罪"&page=1&size=10
+    public PageInfo<Movie> getMoviesByGenre(@RequestParam String genre, @RequestParam int pageNum, @RequestParam int pageSize) {
         return movieService.getMoviesByGenre(genre, pageNum, pageSize);
     }
 
-    // 按地区展示电影，支持分页
+//    测试：http://localhost:8080/movies/region?region=美国&pageNum=1&pageSize=2
     @GetMapping("/region")
-    public PageBean<Movie> getMoviesByRegion(@RequestParam (defaultValue = "美国")String region,
-                                             @RequestParam(defaultValue = "1") int pageNum,
-                                             @RequestParam(defaultValue = "10") int pageSize) {
+    public PageInfo<Movie> getMoviesByRegion(@RequestParam String region, @RequestParam int pageNum, @RequestParam int pageSize) {
         return movieService.getMoviesByRegion(region, pageNum, pageSize);
     }
 }

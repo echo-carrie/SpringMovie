@@ -1,5 +1,6 @@
 package example.springmovie.dto;
 
+//dto层，相当于一个封装数据包，前后端通过这个数据包进行信息交换，前端一般使用json格式。
 public class RegisterRequest {
     private String username;
     private String password;
