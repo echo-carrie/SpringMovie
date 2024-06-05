@@ -41,8 +41,4 @@ public class Movie {
     private LocalDate createdAt;
 
     private LocalDate updatedAt;
-
-    // 构造方法、Getter和Setter方法
-
-
 }

@@ -40,4 +40,29 @@ public class MovieService {
         List<Movie> movies = movieMapper.selectByRegion(region);
         return new PageInfo<>(movies);
     }
+
+    //  按播放量排序
+    public PageInfo<Movie> getRankingMovies(String rankingType, int pageNum, int pageSize) {
+        List<Movie> movies;
+        //   使用pageHelper进行分页
+        PageHelper.startPage(pageNum, pageSize);
+        //   toLowerCase不受大小写影响
+        switch (rankingType.toLowerCase()) {
+            case "weekly":
+                movies = movieMapper.selectByWeeklyRanking();
+                break;
+            case "monthly":
+                movies = movieMapper.selectByMonthlyRanking();
+                break;
+            case "total":
+                movies = movieMapper.selectByTotalRanking();
+                break;
+            case "good_reviews":
+                movies = movieMapper.selectByGoodReviewsRanking();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid ranking type: " + rankingType);
+        }
+        return new PageInfo<>(movies);
+    }
 }
