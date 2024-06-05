@@ -28,7 +28,7 @@ public class MovieController {
 
     // 按类型展示电影，支持分页
     @GetMapping("/genre")
-    public PageBean<Movie> getMoviesByGenre(@RequestParam String genre,
+    public PageBean<Movie> getMoviesByGenre(@RequestParam (defaultValue = "犯罪")String genre,
                                             @RequestParam(defaultValue = "1") int pageNum,
                                             @RequestParam(defaultValue = "10") int pageSize) {
         return movieService.getMoviesByGenre(genre, pageNum, pageSize);
@@ -36,7 +36,7 @@ public class MovieController {
 
     // 按地区展示电影，支持分页
     @GetMapping("/region")
-    public PageBean<Movie> getMoviesByRegion(@RequestParam String region,
+    public PageBean<Movie> getMoviesByRegion(@RequestParam (defaultValue = "美国")String region,
                                              @RequestParam(defaultValue = "1") int pageNum,
                                              @RequestParam(defaultValue = "10") int pageSize) {
         return movieService.getMoviesByRegion(region, pageNum, pageSize);
