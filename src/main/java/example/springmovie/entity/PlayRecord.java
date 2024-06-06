@@ -1,26 +1,22 @@
 package example.springmovie.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
 public class PlayRecord {
+    @TableId
     private int id;
     private Long user_id;
     private Long movie_id;
     private Date created_at;
     private int play_time;
 
-    public void setUserId(Long userId) {
-        this.user_id = userId;
-    }
-
-    public void setCreated_at(java.sql.Timestamp timestamp) {
-        this.created_at= timestamp;
-    }
-
-    public void setVideoId(Long videoId) {
-        this.movie_id=videoId;
-    }
     public void setPlayTime() {
         this.play_time+=1;
     }

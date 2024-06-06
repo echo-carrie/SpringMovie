@@ -37,10 +37,10 @@ public class MovieController {
 
 //    进行本周排行，本月排行，全部排行，按好评排行等
 //    测试：
-//  /weekly 每周播放量 http://localhost:8080/movies/ranking/weekly
-//  /monthly 每月播放量 http://localhost:8080/movies/ranking/monthly
-//  /total 总播放量 http://localhost:8080/movies/ranking/total
-//  /good_reviews 好评量 http://localhost:8080/movies/ranking/good_reviews
+//  /weekly 每周播放量
+//  /monthly 每月播放量
+//  /total 总播放量
+//  /good_reviews 好评量
 // 使用路径变量 {rankingType} 来获取排行类型，并分页展示电影排行
     @GetMapping("/ranking/{rankingType}")
     public ResponseEntity<PageInfo<Movie>> getRankingMovies(

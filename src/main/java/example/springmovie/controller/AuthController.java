@@ -18,7 +18,11 @@ import java.util.List;
 public class AuthController {
     @Autowired
     private UserService userService;
-
+//    GET http://localhost:8080/user/role
+//{
+//    "username":"jc",
+//        "password":"123"
+//}
     @GetMapping("/role")
     public String Role(){
         List<String> roleList= StpUtil.getRoleList();
@@ -31,7 +35,11 @@ public class AuthController {
         // 返回响应消息
         return message;
     }
-
+//    GET http://localhost:8080/user/permission
+//{
+//    "username":"jc",
+//        "password":"123"
+//}
     @GetMapping("/permission")
     public String Permission(){
         List<String> permissionList= StpUtil.getPermissionList();
@@ -45,6 +53,11 @@ public class AuthController {
         return message;
     }
 
+//    POST http://localhost:8080/user/login
+//{
+//    "username":"jc",
+//        "password":"123"
+//}
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         User user = userService.findUserByUsername(loginRequest.getUsername());
@@ -62,7 +75,12 @@ public class AuthController {
             return ResponseEntity.status(404).body("User not found");
         }
     }
-
+// POST http://localhost:8080/user/register
+//    {
+//        "username":"jc",
+//            "password":"123",
+//            "isVip":"VIP"
+//    }
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
         // 使用 BCrypt 生成盐和密码散列值
@@ -88,6 +106,7 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
 
+    // POST http://localhost:8080/user/check
     @GetMapping("/check")
     public String checkAuth() {
         if (cn.dev33.satoken.stp.StpUtil.isLogin()) {
@@ -97,6 +116,7 @@ public class AuthController {
         }
     }
 
+    // POST http://localhost:8080/user/logout
     @PostMapping("/logout")
     public String logout() {
         cn.dev33.satoken.stp.StpUtil.logout();

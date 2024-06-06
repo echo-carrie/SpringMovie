@@ -38,4 +38,8 @@ public interface MovieMapper extends BaseMapper<Movie> {
     // 按好评次数排行
     @Select("SELECT * FROM movies ORDER BY good_reviews DESC")
     List<Movie> selectByGoodReviewsRanking();
+
+    @Select("SELECT * FROM movies WHERE id =#{movieId}")
+    Movie getVideoById(Long movieId);
+
 }

@@ -1,5 +1,6 @@
 package example.springmovie.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import example.springmovie.entity.PlayRecord;
 import example.springmovie.service.PlayRecordService;
 import org.springframework.ui.Model;
@@ -30,10 +31,10 @@ public class PlayController {
 
     @GetMapping("/plays")
     public String plays( Long videoId, Model model,Long userId) {
-        Boolean currentUser_isVip = userService.isVipUser(userId);
-        Movie movie = movieService.getVideoById(videoId);
+        boolean currentUser_isVip=StpUtil.hasPermission("VIP");
+        Movie movie = movieService.getMovieById(videoId);
 
-        if (movie.isVip() && !currentUser_isVip) {
+        if (movie.isVip() && currentUser_isVip) {
             // 如果视频是VIP视频且用户不是VIP用户，则重定向到错误页面
             model.addAttribute("message", "该视频仅VIP用户可观看。");
             return "error";
@@ -50,8 +51,8 @@ public class PlayController {
         // 创建播放记录对象
         PlayRecord playRecord = new PlayRecord();
 
-        playRecord.setUserId(userId);
-        playRecord.setVideoId(videoId);
+        playRecord.setUser_id(userId);
+        playRecord.setMovie_id(videoId);
         playRecord.setCreated_at(new Timestamp(System.currentTimeMillis()));// 记录当前时间为播放时间
         playRecord.setPlayTime();
         // 保存播放记录到数据库
