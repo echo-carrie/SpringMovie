@@ -1,6 +1,7 @@
 package example.springmovie.security;
 
 import cn.dev33.satoken.stp.StpInterface;
+import cn.dev33.satoken.stp.StpUtil;
 import example.springmovie.entity.User;
 import example.springmovie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ public class StpInterfaceImpl implements StpInterface {
     /**
      * 返回一个账号所拥有的权限码集合
      */
+
+    //   判断有没有权限 StpUtil.hasPermission("VIP");
     public List<String> getPermissionList(Object loginId, String loginType) {
         List<String> permissions = new ArrayList<>();
         User user = userService.getUserById(Long.parseLong(loginId.toString()));
-
         if (user != null) {
             if (user.getIsVip() != null && user.getIsVip()) {
                 permissions.add("VIP");
@@ -34,7 +36,6 @@ public class StpInterfaceImpl implements StpInterface {
                 // 其他非VIP权限
             }
         }
-
         return permissions;
     }
 

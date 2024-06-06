@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Data
+//使用data进行依赖注入
+//setter、getter方法会对get、set进行注入
 public class User {
-
-    // Getters and setters
+    //    标识主键
     @TableId
     private Long id;
 
@@ -27,5 +28,9 @@ public class User {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    public Boolean isVip(){
+        return this.isVip;
+    }
 
 }

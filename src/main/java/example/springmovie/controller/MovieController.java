@@ -1,59 +1,53 @@
 package example.springmovie.controller;
 
+import com.github.pagehelper.PageInfo;
 import example.springmovie.entity.Movie;
-import example.springmovie.service.ExcelService;
 import example.springmovie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import example.springmovie.util.pageHelperUtil.PageBean;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-    private final MovieService movieService;
-    private final ExcelService excelService;
 
     @Autowired
-    public MovieController(MovieService movieService, ExcelService excelService) {
-        this.movieService = movieService;
-        this.excelService = excelService;
+    private MovieService movieService;
+//    在postman中输入下列网址进行访问，其中如果有10页，访问了第十一页，那么返回的依然是第十页的数据，在编代码时要注意这一点。
+    @GetMapping("/popular")
+//    按照播放量分类展示，按照周播放量来排序决定，即example.springmovie.entity.Movie中的weekly_plays
+//    测试：http://localhost:8080/movies/popular?page=1&size=10
+    public PageInfo<Movie> getMoviesByPopularity(@RequestParam int pageNum, @RequestParam int pageSize) {
+        return movieService.getMoviesByPopularity(pageNum, pageSize);
     }
 
-    // 按热播排行展示电影，支持分页
-    @GetMapping("/hot")
-    public PageBean<Movie> getHotMovies(@RequestParam(defaultValue = "1") int pageNum,
-                                        @RequestParam(defaultValue = "10") int pageSize) {
-        return movieService.getHotMovies(pageNum, pageSize);
-    }
-
-    // 按类型展示电影，支持分页
     @GetMapping("/genre")
-    public PageBean<Movie> getMoviesByGenre(@RequestParam (defaultValue = "犯罪")String genre,
-                                            @RequestParam(defaultValue = "1") int pageNum,
-                                            @RequestParam(defaultValue = "10") int pageSize) {
+//    按照类型分页展示，根据类型，即genre进行搜索，分页展示类型相同的
+//    测试：http://localhost:8080/movies/genre?genre="犯罪"&page=1&size=10
+    public PageInfo<Movie> getMoviesByGenre(@RequestParam String genre, @RequestParam int pageNum, @RequestParam int pageSize) {
         return movieService.getMoviesByGenre(genre, pageNum, pageSize);
     }
 
-    // 按地区展示电影，支持分页
+//    按照地区分类展示，根据类型搜索，即region进行搜索，分页展示地区相同的
+//    测试：http://localhost:8080/movies/region?region=美国&pageNum=1&pageSize=2
     @GetMapping("/region")
-    public PageBean<Movie> getMoviesByRegion(@RequestParam (defaultValue = "美国")String region,
-                                             @RequestParam(defaultValue = "1") int pageNum,
-                                             @RequestParam(defaultValue = "10") int pageSize) {
+    public PageInfo<Movie> getMoviesByRegion(@RequestParam String region, @RequestParam int pageNum, @RequestParam int pageSize) {
         return movieService.getMoviesByRegion(region, pageNum, pageSize);
     }
 
-    @GetMapping("/excel/hot")
-    public String generateHotMoviesExcelReport() {
-        String filePath = "hot_movies.xlsx"; // 指定文件保存路径
-        try {
-            return excelService.generateExcelReportForHotMovies(filePath);
-        } catch (IOException e) {
-            return "Excel报表生成失败：" + e.getMessage();
-        }
+//    进行本周排行，本月排行，全部排行，按好评排行等
+//    测试：
+//  /weekly 每周播放量
+//  /monthly 每月播放量
+//  /total 总播放量
+//  /good_reviews 好评量
+// 使用路径变量 {rankingType} 来获取排行类型，并分页展示电影排行
+    @GetMapping("/ranking/{rankingType}")
+    public ResponseEntity<PageInfo<Movie>> getRankingMovies(
+            @PathVariable String rankingType,
+            @RequestParam(defaultValue = "1") int pageNum,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        PageInfo<Movie> page = movieService.getRankingMovies(rankingType, pageNum, pageSize);
+        return ResponseEntity.ok(page);
     }
 }

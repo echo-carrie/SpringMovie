@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM users WHERE username = #{username}")
+    @Select("SELECT * FROM moviedb1.users WHERE username = #{username}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "username", column = "username"),
@@ -17,7 +17,7 @@ public interface UserMapper {
     })
     User findByUsername(String username);
 
-    @Select("SELECT * FROM users WHERE id = #{id}")
+    @Select("SELECT * FROM moviedb1.users WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "username", column = "username"),
@@ -29,7 +29,7 @@ public interface UserMapper {
     })
     User selectUserById(Long id);
 
-    @Insert("INSERT INTO users(username, password, email, is_vip, created_at) VALUES(#{username}, #{password}, #{email}, #{isVip}, #{createdAt})")
+    @Insert("INSERT INTO moviedb1.users(username, password, email, is_vip, created_at) VALUES(#{username}, #{password}, #{email}, #{isVip}, #{createdAt})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(User user);
 
