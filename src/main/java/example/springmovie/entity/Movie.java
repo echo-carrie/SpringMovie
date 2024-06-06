@@ -45,4 +45,12 @@ public class Movie {
     // 构造方法、Getter和Setter方法
 
 
+
+    public boolean isVip() {
+        return isVip;
+    }
+
+    public void setVip(boolean vip) {
+        isVip = vip;
+    }
 }

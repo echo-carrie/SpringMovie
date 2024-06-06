@@ -29,4 +29,8 @@ public class User {
 
     private LocalDateTime updatedAt;
 
+    public Boolean isVip(){
+        return this.isVip;
+    }
+
 }
