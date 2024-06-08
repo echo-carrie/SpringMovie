@@ -3,9 +3,8 @@ package example.springmovie.service;
 import example.springmovie.entity.Movie;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import example.springmovie.util.pageHelperUtil.PageBean;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -13,40 +12,37 @@ import java.util.List;
 @Service
 public class ExcelService {
 
-    @Autowired
-    private MovieService movieService; // 假设MovieService已经存在并注入
-
-    public String generateExcelReportForHotMovies(String filePath) throws IOException {
-        int pageSize = 10; // 假设每页显示10条数据
-        int pageNum = 1; // 从第一页开始
-        PageBean<Movie> pageBean = movieService.getHotMovies(pageNum, pageSize);
-        List<Movie> movies = pageBean.getList(); // 获取电影列表
-
+    public void exportMoviesToExcel(List<Movie> movies, String filePath) throws IOException {
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("热播电影榜单");
+        Sheet sheet = workbook.createSheet("电影榜单");
 
         // 创建标题行
         Row titleRow = sheet.createRow(0);
-        titleRow.createCell(0).setCellValue("排名");
-        titleRow.createCell(1).setCellValue("电影名称");
-        titleRow.createCell(2).setCellValue("总播放次数");
+        titleRow.createCell(0).setCellValue("ID");
+        titleRow.createCell(1).setCellValue("标题");
+        titleRow.createCell(2).setCellValue("类型");
+        titleRow.createCell(3).setCellValue("总播放量");
+        // ... 添加其他列标题
 
-        // 填充数据
-        int rowNum = 1;
+        // 填充电影数据
         for (int i = 0; i < movies.size(); i++) {
             Movie movie = movies.get(i);
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(String.valueOf(i + 1)); // 排名
-            row.createCell(1).setCellValue(movie.getTitle()); // 电影名称
-            row.createCell(2).setCellValue(String.valueOf(movie.getTotalPlays())); // 总播放次数
+            Row row = sheet.createRow(i + 1);
+            row.createCell(0).setCellValue(movie.getId().toString());
+            row.createCell(1).setCellValue(movie.getTitle());
+            row.createCell(2).setCellValue(movie.getGenre());
+            row.createCell(3).setCellValue(String.valueOf(movie.getTotalPlays()));
+            // ... 添加其他数据
         }
 
-        // 写入文件
+        // 设置样式等操作...
+
+        // 保存Excel文件
         try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
             workbook.write(outputStream);
         }
-        workbook.close();
 
-        return "Excel报表生成成功，文件保存在：" + filePath;
+        // 关闭工作簿
+        workbook.close();
     }
 }

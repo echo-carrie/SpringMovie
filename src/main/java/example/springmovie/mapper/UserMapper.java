@@ -33,5 +33,6 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(User user);
 
-
+    @Update("UPDATE moviedb1.users SET is_vip = #{isVip}, updated_at = #{updatedAt} WHERE id = #{id}")
+    void updateUser(User user);
 }
