@@ -1,2395 +1,1044 @@
-<!DOCTYPE html>
-<head>
-<title>电影</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-<link rel="stylesheet" href="css/menu.css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- Custom Theme files -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- Custom Theme files -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--webfont-->
-<link href='#css?family=Oxygen:400,700,300' rel='stylesheet' type='text/css'>
-<link href='#css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<!-- start menu -->
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
-<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
-<link rel="stylesheet" href="css/font-awesome.min.css" />
-<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-		    <script type="text/javascript">
-			    $(document).ready(function () {
-			        $('#horizontalTab').easyResponsiveTabs({
-			            type: 'default', //Types: default, vertical, accordion           
-			            width: 'auto', //auto or any width like 600px
-			            fit: true   // 100% fit in a container
-			        });
-			    });
-</script>
-<script src="js/login.js"></script>
-<!---- start-smoth-scrolling---->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
-<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-				});
-			});
-		</script>
-<!---- start-smoth-scrolling---->
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Movflx - Online Movies & TV Shows Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head>
-<body>
-	<script>
-		fetch('http://localhost:3000/movie')
-			.then(response => response.json())
-			.then(data => {
-				console.log(data);
-				// 在此处更新前端页面
-			})
-			.catch(error => console.error('Error:', error));
-			// document.cookie = "test=123"
-	</script>
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
 
-	<!-- header-section-starts -->
-	<div class="header-top-strip">
-		<div class="container">
-			<div class="header-top-left">
-				<p><a href="support.html">24/7 全天营业</a> | <a class="play-icon popup-with-zoom-anim" href="#small-dialog" href="#">电影观影订票网站</a> </p>
-				<div id="small-dialog" class="mfp-hide">
-					<div class="select-city">
-						<h3>重新发送确认</h3>
-						<p>打印和排版行业的虚拟文本</p>
-						<div class="confirmation">
-							<form>
-								<input type="text" class="email" placeholder="电子邮件" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" title="输入有效的电子邮件"/>
-								<input type="text" class="email" placeholder="手机号码" maxlength="10" pattern="[1-9]{1}\d{9}" title="输入有效的手机号码"/>
-								<input type="submit" value="发送">
-							</form>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-			<div class="header-top-right">
-			<div class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">模态标题</h4>
-						</div>
-						<div class="modal-body">
-							<p>&hellip;</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-							<button type="button" class="btn btn-primary">保存更改</button>
-						</div>
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
-			<!-- Button trigger modal -->
+		<!-- CSS here -->
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/animate.min.css">
+        <link rel="stylesheet" href="./css/magnific-popup.css">
+        <link rel="stylesheet" href="./css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="./css/owl.carousel.min.css">
+        <link rel="stylesheet" href="./css/flaticon.css">
+        <link rel="stylesheet" href="./css/odometer.css">
+        <link rel="stylesheet" href="./css/aos.css">
+        <link rel="stylesheet" href="./css/slick.css">
+        <link rel="stylesheet" href="./css/default.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/responsive.css">
+    </head>
+    <body>
 
-			<a class="play-icon popup-with-zoom-anim" href="#small-dialog1">充值会员</a>
-			<a onclick="logout()">退出登录</a>
-			<!---pop-up-box---->  
-			<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
-			<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+        <!-- preloader -->
+        <div id="preloader">
+            <div id="loading-center">
+                <div id="loading-center-absolute">
+                    <img src="https://themebeyond.com/html/movflx/img/preloader.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- preloader-end -->
 
-			<!---//pop-up-box---->
-			<div id="small-dialog1" class="mfp-hide">
-				<img src="images/会员充值页.png" alt="" onclick="buy()">
-			</div>	
+		<!-- Scroll-top -->
+        <button class="scroll-top scroll-to-target" data-target="html">
+            <i class="fas fa-angle-up"></i>
+        </button>
+        <!-- Scroll-top-end-->
 
-			<script>
-					$(document).ready(function() {
-					$('.popup-with-zoom-anim').magnificPopup({
-						type: 'inline',
-						fixedContentPos: false,
-						fixedBgPos: true,
-						overflowY: 'auto',
-						closeBtnInside: false,
-						preloader: false,
-						midClick: true,
-						removalDelay: 300,
-						mainClass: 'my-mfp-zoom-in'
-					});
-																					
-					});
-			</script>
-			<!-- Large modal -->
-
-<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: block;">登录</button>
-<div class="user-head vip" style="display: none"></div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-aria-hidden="true">
-
-<!-- 注册面板 -->
-<div class="modal-dialog modal-lg">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-				&times;</button>
-			<h4 class="modal-title" id="myModalLabel">
-				不要等待，立即登录!</h4>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#Login" data-toggle="tab">登录</a></li>
-						<li><a href="#Registration" data-toggle="tab">注册</a></li>
-					</ul>
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane active" id="Login">
-							<form role="form" class="form-horizontal">
-								<div class="form-group">
-									<label for="email" class="col-sm-2 control-label">
-										电子邮件</label>
-									<div class="col-sm-10">
-										<input type="email" class="form-control" id="email1" placeholder="电子邮件" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1" class="col-sm-2 control-label">
-										密码</label>
-									<div class="col-sm-10">
-										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-2">
-									</div>
-									<div class="col-sm-10">
-										<button type="submit" class="btn btn-primary btn-sm">
-											提交</button>
-										<a href="javascript:;">忘记密码？</a>
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="tab-pane" id="Registration">
-							<form role="form" class="form-horizontal">
-								<div class="form-group">
-									<label for="name" class="col-sm-2 control-label">
-										姓名</label>
-									<div class="col-sm-10">
-										<div class="row">
-											<div class="col-md-3">
-												<select class="form-control">
-													<option>先生</option>
-													<option>女士</option>
-												</select>
-											</div>
-											<div class="col-md-9">
-												<input type="text" class="form-control" placeholder="姓名" id="re-name"/>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="email" class="col-sm-2 control-label" >
-										电子邮件</label>
-									<div class="col-sm-10">
-										<input type="email" class="form-control" id="email2" placeholder="电子邮件" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="mobile" class="col-sm-2 control-label">
-										手机</label>
-									<div class="col-sm-10">
-										<input type="email" class="form-control" id="mobile" placeholder="手机" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="password" class="col-sm-2 control-label">
-										密码</label>
-									<div class="col-sm-10">
-										<input type="password" class="form-control" id="password" placeholder="密码" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-2">
-									</div>
-									<div class="col-sm-10">
-										<button type="button" class="btn btn-primary btn-sm save">
-											保存并继续</button>
-										<button type="button" class="btn btn-default btn-sm">
-											取消</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div id="OR" class="hidden-xs">
-						或者</div>
-				</div>
-				<div class="col-md-4">
-					<div class="row text-center sign-with">
-						<div class="col-md-12">
-							<h3 class="other-nw">
-								使用以下方式登录</h3>
-						</div>
-						<div class="col-md-12">
-							<div class="btn-group btn-group-justified">
-								<a href="#" class="btn btn-primary">Facebook</a> 
-								<a href="#" class="btn btn-danger">Google +</a>
-							</div>
-						</div>
-					</div>
-					<div class="row text-center">
-						<div class="col-md-12">
-							<button class="btn btn-info">Wechat</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- <script>
-	document.addEventListener('DOMContentLoaded', function () {
-    // 登录表单提交事件
-    document.querySelector('#Login form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const email = document.getElementById('email1').value;
-        const password = document.getElementById('exampleInputPassword1').value;
-
-        const storedEmail = localStorage.getItem('email');
-        const storedPassword = localStorage.getItem('password');
-
-        if (email === storedEmail && password === storedPassword) {
-            alert('登录成功');
-            // 这里可以重定向到登录后的页面
-        } else {
-            alert('电子邮件或密码错误');
-        }
-    });
-
-    // 注册表单提交事件
-	const savebtn = document.querySelector('.save')
-	console.log(savebtn)
-    savebtn.addEventListener('click', function (event) {
-
-        const name = document.querySelector('#re-name').value;
-        const email = document.querySelector('#email2').value;
-        const mobile = document.querySelector('#mobile').value;
-        const password = document.querySelector('#password').value;
-
-		console.log(name, email, mobile, password)
-        localStorage.setItem('name', name);
-        localStorage.setItem('email', email);
-        localStorage.setItem('mobile', mobile);
-        localStorage.setItem('password', password);
-
-        alert('注册成功');
-        // 这里可以重定向到注册后的页面
-    });
-});
-
-</script> -->
-
-
-</div>
-<script>
-	if(!islogin){
-		$('#myModal').modal('show');
-	}
-</script>
-			</div>
-		<div class="clearfix"></div>
-		</div>
-	</div>
-		<div class="container">
-		  <div class="main-content">
-			<div class="header">
-				<div class="logo">
-					<a href="index.html"><h1>首页</h1></a>
-				</div>
-				<div class="search">
-					<div class="search2">
-					  <form>
-						<i class="fa fa-search"></i>
-						 <input type="text" value="搜索电影" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '搜索电影';}"/>
-					  </form>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		<div class="bootstrap_container">
-            <nav class="navbar navbar-default w3_megamenu" role="navigation">
-                <div class="navbar-header">
-          			<button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand"><i class="fa fa-home"></i></a>
-				</div><!-- end navbar-header -->
-        
-            <div id="defaultmenu" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">首页</a></li>	
-                    <!-- Mega Menu -->
-					<li class="dropdown w3_megamenu-fw"><a href="movies.html" data-toggle="dropdown" class="dropdown-toggle">电影<b class="caret"></b></a>
-                        <ul class="dropdown-menu fullwidth">
-                            <li class="w3_megamenu-content">
-                                <div class="row">
-								<h5 class="movies-page">更多 - <a href="trailers-now-showing.html">点击这里</a> </h5>
-                                    <div class="col-sm-4">
-                                  		<h3 class="title">在映</h3>
-										<ul class="mov_list">
-						<li>99%</li>
-						<li><a href="movie-single.html">Baahubali (Telugu) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>100%</li>
-						<li><a href="movie-single.html">Baahubali (Hindi) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>98%</li>
-						<li><a href="movie-single.html">Baahubali (English) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>80%</li>
-						<li><a href="movie-single.html">Jurassic World (3D Hindi) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>65%</li>
-						<li><a href="movie-single.html">Hamari Adhuri Kahani (U)</a></li>
-					</ul>
-                                    </div><!-- end col-4 -->
-                                    <div class="col-sm-4 movie-dd">
-                                  		<h3 class="title">重映电影</h3>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-                                    </div><!-- end col-4 -->
-                                    <div class="col-sm-4 movie-dd">
-                                  		<h3 class="title">即将上映</h3>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>                                    		
-                                    </div><!-- end col-4 -->
-									<div class="clearfix"></div>
-									<div class="menu-featured-movies">
-										<h3 class="title">精彩推荐</h3>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="images/mf1.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="images/mf2.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-                                </div><!-- end row -->
-                                <hr>
-                    
-							</li>
-                        </ul>
-                    </li>
-
-					<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">活动<b class="caret"></b></a>
-					<ul class="dropdown-menu half">
-						<li class="w3_megamenu-content withdesc">
-							<div class="row">
-								<h5 class="movies-page">活动页面 - <a href="events.html">点击这里</a> </h5>
-								<h3 class="title">精选活动</h3>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="events.html"><img src="images/f2.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="events.html"><img src="images/f3.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="events.html"><img src="images/f4.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="events.html"><img src="images/f1.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">戏剧<b class="caret"></b></a>
-					<ul class="dropdown-menu half3">
-						<li class="w3_megamenu-content withoutdesc">
-							<div class="row">
-								<h5 class="movies-page">戏剧页面 - <a href="plays.html">点击这里</a> </h5>
-								<h3 class="title">精选戏剧</h3>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="plays.html"><img src="images/f2.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="plays.html"><img src="images/f3.jpg" alt=""></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="plays.html"><img src="images/f4.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="plays.html"><img src="images/f1.jpg" alt="" /></a>
-										</div>
-										<div class="e-buy-tickets">
-											<a href="event-payment.html">购买门票</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">体育<b class="caret"></b></a>
-					<ul class="dropdown-menu half3">
-						<li class="w3_megamenu-content withoutdesc">
-							<div class="row">
-								<h5 class="movies-page">体育页面 - <a href="sports.html">点击这里</a> </h5>
-								<h3 class="title">精选体育活动</h3>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="sports.html"><img src="images/me1.jpg" alt="" /></a>
-											<a class="plays-go" href="#">排球是一项团队运动</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="sports.html"><img src="images/me2.jpg" alt="" /></a>
-											<a class="plays-go" href="#">追逐，我们会赢得比赛。</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="sports.html"><img src="images/me3.jpg" alt="" /></a>
-											<a class="plays-go" href="#">2015年溜冰运动</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="e-movie">
-										<div class="e-movie-img">
-											<a href="sports.html"><img src="images/me4.jpg" alt="" /></a>
-											<a class="plays-go" href="#">SVM保龄球与游戏</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-
-					<!-- end dropdown-menu -->
-				</li>
-				<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">页面<b class="caret"></b></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="about.html">关于我们</a></li>
-						<li><a href="blog.html">博客</a></li>
-						<li><a href="404.html">404 错误</a></li>
-						<li><a href="contact.html">联系我们</a></li>
-						<li><a href="faq.html">常见问题</a></li>
-						<li><a href="about.html">当前职位</a></li>
-						<li class="dropdown-submenu">
-							<a href="#">新闻</a>
-							<ul class="dropdown-menu">
-								<li><a href="press.html">新闻发布</a></li>
-								<li><a href="public-relations.html">公共关系</a></li>
-								<li><a href="press.html">媒体报道</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>				
-					</ul><!-- end dropdown-menu -->
-                        </li><!-- end dropdown-submenu -->
-                    	</ul>
-                       <!-- end dropdown-menu -->
-					</li><!-- end standard drop down -->
-					<!-- end dropdown w3_megamenu-fw -->
-                </ul><!-- end nav navbar-nav -->
-                
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <form id="contact1" action="#" name="contactform" method="post">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                        <input type="text" name="name" id="name1" class="form-control" placeholder="姓名"> 
-                                        <input type="text" name="email" id="email1" class="form-control" placeholder="邮箱"> 
+        <!-- header-area -->
+        <header>
+            <div id="sticky-header" class="menu-area transparent-header">
+                <div class="container custom-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                            <div class="menu-wrap">
+                                <nav class="menu-nav show">
+                                    <div class="logo">
+                                        <a href="index.html">
+                                            <img src="img/logo/logo.png" alt="Logo">
+                                        </a>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                        <input type="text" name="phone" id="phone1" class="form-control" placeholder="手机">
-                                        <input type="text" name="subject" id="subject1" class="form-control" placeholder="主题"> 
-                                    </div>                 
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <textarea class="form-control" name="comments" id="comments1" rows="6" placeholder="联系内容"></textarea>
-                                    </div>   
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="pull-right">
-                                            <input type="submit" value="发送" id="submit1" class="btn btn-primary small">
-                                        </div>  
+                                    <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                        <ul class="navigation">
+                                            <li class="active menu-item-has-children"><a href="#">Home</a>
+                                                <ul class="submenu">
+                                                    <li class="active"><a href="index.html">Home One</a></li>
+                                                    <li><a href="index-2.html">Home Two</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="#">Movie</a>
+                                                <ul class="submenu">
+                                                    <li><a href="movies.html">Movie</a></li>
+                                                    <li><a href="movie-details.html">Movie Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="tv-show.html">tv show</a></li>
+                                            <li><a href="pricing.html">Pricing</a></li>
+                                            <li class="menu-item-has-children"><a href="#">blog</a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">Our Blog</a></li>
+                                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">contacts</a></li>
+                                        </ul>
                                     </div>
-									<div class="clearfix"></div>  
-                                </form>
-                            </li>
-                        </ul>
-					</li>
-				</ul><!-- end nav navbar-nav navbar-right -->
-			</div><!-- end #navbar-collapse-1 -->
-            
-			</nav><!-- end navbar navbar-default w3_megamenu -->
-		</div><!-- end container -->
-    
+                                    <div class="header-action d-none d-md-block">
+                                        <ul>
+                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+                                            <li class="header-lang">
+                                                <form action="#">
+                                                    <div class="icon"><i class="flaticon-globe"></i></div>
+                                                    <select id="lang-dropdown">
+                                                        <option value="">En</option>
+                                                        <option value="">Au</option>
+                                                        <option value="">AR</option>
+                                                        <option value="">TU</option>
+                                                    </select>
+                                                </form>
+                                            </li>
+                                            <li class="header-btn"><a href="#" class="btn">Sign In</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
 
-<!-- AddThis Smart Layers END -->
-	<div class="main-banner">
-		 <div class="banner col-md-8">
-			<section class="slider">
-				<div class="flexslider">
-						<ul class="slides">
-						<li>
-							<img src="img/banner.png" class="img-responsive" alt="" />
-						</li>
-						<li>
-							<img src="images/pic2.jpg" class="img-responsive" alt="" />
-						</li>
-						<li>
-							<img src="images/pic3.jpg" class="img-responsive" alt="" />
-						</li>
-						<li>
-							<img src="images/pic4.jpg" class="img-responsive" alt="" />
-						</li>
-				  </ul>
-				</div>
-			</section>
-				 <!-- FlexSlider -->
-				 <script defer src="js/jquery.flexslider.js"></script>
-				 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-				<script type="text/javascript">
-				$(function(){
-				 SyntaxHighlighter.all();
-				});
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
-					}
-				 });
-				});
-			 	</script>
-         </div>
+                            <!-- Mobile Menu  -->
+                            <div class="mobile-menu">
+                                <div class="close-btn"><i class="fas fa-times"></i></div>
 
-		 <style>
-			.slides li{
-				overflow: hidden;
-				/* border: 1px red solid; */
-			}
-			.slides img{
-				
-			}
-		 </style>
+                                <nav class="menu-box">
+                                    <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
+                                    </div>
+                                    <div class="menu-outer">
+                                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                    </div>
+                                    <div class="social-links">
+                                        <ul class="clearfix">
+                                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="menu-backdrop"></div>
+                            <!-- End Mobile Menu -->
 
-		 <div class="col-md-4 banner-right">
-			<h4>即时观看</h4>
-			<div class="grid_3 grid_5">
-				<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">电影</a></li>
-						<li role="presentation"><a href="#plays" role="tab" id="plays-tab" data-toggle="tab" aria-controls="plays" aria-expanded="false">戏剧</a></li>
-						<li role="presentation"><a href="#events" role="tab" id="events-tab" data-toggle="tab" aria-controls="events" aria-expanded="false">活动</a></li>
-						<li role="presentation"><a href="#sports" role="tab" id="sports-tab" data-toggle="tab" aria-controls="sports" aria-expanded="false">体育</a></li>
-					</ul>
-					<div id="myTabContent" class="tab-content">
-						<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
-							<div class="fleft">
-								<label><input type="radio">
-								<span class="fleft mr20">电影</span></label>
-								<label><input type="radio">
-								<span class="fleft mr20">影院</span></label>
-							</div>
-					<select class="list_of_movies">
-						<option value="">选择电影</option>
-						<optgroup label="Telugu"><option style="padding-left: 10px;" value="ANAN">Asura (U/A)</option>
-							<option style="padding-left: 10px;" value="CHDM">Jurassic World (2D Telugu) (U/A)</option>
-							<option style="padding-left: 10px;" value="GUDR">Jurassic World (3D Telugu) (U/A)</option>
-							<option style="padding-left: 10px;" value="GUNT">Jyothi Lakshmi (U/A)</option><option style="padding-left: 10px;" value="JANG">Kerintha (U)</option>
-							<option style="padding-left: 10px;" value="KAKI">Krishnamma Kalipindi Iddarini (U/A)</option>
-							<option style="padding-left: 10px;" value="KURN">Lava Kusa (A)</option>
-							<option style="padding-left: 10px;" value="MART">Pandaga Chesko (U/A)</option>
-							<option style="padding-left: 10px;" value="PRVT">Tippu (A)</option>
-							<option style="padding-left: 10px;" value="RAJA">Vinavayya Ramayya (U/A)</option>
-						</optgroup>
-						<optgroup label="Hindi">
-							<option style="padding-left: 10px;" value="TAWA">ABCD 2 (3D) (U)</option>
-							<option style="padding-left: 10px;" value="ZIRO">ABCD 2 (2D) (U)</option>
-						</optgroup>
-						<optgroup label="English">
-							<option style="padding-left: 10px;" value="DIB">Jurassic World (3D) (U/A)</option>
-							<option style="padding-left: 10px;" value="GUW">Guwahati</option>
-						</optgroup>
-					</select>
-					<select class="list_of_movies"><option value="">选择时间</option><option style="padding-left: 10px;" value="ANAN">Today, 18 jun</option><option style="padding-left: 10px;" value="CHDM">Tomorrow, 19 jun</option><option style="padding-left: 10px;" value="CHDM">saturday, 20 jun</option><option style="padding-left: 10px;" value="CHDM">sunday, 21 jun</option></select>
-					<h5 class="pre"><i class="fa fa-heart"></i>人气影院:<h5>
-					<h6 class="ipre"><a href="#">Mayajaal Multiplex: Chennai, </a> <a href="#"> INOX: NCS Mall</a>, <a href="#">Vizianagaram</a></h6>
-			  </div>
-			  <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-				  <select class="list_of_movies">
-				<option value="">List of 1000 Screens</option>
-				<optgroup label="Andhra Pradesh">
-					<option style="padding-left: 10px;" value="ANAN">Anantapur</option>
-					<option style="padding-left: 10px;" value="CHDM">Chinnamandem</option>
-					<option style="padding-left: 10px;" value="GUDR">Gudur</option>
-					<option style="padding-left: 10px;" value="GUNT">Guntur</option>
-					<option style="padding-left: 10px;" value="JANG">Jangareddy Gudem</option>
-					<option style="padding-left: 10px;" value="KAKI">Kakinada</option>
-					<option style="padding-left: 10px;" value="KURN">Kurnool</option>
-					<option style="padding-left: 10px;" value="MART">Martur</option>
-					<option style="padding-left: 10px;" value="PRVT">Parvathipuram</option>
-					<option style="padding-left: 10px;" value="RAJA">Rajahmundry</option>
-					<option style="padding-left: 10px;" value="TENA">Tenali</option>
-					<option style="padding-left: 10px;" value="TIRU">Tirupati</option>
-					<option style="padding-left: 10px;" value="VIJA">Vijayawada</option>
-					<option style="padding-left: 10px;" value="VIZA">Vizag</option>
-					<option style="padding-left: 10px;" value="VIZI">Vizianagaram</option></optgroup>
-				<optgroup label="Arunachal Pradesh">
-					<option style="padding-left: 10px;" value="TAWA">Tawang</option>
-					<option style="padding-left: 10px;" value="ZIRO">Ziro</option></optgroup>
-				<optgroup label="Assam">
-					<option style="padding-left: 10px;" value="DIB">Dibrugarh</option>
-					<option style="padding-left: 10px;" value="GUW">Guwahati</option>
-					<option style="padding-left: 10px;" value="JORT">Jorhat</option>
-					<option style="padding-left: 10px;" value="SIL">Silchar</option>
-					<option style="padding-left: 10px;" value="TINS">Tinsukia</option></optgroup>
-				<optgroup label="Bihar">
-					<option style="padding-left: 10px;" value="HAJI">Hajipur</option>
-					<option style="padding-left: 10px;" value="PATN">Patna</option></optgroup>
-				<optgroup label="Chhattisgarh">
-					<option style="padding-left: 10px;" value="BHILAI">Bhilai</option>
-					<option style="padding-left: 10px;" value="BILA">Bilaspur</option>
-					<option style="padding-left: 10px;" value="CHAM">Champa</option>
-					<option style="padding-left: 10px;" value="DHMT">Dhamtari</option>
-					<option style="padding-left: 10px;" value="DURG">Durg</option>
-					<option style="padding-left: 10px;" value="JAGD">Jagdalpur</option>
-					<option style="padding-left: 10px;" value="KAWA">Kawardha</option>
-					<option style="padding-left: 10px;" value="KNGN">Kondagaon</option>
-					<option style="padding-left: 10px;" value="KRBA">Korba</option>
-					<option style="padding-left: 10px;" value="RAIG">Raigarh</option>
-					<option style="padding-left: 10px;" value="RAIPUR">Raipur</option>
-					<option style="padding-left: 10px;" value="TNO">Tilda Neora</option></optgroup>
-				<optgroup label="Croatia">
-					<option style="padding-left: 10px;" value="DBRV">Dubrovnik</option></optgroup>
-				<optgroup label="Goa">
-					<option style="padding-left: 10px;" value="GOA">Goa</option></optgroup>
-				<optgroup label="Gujarat">
-					<option style="padding-left: 10px;" value="ADPR">Adipur</option>
-					<option style="padding-left: 10px;" value="AHD">Ahmedabad</option>
-					<option style="padding-left: 10px;" value="AND">Anand</option>
-					<option style="padding-left: 10px;" value="ANKL">Ankleshwar</option>
-					<option style="padding-left: 10px;" value="BHAR">Bharuch</option>
-					<option style="padding-left: 10px;" value="BHNG">Bhavnagar</option>
-					<option style="padding-left: 10px;" value="DAMA">Daman</option>
-					<option style="padding-left: 10px;" value="GDHAM">Gandhidham</option>
-					<option style="padding-left: 10px;" value="GNAGAR">Gandhinagar</option>
-					<option style="padding-left: 10px;" value="HIMM">Himmatnagar</option>
-					<option style="padding-left: 10px;" value="IDAR">Idar</option>
-					<option style="padding-left: 10px;" value="JAM">Jamnagar</option>
-					<option style="padding-left: 10px;" value="JETP">Jetpur</option>
-					<option style="padding-left: 10px;" value="JUGH">Junagadh</option>
-					<option style="padding-left: 10px;" value="KTCH">Kutch</option>
-					<option style="padding-left: 10px;" value="NADI">Nadiad</option>
-					<option style="padding-left: 10px;" value="NVSR">Navsari</option>
-					<option style="padding-left: 10px;" value="PALN">Palanpur</option>
-					<option style="padding-left: 10px;" value="PATA">Patan</option>
-					<option style="padding-left: 10px;" value="RAJK">Rajkot</option>
-					<option style="padding-left: 10px;" value="SANA">Sanand</option>
-					<option style="padding-left: 10px;" value="SILV">Silvassa</option>
-					<option style="padding-left: 10px;" value="SURT">Surat</option>
-					<option style="padding-left: 10px;" value="VAD">Vadodara</option>
-					<option style="padding-left: 10px;" value="VLSD">Valsad</option>
-					<option style="padding-left: 10px;" value="VAPI">Vapi</option></optgroup>
-				<optgroup label="Haryana">
-					<option style="padding-left: 10px;" value="AMB">Ambala</option>
-					<option style="padding-left: 10px;" value="DHRA">Dharuhera</option>
-					<option style="padding-left: 10px;" value="FARI">Faridabad</option>
-					<option style="padding-left: 10px;" value="HISR">Hisar</option>
-					<option style="padding-left: 10px;" value="JHAJ">Jhajjar</option>
-					<option style="padding-left: 10px;" value="JIND">Jind</option>
-					<option style="padding-left: 10px;" value="KAIT">Kaithal</option>
-					<option style="padding-left: 10px;" value="KARN">Karnal</option>
-					<option style="padding-left: 10px;" value="KUND">Kundli</option>
-					<option style="padding-left: 10px;" value="KURU">Kurukshetra</option>
-					<option style="padding-left: 10px;" value="PNCH">Panchkula</option>
-					<option style="padding-left: 10px;" value="PAN">Panipat</option>
-					<option style="padding-left: 10px;" value="REWA">Rewari</option>
-					<option style="padding-left: 10px;" value="ROH">Rohtak</option>
-					<option style="padding-left: 10px;" value="SISA">Sirsa</option>
-					<option style="padding-left: 10px;" value="RAIH">Sonipat</option>
-					<option style="padding-left: 10px;" value="YAMU">Yamunanagar</option></optgroup>
-				<optgroup label="Himachal Pradesh">
-					<option style="padding-left: 10px;" value="BADD">Baddi</option>
-					<option style="padding-left: 10px;" value="DMSL">Dharamsala</option>
-					<option style="padding-left: 10px;" value="HAMI">Hamirpur (HP)</option>
-					<option style="padding-left: 10px;" value="KANG">Kangra</option>
-					<option style="padding-left: 10px;" value="KULU">Kullu</option>
-					<option style="padding-left: 10px;" value="MANA">Manali</option>
-					<option style="padding-left: 10px;" value="SMLA">Shimla</option>
-					<option style="padding-left: 10px;" value="SCO">Solan</option></optgroup>
-				<optgroup label="Jammu and Kashmir">
-					<option style="padding-left: 10px;" value="JAMM">Jammu</option>
-					<option style="padding-left: 10px;" value="KATH">Kathua</option>
-					<option style="padding-left: 10px;" value="KATR">Katra</option>
-					<option style="padding-left: 10px;" value="LEHA">Ladakh</option></optgroup>
-				<optgroup label="Jharkhand">
-					<option style="padding-left: 10px;" value="BOKA">Bokaro</option>
-					<option style="padding-left: 10px;" value="DOGH">Deoghar</option>
-					<option style="padding-left: 10px;" value="DHAN">Dhanbad(Jharkhand)</option>
-					<option style="padding-left: 10px;" value="JMDP">Jamshedpur</option>
-					<option style="padding-left: 10px;" value="RANC">Ranchi</option></optgroup>
-				<optgroup label="Karnataka">
-					<option style="padding-left: 10px;" value="BELG">Belgaum</option>
-					<option style="padding-left: 10px;" value="BANG">Bengaluru</option>
-					<option style="padding-left: 10px;" value="BIDR">Bidar</option>
-					<option style="padding-left: 10px;" value="COOR">Coorg</option>
-					<option style="padding-left: 10px;" value="DAVA">Davangere</option>
-					<option style="padding-left: 10px;" value="GULB">Gulbarga</option>
-					<option style="padding-left: 10px;" value="HUBL">Hubli</option>
-					<option style="padding-left: 10px;" value="KWAR">Karwar</option>
-					<option style="padding-left: 10px;" value="MLR">Mangalore</option>
-					<option style="padding-left: 10px;" value="MANI">Manipal</option>
-					<option style="padding-left: 10px;" value="MYS">Mysore</option>
-					<option style="padding-left: 10px;" value="TUMK">Tumkur</option>
-					<option style="padding-left: 10px;" value="UDUP">Udupi</option></optgroup>
-				<optgroup label="Kerala">
-					<option style="padding-left: 10px;" value="99">Alappuzha</option>
-					<option style="padding-left: 10px;" value="ANHL">Anchal</option>
-					<option style="padding-left: 10px;" value="ANGA">Angamaly</option>
-					<option style="padding-left: 10px;" value="ERNK">Ernakulam</option>
-					<option style="padding-left: 10px;" value="KANN">Kannur</option>
-					<option style="padding-left: 10px;" value="KARG">Karunagapally</option>
-					<option style="padding-left: 10px;" value="KOCH">Kochi</option>
-					<option style="padding-left: 10px;" value="KOLM">Kollam</option>
-					<option style="padding-left: 10px;" value="KTYM">Kottayam</option>
-					<option style="padding-left: 10px;" value="MVLR">Mavellikara</option>
-					<option style="padding-left: 10px;" value="THAL">Thalayolaparambu</option>
-					<option style="padding-left: 10px;" value="THSR">Thrissur</option>
-					<option style="padding-left: 10px;" value="TRIV">Trivandrum</option></optgroup>
-				<optgroup label="Madhya Pradesh">
-					<option style="padding-left: 10px;" value="BLGT">Balaghat</option>
-					<option style="padding-left: 10px;" value="BETU">Betul</option>
-					<option style="padding-left: 10px;" value="BHOP">Bhopal</option>
-					<option style="padding-left: 10px;" value="CHIN">Chhindwara</option>
-					<option style="padding-left: 10px;" value="DEWAS">Dewas</option>
-					<option style="padding-left: 10px;" value="GWAL">Gwalior</option>
-					<option style="padding-left: 10px;" value="HRDA">Harda</option>
-					<option style="padding-left: 10px;" value="IND">Indore</option>
-					<option style="padding-left: 10px;" value="JABL">Jabalpur</option>
-					<option style="padding-left: 10px;" value="KHDW">Khandwa</option>
-					<option style="padding-left: 10px;" value="NMCH">Neemuch</option>
-					<option style="padding-left: 10px;" value="RATL">Ratlam</option>
-					<option style="padding-left: 10px;" value="SAMP">Sagar</option>
-					<option style="padding-left: 10px;" value="SARN">Sarni</option>
-					<option style="padding-left: 10px;" value="SEHO">Sehore</option>
-					<option style="padding-left: 10px;" value="SEON">Seoni</option>
-					<option style="padding-left: 10px;" value="SHIV">Shivpuri</option>
-					<option style="padding-left: 10px;" value="UJJN">Ujjain</option></optgroup>
-				<optgroup label="Maharashtra">
-					<option style="padding-left: 10px;" value="AHMED">Ahmednagar</option>
-					<option style="padding-left: 10px;" value="AKOL">Akola</option>
-					<option style="padding-left: 10px;" value="ALBG">Alibaug</option>
-					<option style="padding-left: 10px;" value="AMRA">Amravati</option>
-					<option style="padding-left: 10px;" value="AURA">Aurangabad</option>
-					<option style="padding-left: 10px;" value="BARA">Baramati</option>
-					<option style="padding-left: 10px;" value="BEED">Beed</option>
-					<option style="padding-left: 10px;" value="BHIW">Bhiwandi</option>
-					<option style="padding-left: 10px;" value="BOIS">Boisar</option>
-					<option style="padding-left: 10px;" value="BULD">Buldana</option>
-					<option style="padding-left: 10px;" value="CHAN">Chandrapur</option>
-					<option style="padding-left: 10px;" value="DHLE">Dhule</option>
-					<option style="padding-left: 10px;" value="DHUL">Dhulia</option>
-					<option style="padding-left: 10px;" value="INDA">Indapur</option>
-					<option style="padding-left: 10px;" value="JALG">Jalgaon</option>
-					<option style="padding-left: 10px;" value="KHED">Khed</option>
-					<option style="padding-left: 10px;" value="KHOP">Khopoli</option>
-					<option style="padding-left: 10px;" value="KOLH">Kolhapur</option>
-					<option style="padding-left: 10px;" value="LAT">Latur</option>
-					<option style="padding-left: 10px;" value="LAVA">Lavasa</option>
-					<option style="padding-left: 10px;" value="LNVL">Lonavala</option>
-					<option style="padding-left: 10px;" value="MHAD">Mahad</option>
-					<option style="padding-left: 10px;" value="MALE">Malegaon</option>
-					<option style="padding-left: 10px;" value="MUMBAI">Mumbai</option>
-					<option style="padding-left: 10px;" value="NAGP">Nagpur</option>
-					<option style="padding-left: 10px;" value="NAND">Nanded</option>
-					<option style="padding-left: 10px;" value="NASK">Nashik</option>
-					<option style="padding-left: 10px;" value="PALG">Palghar</option>
-					<option style="padding-left: 10px;" value="PANC">Panchgani</option>
-					<option style="padding-left: 10px;" value="PARB">Parbhani</option>
-					<option style="padding-left: 10px;" value="PEN">Pen</option>
-					<option style="padding-left: 10px;" value="PHAL">Phaltan</option>
-					<option style="padding-left: 10px;" value="PIMP">Pimpri</option>
-					<option style="padding-left: 10px;" value="PUNE">Pune</option>
-					<option style="padding-left: 10px;" value="RAI">Raigad</option>
-					<option style="padding-left: 10px;" value="SANG">Sangli</option>
-					<option style="padding-left: 10px;" value="SATA">Satara</option>
-					<option style="padding-left: 10px;" value="SOLA">Solapur</option>
-					<option style="padding-left: 10px;" value="TMB">Tembhode</option>
-					<option style="padding-left: 10px;" value="UDGR">Udgir</option>
-					<option style="padding-left: 10px;" value="WARD">Wardha</option></optgroup>
-				<optgroup label="Meghalaya">
-					<option style="padding-left: 10px;" value="RNG">Rongjeng</option>
-					<option style="padding-left: 10px;" value="SHLG">Shillong</option></optgroup>
-				<optgroup label="Nagaland">
-					<option style="padding-left: 10px;" value="DMPR">Dimapur</option></optgroup>
-				<optgroup label="NCR">
-					<option style="padding-left: 10px;" value="NCR">National Capital Region (NCR)</option></optgroup>
-				<optgroup label="Orissa">
-					<option style="padding-left: 10px;" value="BLSR">Balasore</option>
-					<option style="padding-left: 10px;" value="BHUB">Bhubaneshwar</option>
-					<option style="padding-left: 10px;" value="PURI">Puri</option>
-					<option style="padding-left: 10px;" value="SAMB">Sambalpur</option></optgroup>
-				<optgroup label="Punjab">
-					<option style="padding-left: 10px;" value="ABOR">Abohar</option>
-					<option style="padding-left: 10px;" value="AHMG">Ahmedgarh</option>
-					<option style="padding-left: 10px;" value="AMRI">Amritsar</option>
-					<option style="padding-left: 10px;" value="BNGA">Banga</option>
-					<option style="padding-left: 10px;" value="BAR">Barnala</option>
-					<option style="padding-left: 10px;" value="BHAT">Bathinda</option>
-					<option style="padding-left: 10px;" value="CHD">Chandigarh</option>
-					<option style="padding-left: 10px;" value="HOSH">Hoshiarpur</option>
-					<option style="padding-left: 10px;" value="JALA">Jalandhar</option>
-					<option style="padding-left: 10px;" value="KHAN">Khanna</option>
-					<option style="padding-left: 10px;" value="KOTK">Kotkapura</option>
-					<option style="padding-left: 10px;" value="LUDH">Ludhiana</option>
-					<option style="padding-left: 10px;" value="MNSA">Mansa</option>
-					<option style="padding-left: 10px;" value="MOGA">Moga</option>
-					<option style="padding-left: 10px;" value="MOHL">Mohali</option>
-					<option style="padding-left: 10px;" value="NAVN">Nawanshahr</option>
-					<option style="padding-left: 10px;" value="PATH">Pathankot</option>
-					<option style="padding-left: 10px;" value="PATI">Patiala</option>
-					<option style="padding-left: 10px;" value="PATR">Patran</option>
-					<option style="padding-left: 10px;" value="RUPN">Rupnagar</option>
-					<option style="padding-left: 10px;" value="SANR">Sangrur</option>
-					<option style="padding-left: 10px;" value="ZIRK">Zirakpur</option></optgroup>
-				<optgroup label="Rajasthan">
-					<option style="padding-left: 10px;" value="ABRD">Abu Road</option>
-					<option style="padding-left: 10px;" value="AJMER">Ajmer</option>
-					<option style="padding-left: 10px;" value="ALSR">Alsisar (Rajasthan)</option>
-					<option style="padding-left: 10px;" value="ALWR">Alwar</option>
-					<option style="padding-left: 10px;" value="BANS">Banswara</option>
-					<option style="padding-left: 10px;" value="BEAW">Beawar</option>
-					<option style="padding-left: 10px;" value="BHIL">Bhilwara</option>
-					<option style="padding-left: 10px;" value="BHWD">Bhiwadi</option>
-					<option style="padding-left: 10px;" value="BIK">Bikaner</option>
-					<option style="padding-left: 10px;" value="DAUS">Dausa</option>
-					<option style="padding-left: 10px;" value="JAIP">Jaipur</option>
-					<option style="padding-left: 10px;" value="JSMR">Jaisalmer</option>
-					<option style="padding-left: 10px;" value="JODH">Jodhpur</option>
-					<option style="padding-left: 10px;" value="KISH">Kishangarh</option>
-					<option style="padding-left: 10px;" value="KOTA">Kota</option>
-					<option style="padding-left: 10px;" value="NEEM">Neemrana</option>
-					<option style="padding-left: 10px;" value="SIKR">Sikar</option>
-					<option style="padding-left: 10px;" value="SRIG">Sri Ganganagar</option>
-					<option style="padding-left: 10px;" value="UDAI">Udaipur</option></optgroup>
-				<optgroup label="Singapore">
-					<option style="padding-left: 10px;" value="SING">Singapore</option></optgroup>
-				<optgroup label="Tamil Nadu">
-					<option style="padding-left: 10px;" value="ARIY">Ariyalur</option>
-					<option style="padding-left: 10px;" value="ARNI">Arni</option>
-					<option style="padding-left: 10px;" value="ARUP">Aruppukottai</option>
-					<option style="padding-left: 10px;" value="CHEN">Chennai</option>
-					<option style="padding-left: 10px;" value="COIM">Coimbatore</option>
-					<option style="padding-left: 10px;" value="CUDD">Cuddalore</option>
-					<option style="padding-left: 10px;" value="DHAR">Dharapuram</option>
-					<option style="padding-left: 10px;" value="DMPI">Dharmapuri</option>
-					<option style="padding-left: 10px;" value="DIND">Dindigul</option>
-					<option style="padding-left: 10px;" value="EROD">Erode</option>
-					<option style="padding-left: 10px;" value="KNPM">Kanchipuram</option>
-					<option style="padding-left: 10px;" value="KUMB">Kumbakonam</option>
-					<option style="padding-left: 10px;" value="MADU">Madurai</option>
-					<option style="padding-left: 10px;" value="MTPM">Mettuppalayam</option>
-					<option style="padding-left: 10px;" value="OOTY">Ooty</option>
-					<option style="padding-left: 10px;" value="POND">Pondicherry</option>
-					<option style="padding-left: 10px;" value="PUDH">Pudhukottai</option>
-					<option style="padding-left: 10px;" value="SALM">Salem</option>
-					<option style="padding-left: 10px;" value="SIV">Sivakasi</option>
-					<option style="padding-left: 10px;" value="TAJO">Tanjore</option>
-					<option style="padding-left: 10px;" value="TENK">Tenkasi</option>
-					<option style="padding-left: 10px;" value="TIRV">Tirunelveli</option>
-					<option style="padding-left: 10px;" value="TIRP">Tirupur</option>
-					<option style="padding-left: 10px;" value="TRIC">Trichy</option>
-					<option style="padding-left: 10px;" value="VELL">Vellore</option></optgroup>
-				<optgroup label="Telangana">
-					<option style="padding-left: 10px;" value="ADIL">Adilabad</option>
-					<option style="padding-left: 10px;" value="AMAN">Amangal</option>
-					<option style="padding-left: 10px;" value="HYD">Hyderabad</option>
-					<option style="padding-left: 10px;" value="KARIM">Karimnagar</option>
-					<option style="padding-left: 10px;" value="KHAM">Khammam</option>
-					<option style="padding-left: 10px;" value="MRGD">Miryalaguda</option>
-					<option style="padding-left: 10px;" value="NIZA">Nizamabad</option>
-					<option style="padding-left: 10px;" value="PEDA">Peddapalli</option>
-					<option style="padding-left: 10px;" value="POCH">Pochampally</option>
-					<option style="padding-left: 10px;" value="SDDP">Siddipet</option>
-					<option style="padding-left: 10px;" value="SURY">Suryapet</option>
-					<option style="padding-left: 10px;" value="UPPA">Uppal</option>
-					<option style="padding-left: 10px;" value="WAR">Warangal</option></optgroup>
-				<optgroup label="Tripura ">
-					<option style="padding-left: 10px;" value="AGAR">Agartala</option></optgroup>
-				<optgroup label="Uttar Pradesh">
-					<option style="padding-left: 10px;" value="AGRA">Agra</option>
-					<option style="padding-left: 10px;" value="ALI">Aligarh</option>
-					<option style="padding-left: 10px;" value="ALLH">Allahabad</option>
-					<option style="padding-left: 10px;" value="BARE">Bareilly</option>
-					<option style="padding-left: 10px;" value="BIJ">Bijnor</option>
-					<option style="padding-left: 10px;" value="GHAR">Ghazipur</option>
-					<option style="padding-left: 10px;" value="GRKP">Gorakhpur</option>
-					<option style="padding-left: 10px;" value="KANP">Kanpur</option>
-					<option style="padding-left: 10px;" value="LUCK">Lucknow</option>
-					<option style="padding-left: 10px;" value="MATH">Mathura</option>
-					<option style="padding-left: 10px;" value="MERT">Meerut</option>
-					<option style="padding-left: 10px;" value="MORA">Moradabad</option>
-					<option style="padding-left: 10px;" value="MUZ">Muzaffarnagar</option>
-					<option style="padding-left: 10px;" value="RENU">Renukoot</option>
-					<option style="padding-left: 10px;" value="SAHA">Saharanpur</option>
-					<option style="padding-left: 10px;" value="VAR">Varanasi</option></optgroup>
-				<optgroup label="Uttarakhand">
-					<option style="padding-left: 10px;" value="DEH">Dehradun</option>
-					<option style="padding-left: 10px;" value="HRDR">Haridwar</option>
-					<option style="padding-left: 10px;" value="MSS">Mussoorie</option>
-					<option style="padding-left: 10px;" value="NAIN">Nainital</option>
-					<option style="padding-left: 10px;" value="RAMN">Ramnagar</option>
-					<option style="padding-left: 10px;" value="RKES">Rishikesh</option>
-					<option style="padding-left: 10px;" value="ROOR">Roorkee</option>
-					<option style="padding-left: 10px;" value="RUDP">Rudrapur</option></optgroup>
-				<optgroup label="West Bengal">
-					<option style="padding-left: 10px;" value="ASANSOL">Asansol</option>
-					<option style="padding-left: 10px;" value="BEHA">Berhampore</option>
-					<option style="padding-left: 10px;" value="BLPR">Bolpur</option>
-					<option style="padding-left: 10px;" value="BURD">Burdwan</option>
-					<option style="padding-left: 10px;" value="COBE">Cooch Behar</option>
-					<option style="padding-left: 10px;" value="DARJ">Darjeeling</option>
-					<option style="padding-left: 10px;" value="DURGA">Durgapur</option>
-					<option style="padding-left: 10px;" value="HALD">Haldia</option>
-					<option style="padding-left: 10px;" value="HOOG">Hooghly</option>
-					<option style="padding-left: 10px;" value="HWRH">Howrah</option>
-					<option style="padding-left: 10px;" value="JPG">Jalpaiguri</option>
-					<option style="padding-left: 10px;" value="KOLK">Kolkata</option>
-					<option style="padding-left: 10px;" value="RANA">Ranaghat</option>
-					<option style="padding-left: 10px;" value="SILI">Siliguri</option></optgroup>
-</select>
-			  </div>
-			  <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-				<select class="list_of_movies">
-					<option value="">List of 1000 Screens</option>
-					<optgroup label="Andhra Pradesh">
-					  <option style="padding-left: 10px;" value="ANAN">Anantapur</option>
-					  <option style="padding-left: 10px;" value="CHDM">Chinnamandem</option>
-					  <option style="padding-left: 10px;" value="GUDR">Gudur</option>
-					  <option style="padding-left: 10px;" value="GUNT">Guntur</option>
-					  <option style="padding-left: 10px;" value="JANG">Jangareddy Gudem</option>
-					  <option style="padding-left: 10px;" value="KAKI">Kakinada</option>
-					  <option style="padding-left: 10px;" value="KURN">Kurnool</option>
-					  <option style="padding-left: 10px;" value="MART">Martur</option>
-					  <option style="padding-left: 10px;" value="PRVT">Parvathipuram</option>
-					  <option style="padding-left: 10px;" value="RAJA">Rajahmundry</option>
-					  <option style="padding-left: 10px;" value="TENA">Tenali</option>
-					  <option style="padding-left: 10px;" value="TIRU">Tirupati</option>
-					  <option style="padding-left: 10px;" value="VIJA">Vijayawada</option>
-					  <option style="padding-left: 10px;" value="VIZA">Vizag</option>
-					  <option style="padding-left: 10px;" value="VIZI">Vizianagaram</option></optgroup>
-					<optgroup label="Arunachal Pradesh">
-					  <option style="padding-left: 10px;" value="TAWA">Tawang</option>
-					  <option style="padding-left: 10px;" value="ZIRO">Ziro</option></optgroup>
-					<optgroup label="Assam">
-					  <option style="padding-left: 10px;" value="DIB">Dibrugarh</option>
-					  <option style="padding-left: 10px;" value="GUW">Guwahati</option>
-					  <option style="padding-left: 10px;" value="JORT">Jorhat</option>
-					  <option style="padding-left: 10px;" value="SIL">Silchar</option>
-					  <option style="padding-left: 10px;" value="TINS">Tinsukia</option></optgroup>
-					<optgroup label="Bihar">
-					  <option style="padding-left: 10px;" value="HAJI">Hajipur</option>
-					  <option style="padding-left: 10px;" value="PATN">Patna</option></optgroup>
-					<optgroup label="Chhattisgarh">
-					  <option style="padding-left: 10px;" value="BHILAI">Bhilai</option>
-					  <option style="padding-left: 10px;" value="BILA">Bilaspur</option>
-					  <option style="padding-left: 10px;" value="CHAM">Champa</option>
-					  <option style="padding-left: 10px;" value="DHMT">Dhamtari</option>
-					  <option style="padding-left: 10px;" value="DURG">Durg</option>
-					  <option style="padding-left: 10px;" value="JAGD">Jagdalpur</option>
-					  <option style="padding-left: 10px;" value="KAWA">Kawardha</option>
-					  <option style="padding-left: 10px;" value="KNGN">Kondagaon</option>
-					  <option style="padding-left: 10px;" value="KRBA">Korba</option>
-					  <option style="padding-left: 10px;" value="RAIG">Raigarh</option>
-					  <option style="padding-left: 10px;" value="RAIPUR">Raipur</option>
-					  <option style="padding-left: 10px;" value="TNO">Tilda Neora</option></optgroup>
-					<optgroup label="Croatia">
-					  <option style="padding-left: 10px;" value="DBRV">Dubrovnik</option></optgroup>
-					<optgroup label="Goa">
-					  <option style="padding-left: 10px;" value="GOA">Goa</option></optgroup>
-					<optgroup label="Gujarat">
-					  <option style="padding-left: 10px;" value="ADPR">Adipur</option>
-					  <option style="padding-left: 10px;" value="AHD">Ahmedabad</option>
-					  <option style="padding-left: 10px;" value="AND">Anand</option>
-					  <option style="padding-left: 10px;" value="ANKL">Ankleshwar</option>
-					  <option style="padding-left: 10px;" value="BHAR">Bharuch</option>
-					  <option style="padding-left: 10px;" value="BHNG">Bhavnagar</option>
-					  <option style="padding-left: 10px;" value="DAMA">Daman</option>
-					  <option style="padding-left: 10px;" value="GDHAM">Gandhidham</option>
-					  <option style="padding-left: 10px;" value="GNAGAR">Gandhinagar</option>
-					  <option style="padding-left: 10px;" value="HIMM">Himmatnagar</option>
-					  <option style="padding-left: 10px;" value="IDAR">Idar</option>
-					  <option style="padding-left: 10px;" value="JAM">Jamnagar</option>
-					  <option style="padding-left: 10px;" value="JETP">Jetpur</option>
-					  <option style="padding-left: 10px;" value="JUGH">Junagadh</option>
-					  <option style="padding-left: 10px;" value="KTCH">Kutch</option>
-					  <option style="padding-left: 10px;" value="NADI">Nadiad</option>
-					  <option style="padding-left: 10px;" value="NVSR">Navsari</option>
-					  <option style="padding-left: 10px;" value="PALN">Palanpur</option>
-					  <option style="padding-left: 10px;" value="PATA">Patan</option>
-					  <option style="padding-left: 10px;" value="RAJK">Rajkot</option>
-					  <option style="padding-left: 10px;" value="SANA">Sanand</option>
-					  <option style="padding-left: 10px;" value="SILV">Silvassa</option>
-					  <option style="padding-left: 10px;" value="SURT">Surat</option>
-					  <option style="padding-left: 10px;" value="VAD">Vadodara</option>
-					  <option style="padding-left: 10px;" value="VLSD">Valsad</option>
-					  <option style="padding-left: 10px;" value="VAPI">Vapi</option></optgroup>
-					<optgroup label="Haryana">
-					  <option style="padding-left: 10px;" value="AMB">Ambala</option>
-					  <option style="padding-left: 10px;" value="DHRA">Dharuhera</option>
-					  <option style="padding-left: 10px;" value="FARI">Faridabad</option>
-					  <option style="padding-left: 10px;" value="HISR">Hisar</option>
-					  <option style="padding-left: 10px;" value="JHAJ">Jhajjar</option>
-					  <option style="padding-left: 10px;" value="JIND">Jind</option>
-					  <option style="padding-left: 10px;" value="KAIT">Kaithal</option>
-					  <option style="padding-left: 10px;" value="KARN">Karnal</option>
-					  <option style="padding-left: 10px;" value="KUND">Kundli</option>
-					  <option style="padding-left: 10px;" value="KURU">Kurukshetra</option>
-					  <option style="padding-left: 10px;" value="PNCH">Panchkula</option>
-					  <option style="padding-left: 10px;" value="PAN">Panipat</option>
-					  <option style="padding-left: 10px;" value="REWA">Rewari</option>
-					  <option style="padding-left: 10px;" value="ROH">Rohtak</option>
-					  <option style="padding-left: 10px;" value="SISA">Sirsa</option>
-					  <option style="padding-left: 10px;" value="RAIH">Sonipat</option>
-					  <option style="padding-left: 10px;" value="YAMU">Yamunanagar</option></optgroup>
-					<optgroup label="Himachal Pradesh">
-					  <option style="padding-left: 10px;" value="BADD">Baddi</option>
-					  <option style="padding-left: 10px;" value="DMSL">Dharamsala</option>
-					  <option style="padding-left: 10px;" value="HAMI">Hamirpur (HP)</option>
-					  <option style="padding-left: 10px;" value="KANG">Kangra</option>
-					  <option style="padding-left: 10px;" value="KULU">Kullu</option>
-					  <option style="padding-left: 10px;" value="MANA">Manali</option>
-					  <option style="padding-left: 10px;" value="SMLA">Shimla</option>
-					  <option style="padding-left: 10px;" value="SCO">Solan</option></optgroup>
-					<optgroup label="Jammu and Kashmir">
-					  <option style="padding-left: 10px;" value="JAMM">Jammu</option>
-					  <option style="padding-left: 10px;" value="KATH">Kathua</option>
-					  <option style="padding-left: 10px;" value="KATR">Katra</option>
-					  <option style="padding-left: 10px;" value="LEHA">Ladakh</option></optgroup>
-					<optgroup label="Jharkhand">
-					  <option style="padding-left: 10px;" value="BOKA">Bokaro</option>
-					  <option style="padding-left: 10px;" value="DOGH">Deoghar</option>
-					  <option style="padding-left: 10px;" value="DHAN">Dhanbad(Jharkhand)</option>
-					  <option style="padding-left: 10px;" value="JMDP">Jamshedpur</option>
-					  <option style="padding-left: 10px;" value="RANC">Ranchi</option></optgroup>
-					<optgroup label="Karnataka">
-					  <option style="padding-left: 10px;" value="BELG">Belgaum</option>
-					  <option style="padding-left: 10px;" value="BANG">Bengaluru</option>
-					  <option style="padding-left: 10px;" value="BIDR">Bidar</option>
-					  <option style="padding-left: 10px;" value="COOR">Coorg</option>
-					  <option style="padding-left: 10px;" value="DAVA">Davangere</option>
-					  <option style="padding-left: 10px;" value="GULB">Gulbarga</option>
-					  <option style="padding-left: 10px;" value="HUBL">Hubli</option>
-					  <option style="padding-left: 10px;" value="KWAR">Karwar</option>
-					  <option style="padding-left: 10px;" value="MLR">Mangalore</option>
-					  <option style="padding-left: 10px;" value="MANI">Manipal</option>
-					  <option style="padding-left: 10px;" value="MYS">Mysore</option>
-					  <option style="padding-left: 10px;" value="TUMK">Tumkur</option>
-					  <option style="padding-left: 10px;" value="UDUP">Udupi</option></optgroup>
-					<optgroup label="Kerala">
-					  <option style="padding-left: 10px;" value="99">Alappuzha</option>
-					  <option style="padding-left: 10px;" value="ANHL">Anchal</option>
-					  <option style="padding-left: 10px;" value="ANGA">Angamaly</option>
-					  <option style="padding-left: 10px;" value="ERNK">Ernakulam</option>
-					  <option style="padding-left: 10px;" value="KANN">Kannur</option>
-					  <option style="padding-left: 10px;" value="KARG">Karunagapally</option>
-					  <option style="padding-left: 10px;" value="KOCH">Kochi</option>
-					  <option style="padding-left: 10px;" value="KOLM">Kollam</option>
-					  <option style="padding-left: 10px;" value="KTYM">Kottayam</option>
-					  <option style="padding-left: 10px;" value="MVLR">Mavellikara</option>
-					  <option style="padding-left: 10px;" value="THAL">Thalayolaparambu</option>
-					  <option style="padding-left: 10px;" value="THSR">Thrissur</option>
-					  <option style="padding-left: 10px;" value="TRIV">Trivandrum</option></optgroup>
-					<optgroup label="Madhya Pradesh">
-					  <option style="padding-left: 10px;" value="BLGT">Balaghat</option>
-					  <option style="padding-left: 10px;" value="BETU">Betul</option>
-					  <option style="padding-left: 10px;" value="BHOP">Bhopal</option>
-					  <option style="padding-left: 10px;" value="CHIN">Chhindwara</option>
-					  <option style="padding-left: 10px;" value="DEWAS">Dewas</option>
-					  <option style="padding-left: 10px;" value="GWAL">Gwalior</option>
-					  <option style="padding-left: 10px;" value="HRDA">Harda</option>
-					  <option style="padding-left: 10px;" value="IND">Indore</option>
-					  <option style="padding-left: 10px;" value="JABL">Jabalpur</option>
-					  <option style="padding-left: 10px;" value="KHDW">Khandwa</option>
-					  <option style="padding-left: 10px;" value="NMCH">Neemuch</option>
-					  <option style="padding-left: 10px;" value="RATL">Ratlam</option>
-					  <option style="padding-left: 10px;" value="SAMP">Sagar</option>
-					  <option style="padding-left: 10px;" value="SARN">Sarni</option>
-					  <option style="padding-left: 10px;" value="SEHO">Sehore</option>
-					  <option style="padding-left: 10px;" value="SEON">Seoni</option>
-					  <option style="padding-left: 10px;" value="SHIV">Shivpuri</option>
-					  <option style="padding-left: 10px;" value="UJJN">Ujjain</option></optgroup>
-					<optgroup label="Maharashtra">
-					  <option style="padding-left: 10px;" value="AHMED">Ahmednagar</option>
-					  <option style="padding-left: 10px;" value="AKOL">Akola</option>
-					  <option style="padding-left: 10px;" value="ALBG">Alibaug</option>
-					  <option style="padding-left: 10px;" value="AMRA">Amravati</option>
-					  <option style="padding-left: 10px;" value="AURA">Aurangabad</option>
-					  <option style="padding-left: 10px;" value="BARA">Baramati</option>
-					  <option style="padding-left: 10px;" value="BEED">Beed</option>
-					  <option style="padding-left: 10px;" value="BHIW">Bhiwandi</option>
-					  <option style="padding-left: 10px;" value="BOIS">Boisar</option>
-					  <option style="padding-left: 10px;" value="BULD">Buldana</option>
-					  <option style="padding-left: 10px;" value="CHAN">Chandrapur</option>
-					  <option style="padding-left: 10px;" value="DHLE">Dhule</option>
-					  <option style="padding-left: 10px;" value="DHUL">Dhulia</option>
-					  <option style="padding-left: 10px;" value="INDA">Indapur</option>
-					  <option style="padding-left: 10px;" value="JALG">Jalgaon</option>
-					  <option style="padding-left: 10px;" value="KHED">Khed</option>
-					  <option style="padding-left: 10px;" value="KHOP">Khopoli</option>
-					  <option style="padding-left: 10px;" value="KOLH">Kolhapur</option>
-					  <option style="padding-left: 10px;" value="LAT">Latur</option>
-					  <option style="padding-left: 10px;" value="LAVA">Lavasa</option>
-					  <option style="padding-left: 10px;" value="LNVL">Lonavala</option>
-					  <option style="padding-left: 10px;" value="MHAD">Mahad</option>
-					  <option style="padding-left: 10px;" value="MALE">Malegaon</option>
-					  <option style="padding-left: 10px;" value="MUMBAI">Mumbai</option>
-					  <option style="padding-left: 10px;" value="NAGP">Nagpur</option>
-					  <option style="padding-left: 10px;" value="NAND">Nanded</option>
-					  <option style="padding-left: 10px;" value="NASK">Nashik</option>
-					  <option style="padding-left: 10px;" value="PALG">Palghar</option>
-					  <option style="padding-left: 10px;" value="PANC">Panchgani</option>
-					  <option style="padding-left: 10px;" value="PARB">Parbhani</option>
-					  <option style="padding-left: 10px;" value="PEN">Pen</option>
-					  <option style="padding-left: 10px;" value="PHAL">Phaltan</option>
-					  <option style="padding-left: 10px;" value="PIMP">Pimpri</option>
-					  <option style="padding-left: 10px;" value="PUNE">Pune</option>
-					  <option style="padding-left: 10px;" value="RAI">Raigad</option>
-					  <option style="padding-left: 10px;" value="SANG">Sangli</option>
-					  <option style="padding-left: 10px;" value="SATA">Satara</option>
-					  <option style="padding-left: 10px;" value="SOLA">Solapur</option>
-					  <option style="padding-left: 10px;" value="TMB">Tembhode</option>
-					  <option style="padding-left: 10px;" value="UDGR">Udgir</option>
-					  <option style="padding-left: 10px;" value="WARD">Wardha</option></optgroup>
-					<optgroup label="Meghalaya">
-					  <option style="padding-left: 10px;" value="RNG">Rongjeng</option>
-					  <option style="padding-left: 10px;" value="SHLG">Shillong</option></optgroup>
-					<optgroup label="Nagaland">
-					  <option style="padding-left: 10px;" value="DMPR">Dimapur</option></optgroup>
-					<optgroup label="NCR">
-					  <option style="padding-left: 10px;" value="NCR">National Capital Region (NCR)</option></optgroup>
-					<optgroup label="Orissa">
-					  <option style="padding-left: 10px;" value="BLSR">Balasore</option>
-					  <option style="padding-left: 10px;" value="BHUB">Bhubaneshwar</option>
-					  <option style="padding-left: 10px;" value="PURI">Puri</option>
-					  <option style="padding-left: 10px;" value="SAMB">Sambalpur</option></optgroup>
-					<optgroup label="Punjab">
-					  <option style="padding-left: 10px;" value="ABOR">Abohar</option>
-					  <option style="padding-left: 10px;" value="AHMG">Ahmedgarh</option>
-					  <option style="padding-left: 10px;" value="AMRI">Amritsar</option>
-					  <option style="padding-left: 10px;" value="BNGA">Banga</option>
-					  <option style="padding-left: 10px;" value="BAR">Barnala</option>
-					  <option style="padding-left: 10px;" value="BHAT">Bathinda</option>
-					  <option style="padding-left: 10px;" value="CHD">Chandigarh</option>
-					  <option style="padding-left: 10px;" value="HOSH">Hoshiarpur</option>
-					  <option style="padding-left: 10px;" value="JALA">Jalandhar</option>
-					  <option style="padding-left: 10px;" value="KHAN">Khanna</option>
-					  <option style="padding-left: 10px;" value="KOTK">Kotkapura</option>
-					  <option style="padding-left: 10px;" value="LUDH">Ludhiana</option>
-					  <option style="padding-left: 10px;" value="MNSA">Mansa</option>
-					  <option style="padding-left: 10px;" value="MOGA">Moga</option>
-					  <option style="padding-left: 10px;" value="MOHL">Mohali</option>
-					  <option style="padding-left: 10px;" value="NAVN">Nawanshahr</option>
-					  <option style="padding-left: 10px;" value="PATH">Pathankot</option>
-					  <option style="padding-left: 10px;" value="PATI">Patiala</option>
-					  <option style="padding-left: 10px;" value="PATR">Patran</option>
-					  <option style="padding-left: 10px;" value="RUPN">Rupnagar</option>
-					  <option style="padding-left: 10px;" value="SANR">Sangrur</option>
-					  <option style="padding-left: 10px;" value="ZIRK">Zirakpur</option></optgroup>
-					<optgroup label="Rajasthan">
-					  <option style="padding-left: 10px;" value="ABRD">Abu Road</option>
-					  <option style="padding-left: 10px;" value="AJMER">Ajmer</option>
-					  <option style="padding-left: 10px;" value="ALSR">Alsisar (Rajasthan)</option>
-					  <option style="padding-left: 10px;" value="ALWR">Alwar</option>
-					  <option style="padding-left: 10px;" value="BANS">Banswara</option>
-					  <option style="padding-left: 10px;" value="BEAW">Beawar</option>
-					  <option style="padding-left: 10px;" value="BHIL">Bhilwara</option>
-					  <option style="padding-left: 10px;" value="BHWD">Bhiwadi</option>
-					  <option style="padding-left: 10px;" value="BIK">Bikaner</option>
-					  <option style="padding-left: 10px;" value="DAUS">Dausa</option>
-					  <option style="padding-left: 10px;" value="JAIP">Jaipur</option>
-					  <option style="padding-left: 10px;" value="JSMR">Jaisalmer</option>
-					  <option style="padding-left: 10px;" value="JODH">Jodhpur</option>
-					  <option style="padding-left: 10px;" value="KISH">Kishangarh</option>
-					  <option style="padding-left: 10px;" value="KOTA">Kota</option>
-					  <option style="padding-left: 10px;" value="NEEM">Neemrana</option>
-					  <option style="padding-left: 10px;" value="SIKR">Sikar</option>
-					  <option style="padding-left: 10px;" value="SRIG">Sri Ganganagar</option>
-					  <option style="padding-left: 10px;" value="UDAI">Udaipur</option></optgroup>
-					<optgroup label="Singapore">
-					  <option style="padding-left: 10px;" value="SING">Singapore</option></optgroup>
-					<optgroup label="Tamil Nadu">
-					  <option style="padding-left: 10px;" value="ARIY">Ariyalur</option>
-					  <option style="padding-left: 10px;" value="ARNI">Arni</option>
-					  <option style="padding-left: 10px;" value="ARUP">Aruppukottai</option>
-					  <option style="padding-left: 10px;" value="CHEN">Chennai</option>
-					  <option style="padding-left: 10px;" value="COIM">Coimbatore</option>
-					  <option style="padding-left: 10px;" value="CUDD">Cuddalore</option>
-					  <option style="padding-left: 10px;" value="DHAR">Dharapuram</option>
-					  <option style="padding-left: 10px;" value="DMPI">Dharmapuri</option>
-					  <option style="padding-left: 10px;" value="DIND">Dindigul</option>
-					  <option style="padding-left: 10px;" value="EROD">Erode</option>
-					  <option style="padding-left: 10px;" value="KNPM">Kanchipuram</option>
-					  <option style="padding-left: 10px;" value="KUMB">Kumbakonam</option>
-					  <option style="padding-left: 10px;" value="MADU">Madurai</option>
-					  <option style="padding-left: 10px;" value="MTPM">Mettuppalayam</option>
-					  <option style="padding-left: 10px;" value="OOTY">Ooty</option>
-					  <option style="padding-left: 10px;" value="POND">Pondicherry</option>
-					  <option style="padding-left: 10px;" value="PUDH">Pudhukottai</option>
-					  <option style="padding-left: 10px;" value="SALM">Salem</option>
-					  <option style="padding-left: 10px;" value="SIV">Sivakasi</option>
-					  <option style="padding-left: 10px;" value="TAJO">Tanjore</option>
-					  <option style="padding-left: 10px;" value="TENK">Tenkasi</option>
-					  <option style="padding-left: 10px;" value="TIRV">Tirunelveli</option>
-					  <option style="padding-left: 10px;" value="TIRP">Tirupur</option>
-					  <option style="padding-left: 10px;" value="TRIC">Trichy</option>
-					  <option style="padding-left: 10px;" value="VELL">Vellore</option></optgroup>
-					<optgroup label="Telangana">
-					  <option style="padding-left: 10px;" value="ADIL">Adilabad</option>
-					  <option style="padding-left: 10px;" value="AMAN">Amangal</option>
-					  <option style="padding-left: 10px;" value="HYD">Hyderabad</option>
-					  <option style="padding-left: 10px;" value="KARIM">Karimnagar</option>
-					  <option style="padding-left: 10px;" value="KHAM">Khammam</option>
-					  <option style="padding-left: 10px;" value="MRGD">Miryalaguda</option>
-					  <option style="padding-left: 10px;" value="NIZA">Nizamabad</option>
-					  <option style="padding-left: 10px;" value="PEDA">Peddapalli</option>
-					  <option style="padding-left: 10px;" value="POCH">Pochampally</option>
-					  <option style="padding-left: 10px;" value="SDDP">Siddipet</option>
-					  <option style="padding-left: 10px;" value="SURY">Suryapet</option>
-					  <option style="padding-left: 10px;" value="UPPA">Uppal</option>
-					  <option style="padding-left: 10px;" value="WAR">Warangal</option></optgroup>
-					<optgroup label="Tripura ">
-					  <option style="padding-left: 10px;" value="AGAR">Agartala</option></optgroup>
-					<optgroup label="Uttar Pradesh">
-					  <option style="padding-left: 10px;" value="AGRA">Agra</option>
-					  <option style="padding-left: 10px;" value="ALI">Aligarh</option>
-					  <option style="padding-left: 10px;" value="ALLH">Allahabad</option>
-					  <option style="padding-left: 10px;" value="BARE">Bareilly</option>
-					  <option style="padding-left: 10px;" value="BIJ">Bijnor</option>
-					  <option style="padding-left: 10px;" value="GHAR">Ghazipur</option>
-					  <option style="padding-left: 10px;" value="GRKP">Gorakhpur</option>
-					  <option style="padding-left: 10px;" value="KANP">Kanpur</option>
-					  <option style="padding-left: 10px;" value="LUCK">Lucknow</option>
-					  <option style="padding-left: 10px;" value="MATH">Mathura</option>
-					  <option style="padding-left: 10px;" value="MERT">Meerut</option>
-					  <option style="padding-left: 10px;" value="MORA">Moradabad</option>
-					  <option style="padding-left: 10px;" value="MUZ">Muzaffarnagar</option>
-					  <option style="padding-left: 10px;" value="RENU">Renukoot</option>
-					  <option style="padding-left: 10px;" value="SAHA">Saharanpur</option>
-					  <option style="padding-left: 10px;" value="VAR">Varanasi</option></optgroup>
-					<optgroup label="Uttarakhand">
-					  <option style="padding-left: 10px;" value="DEH">Dehradun</option>
-					  <option style="padding-left: 10px;" value="HRDR">Haridwar</option>
-					  <option style="padding-left: 10px;" value="MSS">Mussoorie</option>
-					  <option style="padding-left: 10px;" value="NAIN">Nainital</option>
-					  <option style="padding-left: 10px;" value="RAMN">Ramnagar</option>
-					  <option style="padding-left: 10px;" value="RKES">Rishikesh</option>
-					  <option style="padding-left: 10px;" value="ROOR">Roorkee</option>
-					  <option style="padding-left: 10px;" value="RUDP">Rudrapur</option></optgroup>
-					<optgroup label="West Bengal">
-					  <option style="padding-left: 10px;" value="ASANSOL">Asansol</option>
-					  <option style="padding-left: 10px;" value="BEHA">Berhampore</option>
-					  <option style="padding-left: 10px;" value="BLPR">Bolpur</option>
-					  <option style="padding-left: 10px;" value="BURD">Burdwan</option>
-					  <option style="padding-left: 10px;" value="COBE">Cooch Behar</option>
-					  <option style="padding-left: 10px;" value="DARJ">Darjeeling</option>
-					  <option style="padding-left: 10px;" value="DURGA">Durgapur</option>
-					  <option style="padding-left: 10px;" value="HALD">Haldia</option>
-					  <option style="padding-left: 10px;" value="HOOG">Hooghly</option>
-					  <option style="padding-left: 10px;" value="HWRH">Howrah</option>
-					  <option style="padding-left: 10px;" value="JPG">Jalpaiguri</option>
-					  <option style="padding-left: 10px;" value="KOLK">Kolkata</option>
-					  <option style="padding-left: 10px;" value="RANA">Ranaghat</option>
-					  <option style="padding-left: 10px;" value="SILI">Siliguri</option></optgroup>
-				  </select>
-				  </div>
-				  <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-					<select class="list_of_movies">
-					  <option value="">List of 1000 Screens</option>
-					  <optgroup label="Andhra Pradesh">
-						<option style="padding-left: 10px;" value="ANAN">Anantapur</option>
-						<option style="padding-left: 10px;" value="CHDM">Chinnamandem</option>
-						<option style="padding-left: 10px;" value="GUDR">Gudur</option>
-						<option style="padding-left: 10px;" value="GUNT">Guntur</option>
-						<option style="padding-left: 10px;" value="JANG">Jangareddy Gudem</option>
-						<option style="padding-left: 10px;" value="KAKI">Kakinada</option>
-						<option style="padding-left: 10px;" value="KURN">Kurnool</option>
-						<option style="padding-left: 10px;" value="MART">Martur</option>
-						<option style="padding-left: 10px;" value="PRVT">Parvathipuram</option>
-						<option style="padding-left: 10px;" value="RAJA">Rajahmundry</option>
-						<option style="padding-left: 10px;" value="TENA">Tenali</option>
-						<option style="padding-left: 10px;" value="TIRU">Tirupati</option>
-						<option style="padding-left: 10px;" value="VIJA">Vijayawada</option>
-						<option style="padding-left: 10px;" value="VIZA">Vizag</option>
-						<option style="padding-left: 10px;" value="VIZI">Vizianagaram</option></optgroup>
-					  <optgroup label="Arunachal Pradesh">
-						<option style="padding-left: 10px;" value="TAWA">Tawang</option>
-						<option style="padding-left: 10px;" value="ZIRO">Ziro</option></optgroup>
-					  <optgroup label="Assam">
-						<option style="padding-left: 10px;" value="DIB">Dibrugarh</option>
-						<option style="padding-left: 10px;" value="GUW">Guwahati</option>
-						<option style="padding-left: 10px;" value="JORT">Jorhat</option>
-						<option style="padding-left: 10px;" value="SIL">Silchar</option>
-						<option style="padding-left: 10px;" value="TINS">Tinsukia</option></optgroup>
-					  <optgroup label="Bihar">
-						<option style="padding-left: 10px;" value="HAJI">Hajipur</option>
-						<option style="padding-left: 10px;" value="PATN">Patna</option></optgroup>
-					  <optgroup label="Chhattisgarh">
-						<option style="padding-left: 10px;" value="BHILAI">Bhilai</option>
-						<option style="padding-left: 10px;" value="BILA">Bilaspur</option>
-						<option style="padding-left: 10px;" value="CHAM">Champa</option>
-						<option style="padding-left: 10px;" value="DHMT">Dhamtari</option>
-						<option style="padding-left: 10px;" value="DURG">Durg</option>
-						<option style="padding-left: 10px;" value="JAGD">Jagdalpur</option>
-						<option style="padding-left: 10px;" value="KAWA">Kawardha</option>
-						<option style="padding-left: 10px;" value="KNGN">Kondagaon</option>
-						<option style="padding-left: 10px;" value="KRBA">Korba</option>
-						<option style="padding-left: 10px;" value="RAIG">Raigarh</option>
-						<option style="padding-left: 10px;" value="RAIPUR">Raipur</option>
-						<option style="padding-left: 10px;" value="TNO">Tilda Neora</option></optgroup>
-					  <optgroup label="Croatia">
-						<option style="padding-left: 10px;" value="DBRV">Dubrovnik</option></optgroup>
-					  <optgroup label="Goa">
-						<option style="padding-left: 10px;" value="GOA">Goa</option></optgroup>
-					  <optgroup label="Gujarat">
-						<option style="padding-left: 10px;" value="ADPR">Adipur</option>
-						<option style="padding-left: 10px;" value="AHD">Ahmedabad</option>
-						<option style="padding-left: 10px;" value="AND">Anand</option>
-						<option style="padding-left: 10px;" value="ANKL">Ankleshwar</option>
-						<option style="padding-left: 10px;" value="BHAR">Bharuch</option>
-						<option style="padding-left: 10px;" value="BHNG">Bhavnagar</option>
-						<option style="padding-left: 10px;" value="DAMA">Daman</option>
-						<option style="padding-left: 10px;" value="GDHAM">Gandhidham</option>
-						<option style="padding-left: 10px;" value="GNAGAR">Gandhinagar</option>
-						<option style="padding-left: 10px;" value="HIMM">Himmatnagar</option>
-						<option style="padding-left: 10px;" value="IDAR">Idar</option>
-						<option style="padding-left: 10px;" value="JAM">Jamnagar</option>
-						<option style="padding-left: 10px;" value="JETP">Jetpur</option>
-						<option style="padding-left: 10px;" value="JUGH">Junagadh</option>
-						<option style="padding-left: 10px;" value="KTCH">Kutch</option>
-						<option style="padding-left: 10px;" value="NADI">Nadiad</option>
-						<option style="padding-left: 10px;" value="NVSR">Navsari</option>
-						<option style="padding-left: 10px;" value="PALN">Palanpur</option>
-						<option style="padding-left: 10px;" value="PATA">Patan</option>
-						<option style="padding-left: 10px;" value="RAJK">Rajkot</option>
-						<option style="padding-left: 10px;" value="SANA">Sanand</option>
-						<option style="padding-left: 10px;" value="SILV">Silvassa</option>
-						<option style="padding-left: 10px;" value="SURT">Surat</option>
-						<option style="padding-left: 10px;" value="VAD">Vadodara</option>
-						<option style="padding-left: 10px;" value="VLSD">Valsad</option>
-						<option style="padding-left: 10px;" value="VAPI">Vapi</option></optgroup>
-					  <optgroup label="Haryana">
-						<option style="padding-left: 10px;" value="AMB">Ambala</option>
-						<option style="padding-left: 10px;" value="DHRA">Dharuhera</option>
-						<option style="padding-left: 10px;" value="FARI">Faridabad</option>
-						<option style="padding-left: 10px;" value="HISR">Hisar</option>
-						<option style="padding-left: 10px;" value="JHAJ">Jhajjar</option>
-						<option style="padding-left: 10px;" value="JIND">Jind</option>
-						<option style="padding-left: 10px;" value="KAIT">Kaithal</option>
-						<option style="padding-left: 10px;" value="KARN">Karnal</option>
-						<option style="padding-left: 10px;" value="KUND">Kundli</option>
-						<option style="padding-left: 10px;" value="KURU">Kurukshetra</option>
-						<option style="padding-left: 10px;" value="PNCH">Panchkula</option>
-						<option style="padding-left: 10px;" value="PAN">Panipat</option>
-						<option style="padding-left: 10px;" value="REWA">Rewari</option>
-						<option style="padding-left: 10px;" value="ROH">Rohtak</option>
-						<option style="padding-left: 10px;" value="SISA">Sirsa</option>
-						<option style="padding-left: 10px;" value="RAIH">Sonipat</option>
-						<option style="padding-left: 10px;" value="YAMU">Yamunanagar</option></optgroup>
-					  <optgroup label="Himachal Pradesh">
-						<option style="padding-left: 10px;" value="BADD">Baddi</option>
-						<option style="padding-left: 10px;" value="DMSL">Dharamsala</option>
-						<option style="padding-left: 10px;" value="HAMI">Hamirpur (HP)</option>
-						<option style="padding-left: 10px;" value="KANG">Kangra</option>
-						<option style="padding-left: 10px;" value="KULU">Kullu</option>
-						<option style="padding-left: 10px;" value="MANA">Manali</option>
-						<option style="padding-left: 10px;" value="SMLA">Shimla</option>
-						<option style="padding-left: 10px;" value="SCO">Solan</option></optgroup>
-					  <optgroup label="Jammu and Kashmir">
-						<option style="padding-left: 10px;" value="JAMM">Jammu</option>
-						<option style="padding-left: 10px;" value="KATH">Kathua</option>
-						<option style="padding-left: 10px;" value="KATR">Katra</option>
-						<option style="padding-left: 10px;" value="LEHA">Ladakh</option></optgroup>
-					  <optgroup label="Jharkhand">
-						<option style="padding-left: 10px;" value="BOKA">Bokaro</option>
-						<option style="padding-left: 10px;" value="DOGH">Deoghar</option>
-						<option style="padding-left: 10px;" value="DHAN">Dhanbad(Jharkhand)</option>
-						<option style="padding-left: 10px;" value="JMDP">Jamshedpur</option>
-						<option style="padding-left: 10px;" value="RANC">Ranchi</option></optgroup>
-					  <optgroup label="Karnataka">
-						<option style="padding-left: 10px;" value="BELG">Belgaum</option>
-						<option style="padding-left: 10px;" value="BANG">Bengaluru</option>
-						<option style="padding-left: 10px;" value="BIDR">Bidar</option>
-						<option style="padding-left: 10px;" value="COOR">Coorg</option>
-						<option style="padding-left: 10px;" value="DAVA">Davangere</option>
-						<option style="padding-left: 10px;" value="GULB">Gulbarga</option>
-						<option style="padding-left: 10px;" value="HUBL">Hubli</option>
-						<option style="padding-left: 10px;" value="KWAR">Karwar</option>
-						<option style="padding-left: 10px;" value="MLR">Mangalore</option>
-						<option style="padding-left: 10px;" value="MANI">Manipal</option>
-						<option style="padding-left: 10px;" value="MYS">Mysore</option>
-						<option style="padding-left: 10px;" value="TUMK">Tumkur</option>
-						<option style="padding-left: 10px;" value="UDUP">Udupi</option></optgroup>
-					  <optgroup label="Kerala">
-						<option style="padding-left: 10px;" value="99">Alappuzha</option>
-						<option style="padding-left: 10px;" value="ANHL">Anchal</option>
-						<option style="padding-left: 10px;" value="ANGA">Angamaly</option>
-						<option style="padding-left: 10px;" value="ERNK">Ernakulam</option>
-						<option style="padding-left: 10px;" value="KANN">Kannur</option>
-						<option style="padding-left: 10px;" value="KARG">Karunagapally</option>
-						<option style="padding-left: 10px;" value="KOCH">Kochi</option>
-						<option style="padding-left: 10px;" value="KOLM">Kollam</option>
-						<option style="padding-left: 10px;" value="KTYM">Kottayam</option>
-						<option style="padding-left: 10px;" value="MVLR">Mavellikara</option>
-						<option style="padding-left: 10px;" value="THAL">Thalayolaparambu</option>
-						<option style="padding-left: 10px;" value="THSR">Thrissur</option>
-						<option style="padding-left: 10px;" value="TRIV">Trivandrum</option></optgroup>
-					  <optgroup label="Madhya Pradesh">
-						<option style="padding-left: 10px;" value="BLGT">Balaghat</option>
-						<option style="padding-left: 10px;" value="BETU">Betul</option>
-						<option style="padding-left: 10px;" value="BHOP">Bhopal</option>
-						<option style="padding-left: 10px;" value="CHIN">Chhindwara</option>
-						<option style="padding-left: 10px;" value="DEWAS">Dewas</option>
-						<option style="padding-left: 10px;" value="GWAL">Gwalior</option>
-						<option style="padding-left: 10px;" value="HRDA">Harda</option>
-						<option style="padding-left: 10px;" value="IND">Indore</option>
-						<option style="padding-left: 10px;" value="JABL">Jabalpur</option>
-						<option style="padding-left: 10px;" value="KHDW">Khandwa</option>
-						<option style="padding-left: 10px;" value="NMCH">Neemuch</option>
-						<option style="padding-left: 10px;" value="RATL">Ratlam</option>
-						<option style="padding-left: 10px;" value="SAMP">Sagar</option>
-						<option style="padding-left: 10px;" value="SARN">Sarni</option>
-						<option style="padding-left: 10px;" value="SEHO">Sehore</option>
-						<option style="padding-left: 10px;" value="SEON">Seoni</option>
-						<option style="padding-left: 10px;" value="SHIV">Shivpuri</option>
-						<option style="padding-left: 10px;" value="UJJN">Ujjain</option></optgroup>
-					  <optgroup label="Maharashtra">
-						<option style="padding-left: 10px;" value="AHMED">Ahmednagar</option>
-						<option style="padding-left: 10px;" value="AKOL">Akola</option>
-						<option style="padding-left: 10px;" value="ALBG">Alibaug</option>
-						<option style="padding-left: 10px;" value="AMRA">Amravati</option>
-						<option style="padding-left: 10px;" value="AURA">Aurangabad</option>
-						<option style="padding-left: 10px;" value="BARA">Baramati</option>
-						<option style="padding-left: 10px;" value="BEED">Beed</option>
-						<option style="padding-left: 10px;" value="BHIW">Bhiwandi</option>
-						<option style="padding-left: 10px;" value="BOIS">Boisar</option>
-						<option style="padding-left: 10px;" value="BULD">Buldana</option>
-						<option style="padding-left: 10px;" value="CHAN">Chandrapur</option>
-						<option style="padding-left: 10px;" value="DHLE">Dhule</option>
-						<option style="padding-left: 10px;" value="DHUL">Dhulia</option>
-						<option style="padding-left: 10px;" value="INDA">Indapur</option>
-						<option style="padding-left: 10px;" value="JALG">Jalgaon</option>
-						<option style="padding-left: 10px;" value="KHED">Khed</option>
-						<option style="padding-left: 10px;" value="KHOP">Khopoli</option>
-						<option style="padding-left: 10px;" value="KOLH">Kolhapur</option>
-						<option style="padding-left: 10px;" value="LAT">Latur</option>
-						<option style="padding-left: 10px;" value="LAVA">Lavasa</option>
-						<option style="padding-left: 10px;" value="LNVL">Lonavala</option>
-						<option style="padding-left: 10px;" value="MHAD">Mahad</option>
-						<option style="padding-left: 10px;" value="MALE">Malegaon</option>
-						<option style="padding-left: 10px;" value="MUMBAI">Mumbai</option>
-						<option style="padding-left: 10px;" value="NAGP">Nagpur</option>
-						<option style="padding-left: 10px;" value="NAND">Nanded</option>
-						<option style="padding-left: 10px;" value="NASK">Nashik</option>
-						<option style="padding-left: 10px;" value="PALG">Palghar</option>
-						<option style="padding-left: 10px;" value="PANC">Panchgani</option>
-						<option style="padding-left: 10px;" value="PARB">Parbhani</option>
-						<option style="padding-left: 10px;" value="PEN">Pen</option>
-						<option style="padding-left: 10px;" value="PHAL">Phaltan</option>
-						<option style="padding-left: 10px;" value="PIMP">Pimpri</option>
-						<option style="padding-left: 10px;" value="PUNE">Pune</option>
-						<option style="padding-left: 10px;" value="RAI">Raigad</option>
-						<option style="padding-left: 10px;" value="SANG">Sangli</option>
-						<option style="padding-left: 10px;" value="SATA">Satara</option>
-						<option style="padding-left: 10px;" value="SOLA">Solapur</option>
-						<option style="padding-left: 10px;" value="TMB">Tembhode</option>
-						<option style="padding-left: 10px;" value="UDGR">Udgir</option>
-						<option style="padding-left: 10px;" value="WARD">Wardha</option></optgroup>
-					  <optgroup label="Meghalaya">
-						<option style="padding-left: 10px;" value="RNG">Rongjeng</option>
-						<option style="padding-left: 10px;" value="SHLG">Shillong</option></optgroup>
-					  <optgroup label="Nagaland">
-						<option style="padding-left: 10px;" value="DMPR">Dimapur</option></optgroup>
-					  <optgroup label="NCR">
-						<option style="padding-left: 10px;" value="NCR">National Capital Region (NCR)</option></optgroup>
-					  <optgroup label="Orissa">
-						<option style="padding-left: 10px;" value="BLSR">Balasore</option>
-						<option style="padding-left: 10px;" value="BHUB">Bhubaneshwar</option>
-						<option style="padding-left: 10px;" value="PURI">Puri</option>
-						<option style="padding-left: 10px;" value="SAMB">Sambalpur</option></optgroup>
-					  <optgroup label="Punjab">
-						<option style="padding-left: 10px;" value="ABOR">Abohar</option>
-						<option style="padding-left: 10px;" value="AHMG">Ahmedgarh</option>
-						<option style="padding-left: 10px;" value="AMRI">Amritsar</option>
-						<option style="padding-left: 10px;" value="BNGA">Banga</option>
-						<option style="padding-left: 10px;" value="BAR">Barnala</option>
-						<option style="padding-left: 10px;" value="BHAT">Bathinda</option>
-						<option style="padding-left: 10px;" value="CHD">Chandigarh</option>
-						<option style="padding-left: 10px;" value="HOSH">Hoshiarpur</option>
-						<option style="padding-left: 10px;" value="JALA">Jalandhar</option>
-						<option style="padding-left: 10px;" value="KHAN">Khanna</option>
-						<option style="padding-left: 10px;" value="KOTK">Kotkapura</option>
-						<option style="padding-left: 10px;" value="LUDH">Ludhiana</option>
-						<option style="padding-left: 10px;" value="MNSA">Mansa</option>
-						<option style="padding-left: 10px;" value="MOGA">Moga</option>
-						<option style="padding-left: 10px;" value="MOHL">Mohali</option>
-						<option style="padding-left: 10px;" value="NAVN">Nawanshahr</option>
-						<option style="padding-left: 10px;" value="PATH">Pathankot</option>
-						<option style="padding-left: 10px;" value="PATI">Patiala</option>
-						<option style="padding-left: 10px;" value="PATR">Patran</option>
-						<option style="padding-left: 10px;" value="RUPN">Rupnagar</option>
-						<option style="padding-left: 10px;" value="SANR">Sangrur</option>
-						<option style="padding-left: 10px;" value="ZIRK">Zirakpur</option></optgroup>
-					  <optgroup label="Rajasthan">
-						<option style="padding-left: 10px;" value="ABRD">Abu Road</option>
-						<option style="padding-left: 10px;" value="AJMER">Ajmer</option>
-						<option style="padding-left: 10px;" value="ALSR">Alsisar (Rajasthan)</option>
-						<option style="padding-left: 10px;" value="ALWR">Alwar</option>
-						<option style="padding-left: 10px;" value="BANS">Banswara</option>
-						<option style="padding-left: 10px;" value="BEAW">Beawar</option>
-						<option style="padding-left: 10px;" value="BHIL">Bhilwara</option>
-						<option style="padding-left: 10px;" value="BHWD">Bhiwadi</option>
-						<option style="padding-left: 10px;" value="BIK">Bikaner</option>
-						<option style="padding-left: 10px;" value="DAUS">Dausa</option>
-						<option style="padding-left: 10px;" value="JAIP">Jaipur</option>
-						<option style="padding-left: 10px;" value="JSMR">Jaisalmer</option>
-						<option style="padding-left: 10px;" value="JODH">Jodhpur</option>
-						<option style="padding-left: 10px;" value="KISH">Kishangarh</option>
-						<option style="padding-left: 10px;" value="KOTA">Kota</option>
-						<option style="padding-left: 10px;" value="NEEM">Neemrana</option>
-						<option style="padding-left: 10px;" value="SIKR">Sikar</option>
-						<option style="padding-left: 10px;" value="SRIG">Sri Ganganagar</option>
-						<option style="padding-left: 10px;" value="UDAI">Udaipur</option></optgroup>
-					  <optgroup label="Singapore">
-						<option style="padding-left: 10px;" value="SING">Singapore</option></optgroup>
-					  <optgroup label="Tamil Nadu">
-						<option style="padding-left: 10px;" value="ARIY">Ariyalur</option>
-						<option style="padding-left: 10px;" value="ARNI">Arni</option>
-						<option style="padding-left: 10px;" value="ARUP">Aruppukottai</option>
-						<option style="padding-left: 10px;" value="CHEN">Chennai</option>
-						<option style="padding-left: 10px;" value="COIM">Coimbatore</option>
-						<option style="padding-left: 10px;" value="CUDD">Cuddalore</option>
-						<option style="padding-left: 10px;" value="DHAR">Dharapuram</option>
-						<option style="padding-left: 10px;" value="DMPI">Dharmapuri</option>
-						<option style="padding-left: 10px;" value="DIND">Dindigul</option>
-						<option style="padding-left: 10px;" value="EROD">Erode</option>
-						<option style="padding-left: 10px;" value="KNPM">Kanchipuram</option>
-						<option style="padding-left: 10px;" value="KUMB">Kumbakonam</option>
-						<option style="padding-left: 10px;" value="MADU">Madurai</option>
-						<option style="padding-left: 10px;" value="MTPM">Mettuppalayam</option>
-						<option style="padding-left: 10px;" value="OOTY">Ooty</option>
-						<option style="padding-left: 10px;" value="POND">Pondicherry</option>
-						<option style="padding-left: 10px;" value="PUDH">Pudhukottai</option>
-						<option style="padding-left: 10px;" value="SALM">Salem</option>
-						<option style="padding-left: 10px;" value="SIV">Sivakasi</option>
-						<option style="padding-left: 10px;" value="TAJO">Tanjore</option>
-						<option style="padding-left: 10px;" value="TENK">Tenkasi</option>
-						<option style="padding-left: 10px;" value="TIRV">Tirunelveli</option>
-						<option style="padding-left: 10px;" value="TIRP">Tirupur</option>
-						<option style="padding-left: 10px;" value="TRIC">Trichy</option>
-						<option style="padding-left: 10px;" value="VELL">Vellore</option></optgroup>
-					  <optgroup label="Telangana">
-						<option style="padding-left: 10px;" value="ADIL">Adilabad</option>
-						<option style="padding-left: 10px;" value="AMAN">Amangal</option>
-						<option style="padding-left: 10px;" value="HYD">Hyderabad</option>
-						<option style="padding-left: 10px;" value="KARIM">Karimnagar</option>
-						<option style="padding-left: 10px;" value="KHAM">Khammam</option>
-						<option style="padding-left: 10px;" value="MRGD">Miryalaguda</option>
-						<option style="padding-left: 10px;" value="NIZA">Nizamabad</option>
-						<option style="padding-left: 10px;" value="PEDA">Peddapalli</option>
-						<option style="padding-left: 10px;" value="POCH">Pochampally</option>
-						<option style="padding-left: 10px;" value="SDDP">Siddipet</option>
-						<option style="padding-left: 10px;" value="SURY">Suryapet</option>
-						<option style="padding-left: 10px;" value="UPPA">Uppal</option>
-						<option style="padding-left: 10px;" value="WAR">Warangal</option></optgroup>
-					  <optgroup label="Tripura ">
-						<option style="padding-left: 10px;" value="AGAR">Agartala</option></optgroup>
-					  <optgroup label="Uttar Pradesh">
-						<option style="padding-left: 10px;" value="AGRA">Agra</option>
-						<option style="padding-left: 10px;" value="ALI">Aligarh</option>
-						<option style="padding-left: 10px;" value="ALLH">Allahabad</option>
-						<option style="padding-left: 10px;" value="BARE">Bareilly</option>
-						<option style="padding-left: 10px;" value="BIJ">Bijnor</option>
-						<option style="padding-left: 10px;" value="GHAR">Ghazipur</option>
-						<option style="padding-left: 10px;" value="GRKP">Gorakhpur</option>
-						<option style="padding-left: 10px;" value="KANP">Kanpur</option>
-						<option style="padding-left: 10px;" value="LUCK">Lucknow</option>
-						<option style="padding-left: 10px;" value="MATH">Mathura</option>
-						<option style="padding-left: 10px;" value="MERT">Meerut</option>
-						<option style="padding-left: 10px;" value="MORA">Moradabad</option>
-						<option style="padding-left: 10px;" value="MUZ">Muzaffarnagar</option>
-						<option style="padding-left: 10px;" value="RENU">Renukoot</option>
-						<option style="padding-left: 10px;" value="SAHA">Saharanpur</option>
-						<option style="padding-left: 10px;" value="VAR">Varanasi</option></optgroup>
-					  <optgroup label="Uttarakhand">
-						<option style="padding-left: 10px;" value="DEH">Dehradun</option>
-						<option style="padding-left: 10px;" value="HRDR">Haridwar</option>
-						<option style="padding-left: 10px;" value="MSS">Mussoorie</option>
-						<option style="padding-left: 10px;" value="NAIN">Nainital</option>
-						<option style="padding-left: 10px;" value="RAMN">Ramnagar</option>
-						<option style="padding-left: 10px;" value="RKES">Rishikesh</option>
-						<option style="padding-left: 10px;" value="ROOR">Roorkee</option>
-						<option style="padding-left: 10px;" value="RUDP">Rudrapur</option></optgroup>
-					  <optgroup label="West Bengal">
-						<option style="padding-left: 10px;" value="ASANSOL">Asansol</option>
-						<option style="padding-left: 10px;" value="BEHA">Berhampore</option>
-						<option style="padding-left: 10px;" value="BLPR">Bolpur</option>
-						<option style="padding-left: 10px;" value="BURD">Burdwan</option>
-						<option style="padding-left: 10px;" value="COBE">Cooch Behar</option>
-						<option style="padding-left: 10px;" value="DARJ">Darjeeling</option>
-						<option style="padding-left: 10px;" value="DURGA">Durgapur</option>
-						<option style="padding-left: 10px;" value="HALD">Haldia</option>
-						<option style="padding-left: 10px;" value="HOOG">Hooghly</option>
-						<option style="padding-left: 10px;" value="HWRH">Howrah</option>
-						<option style="padding-left: 10px;" value="JPG">Jalpaiguri</option>
-						<option style="padding-left: 10px;" value="KOLK">Kolkata</option>
-						<option style="padding-left: 10px;" value="RANA">Ranaghat</option>
-						<option style="padding-left: 10px;" value="SILI">Siliguri</option></optgroup>
-					</select>
-			  </div>
-			</div>
-		   </div>
-		  </div>
-		 </div>
-		 <div class="clearfix"></div>
-		</div>
+                            <!-- Modal Search -->
+                            <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form>
+                                            <input type="text" placeholder="Search here...">
+                                            <button><i class="fas fa-search"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Search-end -->
 
-
-		<div class="review-slider">
-			<ul id="flexiselDemo1">
-				<li class="card">
-					<a href="movie-single.html?name=复仇者联盟" onclick="checkMemberStatus(event)"><img src="images/r1.jpg" alt=""/></a>
-					<div class="slide-title"><h4>复仇者联盟</h4></div>
-					<div class="date-city">
-						<h5>12月12-15日</h5>
-						<h6>多地热映</h6>
-						<div class="buy-tickets">
-							<a href="movie-single.html?name=复仇者联盟" onclick="checkMemberStatus(event)">观看</a>
-						</div>
-					</div>
-				</li>
-				<li class="card">
-					<a href="movie-single.html?name=钢铁侠" onclick="checkMemberStatus(event)"><img src="images/r2.jpg" alt=""/></a>
-					<div class="slide-title"><h4>钢铁侠</h4></div>
-					<div class="date-city">
-						<h5>12月12-15日</h5>
-						<h6>多地热映</h6>
-						<div class="buy-tickets">
-							<a href="movie-single.html?name=钢铁侠" onclick="checkMemberStatus(event)">观看</a>
-						</div>
-					</div>
-				</li>
-				<li class="card">
-					<a href="movie-single.html?name=沙丘" onclick="checkMemberStatus(event)"><img src="images/r3.jpg" alt=""/></a>
-					<div class="slide-title"><h4>沙丘</h4></div>
-					<div class="date-city">
-						<h5>12月12-15日</h5>
-						<h6>多地热映</h6>
-						<div class="buy-tickets">
-							<a href="movie-single.html?name=沙丘" onclick="checkMemberStatus(event)">观看</a>
-						</div>
-					</div>
-				</li>
-				<li class="card">
-					<a href="movie-single.html?name=头脑特工队" onclick="checkMemberStatus(event)"><img src="images/r4.jpg" alt=""/></a>
-					<div class="slide-title"><h4>头脑特工队</h4></div>
-					<div class="date-city">
-						<h5>12月12-15日</h5>
-						<h6>多地热映</h6>
-						<div class="buy-tickets">
-							<a href="movie-single.htm?name=头脑特工队" onclick="checkMemberStatus(event)">观看</a>
-						</div>
-					</div>
-				</li>
-				<li class="card">
-					<a href="movie-single.html?name=爱乐之城" onclick="checkMemberStatus(event)"><img src="images/r5.jpg" alt=""/></a>
-					<div class="slide-title"><h4>爱乐之城</h4></div>
-					<div class="date-city">
-						<h5>12月12-15日</h5>
-						<h6>多地热映</h6>
-						<div class="buy-tickets">
-							<a href="movie-single.html?name=爱乐之城" onclick="checkMemberStatus(event)">观看</a>
-						</div>
-					</div>
-				</li>
-				<li class="card">
-					<a href="movie-single.html?name=无敌破坏王" onclick="checkMemberStatus(event)"><img src="images/r6.jpg" alt=""/></a>
-					<div class="slide-title"><h4>无敌破坏王</h4></div>
-					<div class="date-city">
-						<h5>12月12-15日</h5>
-						<h6>多地热映</h6>
-						<div class="buy-tickets">
-							<a href="movie-single.html?name=无敌破坏王" onclick="checkMemberStatus(event)">观看</a>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-		
-			<script type="text/javascript">
-		$(window).load(function() {
-			
-		  $("#flexiselDemo1").flexisel({
-				visibleItems: 5,
-				animationSpeed: 1000,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover: false,
-				enableResponsiveBreakpoints: true,
-				responsiveBreakpoints: { 
-					portrait: { 
-						changePoint:480,
-						visibleItems: 2
-					}, 
-					landscape: { 
-						changePoint:640,
-						visibleItems: 3
-					},
-					tablet: { 
-						changePoint:800,
-						visibleItems: 4
-					}
-				}
-			});
-			});
-		</script>
-		<script type="text/javascript" src="js/jquery.flexisel.js"></script>	
-		</div>
-		<div class="footer-top-grid">
-		<div class="list-of-movies col-md-8">
-			<div class="tabs">
-				<div class="sap_tabs">	
-						 <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-						  <ul class="resp-tabs-list">
-						  	  <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>在映</span></li>
-							  <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>本周预约</span></li>
-							  <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>即将上映</span></li>
-							  <div class="clearfix"></div>
-						  </ul>				  	 
-							<div class="resp-tabs-container">
-							    <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-									<ul class="tab_img">
-									  <li>
-										<div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-1.jpg" class="img-responsive" alt=""/></a>
-										   <div class="info1"> </div>
-											 <div class="mask">
-						                     </div>
-								              <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>97</h5>
-														<p>% <br>想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-									  <li>
-										<div class="view view-first">
-					   		  			   <a href="movie-single.html"><img src="images/pic-2.jpg" class="img-responsive" alt=""/></a>
-										   <div class="info1"> </div>
-											 <div class="mask">
-						                     </div>
-								              <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>98</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-									  <li>
-										<div class="view view-first">
-					   		  			   <a href="movie-single.html"><img src="images/pic-10.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>100</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-										<div class="clearfix"></div>
-									</ul>
-							     </div>	
-							     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
-									<ul class="tab_img">
-									  <li>
-										<div class="view view-first">
-					   		  			   <a href="movie-single.html"><img src="images/pic-8.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>92</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-									  <li>
-										<div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-3.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>100</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-										<li class="last">
-										  <div class="view view-first">
-					   		  			   <a href="movie-single.html"><img src="images/pic-9.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								               <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>74</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-										<div class="clearfix"></div>
-									</ul>
-							     </div>	
-							     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
-									<ul class="tab_img">
-										<li>
-										  <div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-4.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>88</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-										<li>
-										  <div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-12.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>100</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-										<li class="last">
-										  <div class="view view-first">
-					   		  			   <a href="movie-single.html"><img src="images/pic-5.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-													<div class="percentage-w-t-s">
-														<h5>90</h5>
-														<p>% <br> 想看</p>
-														<div class="clearfix"></div>
-													</div>
-											  </div>
-										  </div>
-										</li>
-										<div class="clearfix"></div>
-									</ul>
-							     </div>	
-							     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
-									<ul class="tab_img">
-									  <li>
-										<div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-6.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-											  </div>
-										  </div>
-										</li>
-										<li>
-										  <div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-1.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-											  </div>
-										  </div>
-										</li>
-										<li>
-										  <div class="view view-first">
-					   		  			  <a href="movie-single.html"> <img src="images/pic-9.jpg" class="img-responsive" alt=""/></a>
-											 <div class="mask">
-						                        <div class="info1"> </div>
-								              </div>
-								                <div class="tab_desc">
-													<a href="movie-single.html">现在预约</a>
-											  </div>
-										  </div>
-										</li>
-										<div class="clearfix"></div>
-									</ul>
-						    	</div>		        					 	        					 
-			     		    </div>	
                         </div>
-					</div>
-				</div>	
-				<div class="clearfix"></div>
-				<div class="featured">
-					<h4>精彩推荐</h4>
-					<ul>
-						<li>
-							<div class="f-movie">
-								<div class="f-movie-img">
-									<a href="movies.html"><img src="images/f4.jpg" alt="" /></a>
-								</div>
-									<div class="f-movie-name">
-										<a href="movies.html">钢铁侠</a>
-										<p>多地热映</p>
-									</div>
-								<div class="f-buy-tickets">
-									<a href="movie-single.html">观看</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="f-movie">
-								<div class="f-movie-img">
-									<a href="movies.html"><img src="images/f5.jpg" alt="" /></a>
-								</div>
-									<div class="f-movie-name">
-										<a href="movies.html">头脑特工队</a>
-										<p>多地热映</p>
-									</div>
-								<div class="f-buy-tickets">
-									<a href="movie-single.html">观看</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="f-movie">
-								<div class="f-movie-img">
-									<a href="movies.html"><img src="images/f6.jpg" alt="" /></a>
-								</div>
-									<div class="f-movie-name">
-										<a href="movies.html">沙丘</a>
-										<p>佛山南海</p>
-									</div>
-								<div class="f-buy-tickets">
-									<a href="movie-single.html">观看</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="f-movie">
-								<div class="f-movie-img">
-									<a href="movies.html"><img src="images/f1.jpg" alt=""></a>
-								</div>
-									<div class="f-movie-name">
-										<a href="movies.html">终结者</a>
-										<p>多地热映</p>
-									</div>
-								<div class="f-buy-tickets">
-									<a href="movie-single.html">观看</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="f-movie">
-								<div class="f-movie-img">
-									<a href="movies.html"><img src="images/f2.jpg" alt=""></a>
-								</div>
-									<div class="f-movie-name">
-										<a href="movies.html">复仇者联盟</a>
-										<p>多地热映</p>
-									</div>
-								<div class="f-buy-tickets">
-									<a href="movie-single.html">观看</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="f-movie">
-								<div class="f-movie-img">
-									<a href="movies.html"><img src="images/f3.jpg" alt=""></a>
-								</div>
-									<div class="f-movie-name">
-										<a href="movies.html">蚁人</a>
-										<p>佛山南海</p>
-									</div>								 
-								<div class="f-buy-tickets">
-									<a href="movie-single.html">观看</a>
-								</div>
-							</div>
-						</li>
-						<div class="clearfix"></div>
-					</ul>
-				</div>
-			</div>
-			<div class="right-side-bar">
-				<div class="top-movies-in-india" id="hot-play">
-					<h4>热映榜</h4>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>77%</li>
-						<li><a href="movie-single.html?name=寻梦环游记">寻梦环游记(3D) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>80%</li>
-						<li><a href="movie-single.html?name=头脑特工队">头脑特工队(3D Hindi) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>69%</li>
-						<li><a href="movie-single.html?name=疯狂动物城">疯狂动物城(U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>65%</li>
-						<li><a href="movie-single.html?name=无敌破坏王">无敌破坏王(U)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>83%</li>
-						<li><a href="movie-single.html?name=霸王别姬">霸王别姬(U)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>87%</li>
-						<li><a href="movie-single.html?name=当幸福来敲门">当幸福来敲门(U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>71%</li>
-						<li><a href="movie-single.html?name=一步之遥">一步之遥(U)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>81%</li>
-						<li><a href="movie-single.html?name=玩具总动员">玩具总动员(U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>80%</li>
-						<li><a href="movie-single.html?name=神探夏洛特">神探夏洛克(U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li><i class="fa fa-star"></i></li>
-						<li>89%</li>
-						<li><a href="movie-single.html?name=奇异博士">奇异博士(U)</a></li>
-					</ul>
-				</div>
-				<script>
-					const title = document.querySelector('#hot-play')
-					console.log(title)
-					title.addEventListener('click', ()=>{
-						window.location.href = 'press.html'
-					})
-				</script>
-				<!-- <div class="quick-pay">
-					<h3>快速支付</h3>
-					<p class="payText">让您的在线支付变得轻而易举。在您的个人资料中保存您的信用卡、借记卡和网银信息。<a href="#">阅读更多</a></p>
-				</div>
-				<div class="our-blog">
-					<h5>我们的博客</h5>
-					<div class="post-article">
-						<a href="blog.html" class="post-title">Lorem Ipsum 只是印刷行业的虚拟文本</a>
-						<i>发表于 2015年6月15日</i>
-						<p>与普遍看法相反，Lorem Ipsum 并不是简单的随机文本。它的根源可以追溯到公元前45年的一部经典拉丁文学作品，使其已有2000多年的历史...<br><a href="blog.html">阅读更多</a></p>
-					</div>
-					<div class="post-article">
-						<a href="blog.html" class="post-title">Sed ut perspiciatis unde</a>
-						<i>发表于 2015年6月15日</i>
-						<p>与普遍看法相反，Lorem Ipsum 并不是简单的随机文本。它的根源可以追溯到公元前45年的一部经典拉丁文学作品，使其已有2000多年的历史...<br><a href="blog.html">阅读更多</a></p>
-					</div>
-					<div class="post-article">
-						<a href="blog.html" class="post-title">Sed ut perspiciatis unde</a>
-						<i>发表于 2015年6月15日</i>
-						<p>与普遍看法相反，Lorem Ipsum 并不是简单的随机文本。它的根源可以追溯到公元前45年的一部经典拉丁文学作品，使其已有2000多年的历史...<br><a href="blog.html">阅读更多</a></p>
-					</div>
-				</div> -->
-				
-			</div>
-			<div class="clearfix"></div>			
-			</div>
-			<div class="footer-top-strip">
-				<p><span>补充电影<i>(星期五, 6月19日) </i>: </span><a href="movie-single.html">迪士尼的ABCD 2 (3D) (U)</a>, <a href="movie-single.html">2 Premi Premache</a> , <a href="movie-single.html">Dekh Ke (博杰普尔语)</a> , <a href="movie-single.html">迪士尼的ABCD 2 (2D) (U)</a>, <a href="movie-single.html">Dekh Ke (博杰普尔语)</a></p>
-				<p><span>即将上映 :</span><a href="movie-single.html"> 2 Premi Premache</a>, <a href="movie-single.html">Acharam, Dekh Ke (博杰普尔语)</a>, <a href="movie-single.html">Entourage</a>, <a href="movie-single.html">Kuttram Kadithal</a></p>
-			</div>
-			</div>
-			<div class="footer">
-				<div class="col-md-3 footer-left">
-					<div class="f-mov-list">
-						<h4>最新电影</h4>
-						<ul>
-							<li><a href="now-showing.html">正在上映</a></li>
-							<li><a href="comming-soon.html">即将上映</a></li>
-							<li><a href="celebrities.html">电影名人</a></li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-					<div class="f-mov-list">
-						<h4>电影评论</h4>
-						<ul>
-							<li><a href="404.html" target="target_blank">娱乐新闻</a></li>
-							<li><a href="blog.html" target="target_blank">Rajeev Masand</a></li>
-							<li><a href="blog.html" target="target_blank">影评</a></li>
-							<li><a href="write-us.html" target="target_blank">访客博客</a></li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-					<div class="f-mov-list">
-						<h4>电影预告片</h4>
-						<ul>
-							<li><a href="trailers-now-showing.html">正在上映</a></li>
-							<li><a href="trailers-comming-soon.html">即将上映</a></li>                        
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-3 footer-left">
-					<div class="f-mov-list">
-						<h4>电影院和地区</h4>
-						<ul>
-							<li><a href="regions.html">所有地区</a></li>
-							<li><a href="cinema-chain.html">电影院连锁</a></li>
-							<li><a href="cinemas.html">电影院</a></li>                        
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-					<div class="f-mov-list">
-						<h4>按语言分类的电影</h4>
-						<ul>
-							<li><a href="movies.html">印地语</a></li>
-							<li><a href="movies.html">英语</a></li>
-							<li><a href="movies.html">马拉地语</a></li>
-							<li><a href="movies.html">孟加拉语</a></li>
-							<li><a href="movies.html">泰米尔语</a></li>
-							<li><a href="movies.html">泰卢固语</a></li>
-							<li><a href="movies.html">马拉雅拉姆语</a></li>
-							<li><a href="movies.html">博杰普尔语</a></li>
-							<li><a href="movies.html">卡纳达语</a></li>                    
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-3 footer-left">
-					<div class="f-mov-list">
-						<h4>独家内容</h4>
-						<ul>
-							<li><a href="donate.html">预订微笑</a></li>
-							<li><a href="vochers.html">企业代金券</a></li>
-							<li><a href="gift-cards.html">礼品卡</a></li>
-						</ul>
-						<div class="clearfix"></div>                    
-					</div>    
-					<div class="f-mov-list">
-						<h4>帮助</h4>
-						<ul>
-							<li><a href="site-map.html">网站地图</a></li>
-							<li><a href="feed-back.html">反馈</a></li>
-							<li><a href="faq.html">常见问题</a></li>
-							<li><a href="terms-and-conditions.html">条款和条件</a></li>
-							<li><a href="privacy-policy.html">隐私政策</a></li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>            
-				</div>
-				<div class="col-md-3 footer-left">
-					<div class="f-mov-list">
-						<h4>按类型分类的电影</h4>
-						<ul>
-							<li><a href="movies.html">动作片</a></li>
-							<li><a href="movies.html">爱情片</a></li>
-							<li><a href="movies.html">喜剧片</a></li>
-							<li><a href="movies.html">成人片</a></li>
-							<li><a href="movies.html">冒险片</a></li>
-							<li><a href="movies.html">经典片</a></li>
-							<li><a href="movies.html">犯罪片</a></li>
-							<li><a href="movies.html">剧情片</a></li>
-							<li><a href="movies.html">家庭片</a></li>
-							<li><a href="movies.html">奇幻片</a></li>
-							<li><a href="movies.html">音乐片</a></li>
-							<li><a href="movies.html">悬疑片</a></li>
-							<li><a href="movies.html">惊悚片</a></li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-				<div class="col-md-12">
-					<div class="footer-right">
-						<div class="follow-us">
-							<h5 class="f-head">关注我们</h5>
-							<ul class="social-icons">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<div class="subscribe">
-							<h5 class="f-head">订阅我们的新闻</h5>
-							<input type="text" class="text" value="输入电子邮件地址" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '输入电子邮件地址';}">
-							<input type="submit" value="提交">
-							<div class="clearfix"></div>
-						</div>
-						<div class="recent_24by7">
-							<a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i class="fa fa-calendar-o"></i>重新发送预订确认</a>
-							<a href="support.html"><i class="fa fa-question"></i>24/7 客户服务</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="clearfix"></div>
- 				<script type="text/javascript">
-						$(document).ready(function() {
-							/*
-							var defaults = {
-					  			containerID: 'toTop', // fading element id
-								containerHoverID: 'toTopHover', // fading element hover id
-								scrollSpeed: 1200,
-								easingType: 'linear' 
-					 		};
-							*/
-							
-							$().UItoTop({ easingType: 'easeOutQuart' });
-							
-						});
-				</script>
-				<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-			
-</body>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header-area-end -->
+
+
+        <!-- main-area -->
+        <main>
+
+            <!-- banner-area -->
+            <section class="banner-area banner-bg" data-background="img/banner/banner_bg01.jpg">
+                <div class="container custom-container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-8">
+                            <div class="banner-content">
+                                <h6 class="sub-title wow fadeInUp" data-wow-delay=".2s" data-wow-duration="1.8s">Movflx</h6>
+                                <h2 class="title wow fadeInUp" data-wow-delay=".4s" data-wow-duration="1.8s">Unlimited <span>Movie</span>, TVs Shows, & More.</h2>
+                                <div class="banner-meta wow fadeInUp" data-wow-delay=".6s" data-wow-duration="1.8s">
+                                    <ul>
+                                        <li class="quality">
+                                            <span>Pg 18</span>
+                                            <span>hd</span>
+                                        </li>
+                                        <li class="category">
+                                            <a href="#">Romance,</a>
+                                            <a href="#">Drama</a>
+                                        </li>
+                                        <li class="release-time">
+                                            <span><i class="far fa-calendar-alt"></i> 2021</span>
+                                            <span><i class="far fa-clock"></i> 128 min</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="banner-btn btn popup-video wow fadeInUp" data-wow-delay=".8s" data-wow-duration="1.8s"><i class="fas fa-play"></i> Watch Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- banner-area-end -->
+
+            <!-- up-coming-movie-area -->
+            <section class="ucm-area ucm-bg" data-background="img/bg/ucm_bg.jpg">
+                <div class="ucm-bg-shape" data-background="img/bg/ucm_bg_shape.png"></div>
+                <div class="container">
+                    <div class="row align-items-end mb-55">
+                        <div class="col-lg-6">
+                            <div class="section-title text-center text-lg-left">
+                                <span class="sub-title">ONLINE STREAMING</span>
+                                <h2 class="title">Upcoming Movies</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="ucm-nav-wrap">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="tvShow-tab" data-toggle="tab" href="#tvShow" role="tab" aria-controls="tvShow" aria-selected="true">TV Shows</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="movies-tab" data-toggle="tab" href="#movies" role="tab" aria-controls="movies" aria-selected="false">Movies</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="anime-tab" data-toggle="tab" href="#anime" role="tab" aria-controls="anime" aria-selected="false">Anime</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tvShow" role="tabpanel" aria-labelledby="tvShow-tab">
+                            <div class="ucm-active owl-carousel">
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster01.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster02.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">4k</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster03.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster04.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">8k</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster05.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="movies" role="tabpanel" aria-labelledby="movies-tab">
+                            <div class="ucm-active owl-carousel">
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster05.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster06.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Hikers</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">4k</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster07.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">Life Quotes</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster08.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Beachball</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">4k</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster03.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="anime" role="tabpanel" aria-labelledby="anime-tab">
+                            <div class="ucm-active owl-carousel">
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster01.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster02.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">4k</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster03.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster04.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">8k</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="movie-item mb-50">
+                                    <div class="movie-poster">
+                                        <a href="movie-details.html"><img src="img/poster/ucm_poster05.jpg" alt=""></a>
+                                    </div>
+                                    <div class="movie-content">
+                                        <div class="top">
+                                            <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                            <span class="date">2021</span>
+                                        </div>
+                                        <div class="bottom">
+                                            <ul>
+                                                <li><span class="quality">hd</span></li>
+                                                <li>
+                                                    <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                    <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- up-coming-movie-area-end -->
+
+            <!-- services-area -->
+            <section class="services-area services-bg" data-background="img/bg/services_bg.jpg">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="services-img-wrap">
+                                <img src="img/images/services_img.jpg" alt="">
+                                <a href="img/images/services_img.jpg" class="download-btn" download>Download <img src="https://themebeyond.com/html/movflx/fonts/download.svg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="services-content-wrap">
+                                <div class="section-title title-style-two mb-20">
+                                    <span class="sub-title">Our Services</span>
+                                    <h2 class="title">Download Your Shows Watch Offline.</h2>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consecetur adipiscing elseddo eiusmod tempor.There are many variations of passages of lorem
+                                Ipsum available, but the majority have suffered alteration in some injected humour.</p>
+                                <div class="services-list">
+                                    <ul>
+                                        <li>
+                                            <div class="icon">
+                                                <i class="flaticon-television"></i>
+                                            </div>
+                                            <div class="content">
+                                                <h5>Enjoy on Your TV.</h5>
+                                                <p>Lorem ipsum dolor sit amet, consecetur adipiscing elit, sed do eiusmod tempor.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon">
+                                                <i class="flaticon-video-camera"></i>
+                                            </div>
+                                            <div class="content">
+                                                <h5>Watch Everywhere.</h5>
+                                                <p>Lorem ipsum dolor sit amet, consecetur adipiscing elit, sed do eiusmod tempor.</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- services-area-end -->
+
+            <!-- top-rated-movie -->
+            <section class="top-rated-movie tr-movie-bg" data-background="img/bg/tr_movies_bg.jpg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="section-title text-center mb-50">
+                                <span class="sub-title">ONLINE STREAMING</span>
+                                <h2 class="title">Top Rated Movies</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="tr-movie-menu-active text-center">
+                                <button class="active" data-filter="*">TV Shows</button>
+                                <button class="" data-filter=".cat-one">Movies</button>
+                                <button class="" data-filter=".cat-two">documentary</button>
+                                <button class="" data-filter=".cat-three">sports</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row tr-movie-active">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster01.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">hd</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster02.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">4k</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster03.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">hd</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster04.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">8K</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster05.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">3D</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster06.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Hikaru</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">hd</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.9</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster07.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">Life Quotes</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">4K</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.9</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
+                            <div class="movie-item mb-60">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster08.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Beachball</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">4K</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.9</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- top-rated-movie-end -->
+
+            <!-- live-area -->
+            <section class="live-area live-bg fix" data-background="img/bg/live_bg.jpg">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-lg-6">
+                            <div class="section-title title-style-two mb-25">
+                                <span class="sub-title">ONLINE STREAMING</span>
+                                <h2 class="title">Live Movie & TV Shows For Friends & Family</h2>
+                            </div>
+                            <div class="live-movie-content">
+                                <p>Lorem ipsum dolor sit amet, consecetur adipiscing elseddo eiusmod There are many variations of passages of lorem Ipsum
+                                available, but the majority have suffered alteration.</p>
+                                <div class="live-fact-wrap">
+                                    <div class="resolution">
+                                        <h2>HD 4K</h2>
+                                    </div>
+                                    <div class="active-customer">
+                                        <h4><span class="odometer" data-count="20"></span>K+</h4>
+                                        <p>Active Customer</p>
+                                    </div>
+                                </div>
+                                <a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="btn popup-video"><i class="fas fa-play"></i> Watch Now</a>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-6">
+                            <div class="live-movie-img wow fadeInRight" data-wow-delay=".2s" data-wow-duration="1.8s">
+                                <img src="img/images/live_img.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- live-area-end -->
+
+            <!-- tv-series-area -->
+            <section class="tv-series-area tv-series-bg" data-background="img/bg/tv_series_bg.jpg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="section-title text-center mb-50">
+                                <span class="sub-title">Best TV Series</span>
+                                <h2 class="title">World Best TV Series</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="movie-item mb-50">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster09.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">hd</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="movie-item mb-50">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster10.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">4k</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="movie-item mb-50">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster03.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">hd</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="movie-item mb-50">
+                                <div class="movie-poster">
+                                    <a href="movie-details.html"><img src="img/poster/ucm_poster04.jpg" alt=""></a>
+                                </div>
+                                <div class="movie-content">
+                                    <div class="top">
+                                        <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                        <span class="date">2021</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li><span class="quality">hd</span></li>
+                                            <li>
+                                                <span class="duration"><i class="far fa-clock"></i> 128 min</span>
+                                                <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- tv-series-area-end -->
+
+            <!-- newsletter-area -->
+            <section class="newsletter-area newsletter-bg" data-background="img/bg/newsletter_bg.jpg">
+                <div class="container">
+                    <div class="newsletter-inner-wrap">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="newsletter-content">
+                                    <h4>Trial Start First 30 Days.</h4>
+                                    <p>Enter your email to create or restart your membership.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <form action="#" class="newsletter-form">
+                                    <input type="email" required placeholder="Enter your email">
+                                    <button class="btn">get started</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- newsletter-area-end -->
+
+        </main>
+        <!-- main-area-end -->
+
+
+        <!-- footer-area -->
+        <footer>
+            <div class="footer-top-wrap">
+                <div class="container">
+                    <div class="footer-menu-wrap">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3">
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="img/logo/logo.png" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="footer-menu">
+                                    <nav>
+                                        <ul class="navigation">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="index.html">Movie</a></li>
+                                            <li><a href="index.html">tv show</a></li>
+                                            <li><a href="index.html">pages</a></li>
+                                            <li><a href="pricing.html">Pricing</a></li>
+                                        </ul>
+                                        <div class="footer-search">
+                                            <form action="#">
+                                                <input type="text" placeholder="Find Favorite Movie">
+                                                <button><i class="fas fa-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-quick-link-wrap">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <div class="quick-link-list">
+                                    <ul>
+                                        <li><a href="#">FAQ</a></li>
+                                        <li><a href="#">Help Center</a></li>
+                                        <li><a href="#">Terms of Use</a></li>
+                                        <li><a href="#">Privacy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="footer-social">
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="copyright-text">
+                                <p>Copyright &copy; 2021. All Rights Reserved By <a href="http://www.bootstrapmb.com/">bootstrapmb</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="payment-method-img text-center text-md-right">
+                                <img src="img/images/card_img.png" alt="img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer-area-end -->
+
+
+
+
+
+		<!-- JS here -->
+        <script src="js/vendor/jquery-3.6.0.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.odometer.min.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/ajax-form.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

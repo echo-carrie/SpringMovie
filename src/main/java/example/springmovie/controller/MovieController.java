@@ -5,14 +5,23 @@ import example.springmovie.entity.Movie;
 import example.springmovie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/movies")
 public class MovieController {
 
     @Autowired
     private MovieService movieService;
+
+    @GetMapping("/index")
+    public String movies(){
+        // 注意这里返回的是"forward:/movies.html"，这将转发请求到静态资源
+        return "movies";
+    }
+
 //    在postman中输入下列网址进行访问，其中如果有10页，访问了第十一页，那么返回的依然是第十页的数据，在编代码时要注意这一点。
     @GetMapping("/popular")
 //    按照播放量分类展示，按照周播放量来排序决定，即example.springmovie.entity.Movie中的weekly_plays
