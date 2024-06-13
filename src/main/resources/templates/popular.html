@@ -78,25 +78,24 @@
                                         <ul class="navigation">
                                             <li class="active menu-item-has-children"><a href="#">Home</a>
                                                 <ul class="submenu">
-                                                    <li class="active"><a href="popular.html">Home One</a></li>
-                                                    <li><a href="index-2.html">Home Two</a></li>
+                                                    <li class="active"><a th:href="@{http://localhost:8080/movies/popular?pageNum=1&pageSize=10}">Home One</a></li>
+                                                    <li><a th:href="@{../index-2.html}">Home Two</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item-has-children"><a href="#">Movie</a>
                                                 <ul class="submenu">
-                                                    <li><a href="movies.html">Movie</a></li>
-                                                    <li><a href="movie-details.html">Movie Details</a></li>
+                                                    <li><a th:href="@{../movies.html}">Movie</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="tv-show.html">tv show</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
+                                            <li><a th:href="@{../tv-show.html}">tv show</a></li>
+                                            <li><a th:href="@{../pricing.html}">Pricing</a></li>
                                             <li class="menu-item-has-children"><a href="#">blog</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">Our Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                                    <li><a th:href="@{../blog.html}">Our Blog</a></li>
+                                                    <li><a th:href="@{../blog-details.html}">Blog Details</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">contacts</a></li>
+                                            <li><a th:href="@{../contact.html}">contacts</a></li>
                                         </ul>
                                     </div>
                                     <div class="header-action d-none d-md-block">
@@ -113,11 +112,50 @@
                                                     </select>
                                                 </form>
                                             </li>
-                                            <li class="header-btn"><a href="#" class="btn">Sign In</a></li>
+<!--                                            <li class="header-btn"><a href="#" class="btn">Sign In</a></li>-->
                                         </ul>
                                     </div>
                                 </nav>
                             </div>
+
+                            <script>
+                                function createLi (){
+                                    const li = document.createElement('li')
+                                    const a = document.createElement('a')
+                                    li.classList.add('header-btn')
+                                    a.href = '#'
+                                    a.classList.add('btn')
+                                    if(localStorage.getItem('islogin')) a.innerText = '退出登录';
+                                    else a.innerText = 'Sign in';
+                                    li.appendChild(a);
+                                    return li
+                                }
+                                const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
+                                console.log(container)
+                                container.appendChild(createLi());
+
+                                function create_login(){
+                                    const btn = document.querySelector('.header-btn');
+                                    localStorage.setItem('islogin', JSON.stringify(true))
+                                    btn.children[0].innerText = '退出登录'
+                                    btn.removeEventListener('click', create_login);
+                                    btn.addEventListener('click', create_logout);
+                                }
+
+                                function create_logout(){
+                                    const btn = document.querySelector('.header-btn');
+                                    localStorage.setItem('islogin', JSON.stringify(false))
+                                    btn.children[0].innerText = 'Sign in'
+                                    btn.removeEventListener('click', create_logout);
+                                    btn.addEventListener('click', create_login);
+                                }
+
+                                console.log(localStorage.getItem('islogin'))
+                                const btn = document.querySelector('.header-btn');
+                                if(localStorage.getItem('islogin')) btn.addEventListener('click', create_login);
+                                else btn.addEventListener('click', create_logout);
+
+                            </script>
 
                             <!-- Mobile Menu  -->
                             <div class="mobile-menu">
@@ -147,9 +185,9 @@
                             <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form id="search-form" onsubmit="return performSearch()">
+                                        <form id="search-form">
                                             <input type="text" placeholder="Search here...">
-                                            <button type="submit"><i class="fas fa-search"></i></button>
+                                            <button onclick="performSearch()"><i class="fas fa-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -157,12 +195,13 @@
                             <!-- Modal Search-end -->
 
                             <script>
-                                function performSearch() {
+                                function performSearch(e) {
+                                    e.preventDefault()
                                     let searchInput = document.getElementById('search-input').value;
                                     let url = '/movies/genre?genre=' + encodeURIComponent(searchInput) + '&pageNum=1&pageSize=10';
-                                    console.log(url)
+
                                     // window.location.href = url;
-                                    return false; // Prevent form submission
+                                    // return false; // Prevent form submission
                                 }
                             </script>
 
@@ -241,11 +280,11 @@
                             <div class="ucm-active owl-carousel">
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">Women's Day</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -261,11 +300,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster02.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster02.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Perfect Match</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -281,11 +320,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Dog Woof</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -301,11 +340,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Easy Reach</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -321,11 +360,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Cooking</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -345,11 +384,11 @@
                             <div class="ucm-active owl-carousel">
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Cooking</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -365,11 +404,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster06.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster06.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Hikers</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Hikers</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -385,11 +424,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster07.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster07.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">Life Quotes</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">Life Quotes</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -405,11 +444,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster08.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster08.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Beachball</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Beachball</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -425,11 +464,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Dog Woof</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -449,11 +488,11 @@
                             <div class="ucm-active owl-carousel">
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">Women's Day</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -469,11 +508,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster02.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster02.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Perfect Match</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -489,11 +528,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Dog Woof</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -509,11 +548,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Easy Reach</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -529,11 +568,11 @@
                                 </div>
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
+                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
-                                            <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                            <h5 class="title"><a th:href="@{../movie-details.html}">The Cooking</a></h5>
                                             <span class="date">2021</span>
                                         </div>
                                         <div class="bottom">
@@ -615,10 +654,10 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="tr-movie-menu-active text-center">
-                                <button class="active" data-filter="*">TV Shows</button>
-                                <button class="" data-filter=".cat-one">Movies</button>
-                                <button class="" data-filter=".cat-two">documentary</button>
-                                <button class="" data-filter=".cat-three">sports</button>
+                                <button class="active" data-filter="*">电影</button>
+                                <button class="" data-filter=".cat-one">周榜</button>
+                                <button class="" data-filter=".cat-two">月榜</button>
+                                <button class="" data-filter=".cat-three">总榜</button>
                             </div>
                         </div>
                     </div>
@@ -628,11 +667,11 @@
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
 <!--                                    <img src="/img/poster/ucm_poster01.jpg" alt="">-->
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img th:src="@{../img/1.jpg}" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html" th:text="${movie.title}">Women's Day</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}" th:text="${movie.title}">Women's Day</a></h5>
                                         <span class="date" th:text="${movie.releaseDate}"></span>
                                     </div>
                                     <div class="bottom">
@@ -647,14 +686,16 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster02.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster02.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Perfect Match</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -672,11 +713,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Dog Woof</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -694,11 +735,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Easy Reach</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -716,11 +757,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster05.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Cooking</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Cooking</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -738,11 +779,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster06.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster06.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Hikaru</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Hikaru</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -760,11 +801,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-two">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster07.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster07.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">Life Quotes</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">Life Quotes</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -782,11 +823,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer cat-one cat-three">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster08.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster08.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Beachball</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Beachball</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -855,11 +896,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="movie-item mb-50">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster09.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster09.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">Women's Day</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">Women's Day</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -877,11 +918,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="movie-item mb-50">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster10.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster10.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Perfect Match</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Perfect Match</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -899,11 +940,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="movie-item mb-50">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster03.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Dog Woof</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Dog Woof</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -921,11 +962,11 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="movie-item mb-50">
                                 <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
+                                    <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster04.jpg" alt=""></a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
-                                        <h5 class="title"><a href="movie-details.html">The Easy Reach</a></h5>
+                                        <h5 class="title"><a th:href="@{../movie-details.html}">The Easy Reach</a></h5>
                                         <span class="date">2021</span>
                                     </div>
                                     <div class="bottom">
@@ -987,11 +1028,11 @@
                                 <div class="footer-menu">
                                     <nav>
                                         <ul class="navigation">
-                                            <li><a href="popular.html">Home</a></li>
-                                            <li><a href="popular.html">Movie</a></li>
-                                            <li><a href="popular.html">tv show</a></li>
-                                            <li><a href="popular.html">pages</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
+                                            <li><a th:href="@{../popular.html}">Home</a></li>
+                                            <li><a th:href="@{../popular.html}">Movie</a></li>
+                                            <li><a th:href="@{../popular.html}">tv show</a></li>
+                                            <li><a th:href="@{../popular.html}">pages</a></li>
+                                            <li><a th:href="@{../pricing.html}">Pricing</a></li>
                                         </ul>
                                         <div class="footer-search">
                                             <form action="#">

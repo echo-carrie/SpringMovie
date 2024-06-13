@@ -45,8 +45,10 @@ public class MovieController {
 //    按照地区分类展示，根据类型搜索，即region进行搜索，分页展示地区相同的
 //    测试：http://localhost:8080/movies/region?region=美国&pageNum=1&pageSize=2
     @GetMapping("/region")
-    public PageInfo<Movie> getMoviesByRegion(@RequestParam String region, @RequestParam int pageNum, @RequestParam int pageSize) {
-        return movieService.getMoviesByRegion(region, pageNum, pageSize);
+    public String getMoviesByRegion(@RequestParam String region, @RequestParam int pageNum, @RequestParam int pageSize, Model model) {
+        System.out.println(movieService.getMoviesByRegion(region, pageNum, pageSize).getList());
+        model.addAttribute("reslist", movieService.getMoviesByRegion(region, pageNum, pageSize).getList());
+        return "movies";
     }
 
 //    进行本周排行，本月排行，全部排行，按好评排行等
@@ -55,6 +57,7 @@ public class MovieController {
 //  /monthly 每月播放量
 //  /total 总播放量
 //  /good_reviews 好评量
+//    http://localhost:8080/movies/ranking/weekly
 // 使用路径变量 {rankingType} 来获取排行类型，并分页展示电影排行
     @GetMapping("/ranking/{rankingType}")
     public ResponseEntity<PageInfo<Movie>> getRankingMovies(
