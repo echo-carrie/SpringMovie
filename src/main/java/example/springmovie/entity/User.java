@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Setter
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 //使用data进行依赖注入
 //setter、getter方法会对get、set进行注入
-public class User {
+public class User  implements Serializable {
     //    标识主键
     @TableId
     private Long id;
@@ -29,8 +30,9 @@ public class User {
 
     private LocalDateTime updatedAt;
 
-    public Boolean isVip(){
-        return this.isVip;
+    // 无参构造函数，Serializable 接口要求必须有
+    public User() {
     }
+
 
 }

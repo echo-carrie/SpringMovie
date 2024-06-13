@@ -73,7 +73,7 @@ public class PayController {
         }
 
         // 调用UserService更新用户VIP状态
-        userService.updateUserVipStatus(userId);
+        userService.setVip();
 
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println("支付成功，订单号为：" + orderId + "，用户已升级为VIP。");

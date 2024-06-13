@@ -1,5 +1,6 @@
 package example.springmovie.service;
 
+import cn.dev33.satoken.stp.StpUtil;
 import example.springmovie.entity.User;
 import example.springmovie.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +23,22 @@ public class UserService {
         return userMapper.selectUserById(userId);
     }
 
-//获取用户信息
-    public Boolean isVipUser(Long userId) {
-        User user = userMapper.selectUserById(userId);
-        return user != null && user.isVip(); // 如果用户对象不为空且isVip为true，则返回 true，否则返回 false
-    }
-    public void updateUserVipStatus(Long userId) {
-        User user = getUserById(userId); // 获取用户对象
-        if (user != null) {
-            user.setIsVip(true); // 设置VIP状态为true
-            userMapper.updateUser(user); // 调用 UserMapper 更新用户状态
-        }
+    //判断是否为vip，返回true 或者 false
+    public Boolean isVip() {
+        //获取缓存中对象
+        User user=(User) StpUtil.getSession().get("user");
+        return user.getIsVip();
     }
 
-    // 你可能还需要一个方法来更新用户信息
-    public void updateUser(User user) {
+    //设置vip，会在缓存和数据库中进行更新
+    public void setVip() {
+        //获取局部变量
+        User user=(User) StpUtil.getSession().get("user");
+        //设置缓存中对象
+        user.setIsVip(true);
+        //更新缓存对象
+        StpUtil.getSession().set("user",user);
+        //更新数据库中对象
         userMapper.updateUser(user);
     }
 }
