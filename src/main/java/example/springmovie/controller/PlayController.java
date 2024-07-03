@@ -42,7 +42,7 @@ public class PlayController {
 
         // 用户有权限观看视频，跳转到视频播放页面
         model.addAttribute("movie", movie);
-        return "play";
+        return "movie-details";
     }
 
     @GetMapping("/log_add")

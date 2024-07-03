@@ -9,6 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
+
+<!--        <link rel="stylesheet" href="https://qidian.gtimg.com/lulu/pure/css/common/ui/Input.css">-->
+<!--        <script href="https://unpkg.com/lu2/theme/edge/js/common/all.js"></script>-->
+
         <!-- Place favicon.ico in the root directory -->
 
 		<!-- CSS here -->
@@ -41,6 +45,7 @@
 
     </head>
     <body>
+
 <!--        <div th:each="movie:${movies}" th:if="${movies != null}">-->
 <!--            <p th:text="${movie.title}"></p>-->
 <!--        </div>-->
@@ -76,31 +81,35 @@
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
-                                            <li class="active menu-item-has-children"><a href="#">Home</a>
-                                                <ul class="submenu">
-                                                    <li class="active"><a th:href="@{http://localhost:8080/movies/popular?pageNum=1&pageSize=10}">Home One</a></li>
-                                                    <li><a th:href="@{../index-2.html}">Home Two</a></li>
-                                                </ul>
+                                            <li><a th:href="@{http://localhost:8080/movies/popular?pageNum=1&pageSize=10}">Home</a>
                                             </li>
-                                            <li class="menu-item-has-children"><a href="#">Movie</a>
-                                                <ul class="submenu">
-                                                    <li><a th:href="@{../movies.html}">Movie</a></li>
-                                                </ul>
+                                            <li><a th:href="@{http://localhost:8080/movies/genre?genre=科幻&pageNum=1&pageSize=10}">Movie</a>
                                             </li>
-                                            <li><a th:href="@{../tv-show.html}">tv show</a></li>
                                             <li><a th:href="@{../pricing.html}">Pricing</a></li>
-                                            <li class="menu-item-has-children"><a href="#">blog</a>
-                                                <ul class="submenu">
-                                                    <li><a th:href="@{../blog.html}">Our Blog</a></li>
-                                                    <li><a th:href="@{../blog-details.html}">Blog Details</a></li>
-                                                </ul>
-                                            </li>
                                             <li><a th:href="@{../contact.html}">contacts</a></li>
+                                            <li id="welcome" style="
+                                                    font-size: 12px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                    color: #f0f0f0;
+                                                    padding: 38px 23px;
+                                                    display: block;
+                                                    line-height: 1;
+                                                    position: relative;
+                                                    z-index: 1;">未登录，请登录</li>
                                         </ul>
                                     </div>
+
                                     <div class="header-action d-none d-md-block">
                                         <ul>
-                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+<!--                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>-->
+                                            <li id="header-search"><a href="#" ><i class="fas fa-search"></i></a></li>
+
+                                            <div class="layout">
+                                                <input type="text" class="search-box">
+                                                <button id="search-confirm">确认</button>
+                                            </div>
+
                                             <li class="header-lang">
                                                 <form action="#">
                                                     <div class="icon"><i class="flaticon-globe"></i></div>
@@ -118,20 +127,137 @@
                                 </nav>
                             </div>
 
+                            <style>
+                                .layout{
+                                    width: 100vw;
+                                    height: 100vh;
+                                    background-color: rgba(0, 0, 0, 0.6);
+                                    transition: 0.5s linear;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    position: fixed;
+                                    z-index: 99;
+                                    top: 0;
+                                    left: 0;
+                                    opacity: 0;
+                                }
+                                #search-confirm{
+                                    height: 60px;
+                                    border: none;
+                                    border-radius: 5px;
+                                    width: 100px;
+                                    margin-left: 20px;
+                                    background-color: rgb(228, 216, 4);
+                                    color: #fff;
+                                    font-size: 20px;
+                                    font-weight: 500;
+                                }
+                                .search-box{
+                                    /*border: 1px red solid;*/
+                                    width: 400px;
+                                    height: 60px;
+                                    position: relative;
+                                    font-weight: 500;
+                                    font-size: 20px;
+                                    padding: 0 10px;
+                                }
+                                .search-box::before{
+                                    content: '123';
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    /*border: 1px red solid;*/
+                                    width: 100px;
+                                    height: 100px;
+                                }
+                            </style>
                             <script>
+                                // const registerUser = async () => {
+                                //     const registerRequest = {
+                                //         username: 'jc',
+                                //         password: '123',
+                                //         isVip: true
+                                //     };
+                                //
+                                //     try {
+                                //         const response = await fetch('http://localhost:8080/user/register', {
+                                //             method: 'POST',
+                                //             headers: {
+                                //                 'Content-Type': 'application/json'
+                                //             },
+                                //             body: JSON.stringify(registerRequest)
+                                //         });
+                                //
+                                //         if (!response.ok) {
+                                //             throw new Error('Network response was not ok ' + response.statusText);
+                                //         }
+                                //
+                                //         const data = await response.text();
+                                //         console.log('Success:', data);
+                                //     } catch (error) {
+                                //         console.error('Error:', error);
+                                //     }
+                                // };
+                                //
+                                // registerUser();
+
+                                const searchIcon = document.querySelector('#header-search');
+                                const layout = document.querySelector('.layout');
+                                const input = document.querySelector('.search-box');
+                                const button = document.querySelector('#search-confirm');
+                                const type = ["科幻", "剧情", "犯罪", "喜剧", "爱情", "奇幻", "战争", "音乐"];
+
+                                layout.addEventListener('click', (event)=>{
+                                    // layout.style.display = 'none';
+                                    layout.style.opacity = 0;
+                                    layout.style.pointerEvents = 'none';
+
+                                })
+
+                                input.addEventListener('click', (event)=>{
+                                    event.stopPropagation();
+                                })
+                                button.addEventListener('click', (event)=>{
+                                    event.stopPropagation();
+                                    if (type.indexOf(input.value) === -1){
+                                        location.href = 'http://localhost:8080/movies/searchByName?name=' + input.value;
+                                    } else{
+                                        location.href = 'http://localhost:8080/movies/genre?genre=' + input.value + '&pageNum=1&pageSize=10';
+                                    }
+                                })
+                                searchIcon.addEventListener('click', ()=>{
+                                    layout.style.opacity = 1;
+                                    layout.style.pointerEvents = 'auto';
+                                })
+
+                                const welcome = document.querySelector('#welcome');
                                 function createLi (){
                                     const li = document.createElement('li')
                                     const a = document.createElement('a')
                                     li.classList.add('header-btn')
                                     a.href = '#'
                                     a.classList.add('btn')
-                                    if(localStorage.getItem('islogin')) a.innerText = '退出登录';
-                                    else a.innerText = 'Sign in';
+
+                                    fetch('http://localhost:8080/user/check')
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        if(data === "User is not authenticated") {
+                                            a.innerText = '登录';
+                                            welcome.innerText = '未登录，请登录';
+                                        }
+                                        else {
+                                            a.innerText = '退出登录';
+                                            welcome.innerText = '欢迎！';
+                                        }
+                                    })
+                                    .catch(error => console.error('Error:', error));
+
                                     li.appendChild(a);
                                     return li
                                 }
                                 const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
-                                console.log(container)
+                                // console.log(container)
                                 container.appendChild(createLi());
 
                                 function create_login(){
@@ -145,13 +271,14 @@
                                 function create_logout(){
                                     const btn = document.querySelector('.header-btn');
                                     localStorage.setItem('islogin', JSON.stringify(false))
-                                    btn.children[0].innerText = 'Sign in'
+                                    btn.children[0].innerText = '登录'
                                     btn.removeEventListener('click', create_logout);
                                     btn.addEventListener('click', create_login);
                                 }
 
-                                console.log(localStorage.getItem('islogin'))
+                                // console.log(localStorage.getItem('islogin'))
                                 const btn = document.querySelector('.header-btn');
+                                // 判定登录状态
                                 if(localStorage.getItem('islogin')) btn.addEventListener('click', create_login);
                                 else btn.addEventListener('click', create_logout);
 
@@ -196,6 +323,7 @@
 
                             <script>
                                 function performSearch(e) {
+
                                     e.preventDefault()
                                     let searchInput = document.getElementById('search-input').value;
                                     let url = '/movies/genre?genre=' + encodeURIComponent(searchInput) + '&pageNum=1&pageSize=10';
@@ -662,12 +790,16 @@
                         </div>
                     </div>
                     <div class="row tr-movie-active">
+
                         <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer" th:each="movie, iterStat : ${movies}" th:if="${movies} != null"
                              th:classappend="${iterStat.index % 3 == 0} ? 'cat-one' : ( ${iterStat.index % 3 == 1} ? 'cat-two' : 'cat-three' )">
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
 <!--                                    <img src="/img/poster/ucm_poster01.jpg" alt="">-->
-                                    <a th:href="@{../movie-details.html}"><img th:src="@{../img/1.jpg}" alt=""></a>
+                                    <a th:href="@{../movie-details.html}">
+<!--                                        <img th:src="@{'../' + ${movie.coverUrl}}" alt="">-->
+                                        <img th:src="@{'../img/8.jpg'}" alt="">
+                                    </a>
                                 </div>
                                 <div class="movie-content">
                                     <div class="top">
@@ -1030,7 +1162,7 @@
                                         <ul class="navigation">
                                             <li><a th:href="@{../popular.html}">Home</a></li>
                                             <li><a th:href="@{../popular.html}">Movie</a></li>
-                                            <li><a th:href="@{../popular.html}">tv show</a></li>
+<!--                                            <li><a th:href="@{../popular.html}">tv show</a></li>-->
                                             <li><a th:href="@{../popular.html}">pages</a></li>
                                             <li><a th:href="@{../pricing.html}">Pricing</a></li>
                                         </ul>
