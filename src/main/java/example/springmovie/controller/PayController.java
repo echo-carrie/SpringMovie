@@ -9,7 +9,10 @@ import example.springmovie.entity.User;
 import example.springmovie.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -31,7 +34,7 @@ public class PayController {
     // 支付请求
 
     @GetMapping("/pay")
-    public void pay(@RequestParam(value = "cost", defaultValue = "15") String cost, HttpServletResponse response){
+    public void pay(@RequestParam(value = "cost", defaultValue = "15") String cost, HttpServletResponse response) {
         // 使用 generateOrderId 方法生成订单ID
         String orderId = generateOrderId();
 
@@ -64,18 +67,31 @@ public class PayController {
 
     // 支付成功回调
     @RequestMapping("success")
-    public void success(@RequestParam("orderId") String orderId, HttpServletResponse response) throws IOException {
-        // 获取当前登录用户的ID
-        Long userId = StpUtil.getLoginIdAsLong();
-        if (userId == null || userId == 0) {
-            response.getWriter().println("支付成功，但无法识别用户ID，无法更新会员身份。");
-            return;
+    public ResponseEntity<?> success(@RequestParam("orderId") String orderId, HttpServletResponse response) throws IOException {
+        try {
+            // 用户未登录
+            if (!cn.dev33.satoken.stp.StpUtil.isLogin()) {
+                return ResponseEntity.ok("用户未登陆");
+            }
+            // 用户已登录
+            else {
+                // 用户已经是VIP
+                if (userService.isVip()){
+                    return ResponseEntity.ok("用户已经是VIP");
+                }
+                // 用户不是VIP
+                else {
+                    userService.setVip();
+                    return ResponseEntity.ok("支付成功，订单号为：" + orderId + "，用户已升级为VIP。");
+                }
+            }
+        } catch (Exception e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "VIP注册检查失败：" + e.getMessage(),
+                    e // 将原始异常作为响应的一部分，有助于调试
+            );
         }
 
-        // 调用UserService更新用户VIP状态
-        userService.setVip();
-
-        response.setContentType("text/html;charset=utf-8");
-        response.getWriter().println("支付成功，订单号为：" + orderId + "，用户已升级为VIP。");
     }
 }
