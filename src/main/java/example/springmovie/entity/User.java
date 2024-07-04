@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,6 +15,8 @@ import java.time.LocalDateTime;
 //使用data进行依赖注入
 //setter、getter方法会对get、set进行注入
 public class User  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     //    标识主键
     @TableId
     private Long id;
