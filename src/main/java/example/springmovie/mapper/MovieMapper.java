@@ -11,6 +11,10 @@ import java.util.List;
 public interface MovieMapper extends BaseMapper<Movie> {
     // 电影展示
 
+    //all
+    @Select("SELECT * FROM movies")
+    List<Movie> selectAllMovies();
+
     // 按热播排行排序
     @Select("SELECT * FROM movies ORDER BY weekly_plays DESC")
     List<Movie> selectMoviesByPopularity();

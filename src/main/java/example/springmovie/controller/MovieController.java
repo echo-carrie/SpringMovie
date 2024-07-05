@@ -23,6 +23,11 @@ public class MovieController {
         return "movies";
     }
 
+    @GetMapping("/echarts")
+    public String echarts(){
+        return "echarts";
+    }
+
 //    在postman中输入下列网址进行访问，其中如果有10页，访问了第十一页，那么返回的依然是第十页的数据，在编代码时要注意这一点。
     @GetMapping("/popular")
 //    按照播放量分类展示，按照周播放量来排序决定，即example.springmovie.entity.Movie中的weekly_plays
