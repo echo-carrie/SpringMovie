@@ -52,38 +52,41 @@
                             <div class="menu-wrap">
                                 <nav class="menu-nav show">
                                     <div class="logo">
-                                        <a href="index.html">
-                                            <img src="img/logo/logo.png" alt="Logo">
+                                        <a href="popular.html">
+                                            <img src="/img/logo/logo.png" alt="Logo">
                                         </a>
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
-                                            <li class="menu-item-has-children"><a href="#">Home</a>
-                                                <ul class="submenu">
-                                                    <li><a href="index.html">Home One</a></li>
-                                                    <li><a href="index-2.html">Home Two</a></li>
-                                                </ul>
+                                            <li><a th:href="@{http://localhost:8080/movies/popular?pageNum=1&pageSize=10}">Home</a>
                                             </li>
-                                            <li class="active menu-item-has-children"><a href="#">Movie</a>
-                                                <ul class="submenu">
-                                                    <li><a href="movies.html">Movie</a></li>
-                                                    <li class="active"><a href="movie-details.html">Movie Details</a></li>
-                                                </ul>
+                                            <li><a th:href="@{http://localhost:8080/movies/genre?genre=科幻&pageNum=1&pageSize=10}">Movie</a>
                                             </li>
-                                            <li><a href="tv-show.html">tv show</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                            <li class="menu-item-has-children"><a href="#">blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Our Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="error.html">contacts</a></li>
+                                            <li><a th:href="@{http://localhost:8080/movies/pricing}">Pricing</a></li>
+                                            <li><a th:href="@{../contact.html}">contacts</a></li>
+                                            <li id="welcome" style="
+                                                    font-size: 12px;
+                                                    font-weight: 500;
+                                                    text-transform: uppercase;
+                                                    color: #f0f0f0;
+                                                    padding: 38px 23px;
+                                                    display: block;
+                                                    line-height: 1;
+                                                    position: relative;
+                                                    z-index: 1;">未登录，请登录</li>
                                         </ul>
                                     </div>
+
                                     <div class="header-action d-none d-md-block">
                                         <ul>
-                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>
+                                            <!--                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>-->
+                                            <li id="header-search"><a href="#" ><i class="fas fa-search"></i></a></li>
+
+                                            <div class="layout">
+                                                <input type="text" class="search-box">
+                                                <button id="search-confirm">确认</button>
+                                            </div>
+
                                             <li class="header-lang">
                                                 <form action="#">
                                                     <div class="icon"><i class="flaticon-globe"></i></div>
@@ -95,18 +98,292 @@
                                                     </select>
                                                 </form>
                                             </li>
-                                            <li class="header-btn"><a href="#" class="btn">Sign In</a></li>
+                                            <!--                                            <li class="header-btn"><a href="#" class="btn">Sign In</a></li>-->
                                         </ul>
                                     </div>
                                 </nav>
                             </div>
+
+                            <style>
+                                .layout{
+                                    width: 100vw;
+                                    height: 100vh;
+                                    background-color: rgba(0, 0, 0, 0.6);
+                                    transition: 0.5s linear;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    position: fixed;
+                                    z-index: 99;
+                                    top: 0;
+                                    left: 0;
+                                    opacity: 0;
+                                }
+                                #search-confirm{
+                                    height: 60px;
+                                    border: none;
+                                    border-radius: 5px;
+                                    width: 100px;
+                                    margin-left: 20px;
+                                    background-color: rgb(228, 216, 4);
+                                    color: #fff;
+                                    font-size: 20px;
+                                    font-weight: 500;
+                                }
+                                .search-box{
+                                    /*border: 1px red solid;*/
+                                    width: 400px;
+                                    height: 60px;
+                                    position: relative;
+                                    font-weight: 500;
+                                    font-size: 20px;
+                                    padding: 0 10px;
+                                }
+                                .search-box::before{
+                                    content: '123';
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    /*border: 1px red solid;*/
+                                    width: 100px;
+                                    height: 100px;
+                                }
+                            </style>
+                            <script>
+
+                                const searchIcon = document.querySelector('#header-search');
+                                const layout = document.querySelector('.layout');
+                                const input = document.querySelector('.search-box');
+                                const button = document.querySelector('#search-confirm');
+                                const type = ["科幻", "剧情", "犯罪", "喜剧", "爱情", "奇幻", "战争", "音乐"];
+                                const welcome = document.querySelector('#welcome');
+                                const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
+
+                                layout.addEventListener('click', (event)=>{
+                                    // layout.style.display = 'none';
+                                    layout.style.opacity = 0;
+                                    layout.style.pointerEvents = 'none';
+
+                                })
+
+                                input.addEventListener('click', (event)=>{
+                                    event.stopPropagation();
+                                })
+                                button.addEventListener('click', (event)=>{
+                                    event.stopPropagation();
+                                    if (type.indexOf(input.value) === -1){
+                                        location.href = 'http://localhost:8080/movies/searchByName?name=' + input.value;
+                                    } else{
+                                        location.href = 'http://localhost:8080/movies/genre?genre=' + input.value + '&pageNum=1&pageSize=10';
+                                    }
+                                })
+                                searchIcon.addEventListener('click', ()=>{
+                                    layout.style.opacity = 1;
+                                    layout.style.pointerEvents = 'auto';
+                                })
+
+                                function check_status(){
+                                    const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
+                                    fetch('http://localhost:8080/user/check')
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            if(data !== "用户未登陆") {
+                                                fetch('http://localhost:8080/user/is_vip')
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        if(data === "true") {
+                                                            welcome.innerText = "欢迎！VIP用户！"
+                                                            // console.log(container)
+                                                            container.removeChild(container.lastChild);
+                                                            container.appendChild(createLi("退出登录"));
+                                                        }
+                                                        else {
+                                                            welcome.innerText = "欢迎！普通用户！"
+                                                            container.removeChild(container.lastChild)
+                                                            container.appendChild(createLi("退出登录"));
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error:', error));
+                                            }
+                                            else {
+                                                welcome.innerText = "未登录！请登录！"
+                                                container.removeChild(container.lastChild)
+                                                container.appendChild(createLi("登录/注册"));
+                                            }
+                                        })
+                                        .catch(error => console.error('Error:', error));
+                                }
+                                window.onload = () => {
+                                    check_status();
+                                }
+                                // check_status();
+
+                                function createLi (text){
+                                    const li = document.createElement('li')
+                                    const a = document.createElement('a')
+                                    li.classList.add('header-btn')
+
+                                    fetch('http://localhost:8080/user/check')
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            if(data === "用户已登录"){
+                                                console.log(data);
+                                                li.removeEventListener('click', create_login);
+                                                li.addEventListener('click', create_logout);
+                                            } else{
+                                                console.log(data);
+                                                li.removeEventListener('click', create_logout);
+                                                li.addEventListener('click', create_login);
+                                            }
+                                        })
+                                        .catch(error => console.error('Error:', error));
+
+                                    a.href = '#'
+                                    a.classList.add('btn')
+                                    a.innerText = text;
+                                    li.appendChild(a);
+                                    return li
+                                }
+
+
+                                const loginBody = {
+                                    "username": "sjh",
+                                    "password": 123,
+                                };
+
+                                const loginvipBody = {
+                                    "username": "jc",
+                                    "password": 123,
+                                };
+
+                                const registerBody = {
+                                    "username": "sjh",
+                                    "password": 123,
+                                    "email": "1234567@qq.com",
+                                    "isVip": false
+                                };
+
+                                let target = loginBody;
+
+                                function create_login(){
+                                    console.log("in");
+                                    if(target === loginvipBody) target = loginBody;
+                                    else target = loginvipBody;
+                                    // 发送请求
+                                    fetch('http://localhost:8080/user/login', {
+                                        method: 'POST', // 指定请求方法为POST
+                                        headers: {
+                                            'Content-Type': 'application/json' // 设置请求头，指定内容类型为JSON
+                                        },
+                                        body: JSON.stringify(target) // 将请求体转换为JSON字符串
+                                    })
+                                        .then(response => response.text()) // 解析响应体为JSON格式
+                                        .then(data => {
+                                            console.log(data); // 处理响应数据
+                                            if (data === "登录成功"){
+                                                fetch('http://localhost:8080/user/is_vip')
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        if(data === "true") {
+                                                            welcome.innerText = '欢迎！VIP用户！';
+
+                                                        }
+                                                        else {
+                                                            welcome.innerText = '欢迎！普通用户！';
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error:', error));
+                                                container.removeChild(container.lastChild)
+                                                container.appendChild(createLi("退出登录"));
+
+                                            }else{
+                                                console.log(data);
+                                                welcome.innerText = '未登录，请登录';
+                                                console.warn("不存在该用户！请注册！")
+
+                                                fetch('http://localhost:8080/user/register', {
+                                                    method: 'POST', // 指定请求方法为POST
+                                                    headers: {
+                                                        'Content-Type': 'application/json' // 设置请求头，指定内容类型为JSON
+                                                    },
+                                                    body: JSON.stringify(registerBody) // 将请求体转换为JSON字符串
+                                                })
+                                                    .then(response => response.text()) // 解析响应体为JSON格式
+                                                    .then(data => {
+                                                        console.log(data); // 处理响应数据
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error:', error); // 处理错误
+                                                    });
+
+                                                container.removeChild(container.lastChild)
+                                                container.appendChild(createLi("登录/注册"));
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error); // 处理错误
+                                        });
+
+                                }
+
+                                function create_logout(){
+                                    console.log("out");
+                                    const btn = document.querySelector('.header-btn');
+
+                                    // fetch('http://localhost:8080/user/logout')
+                                    //     .then(response => response.text())
+                                    //     .then(data => {
+                                    //         console.log(data);
+                                    //         welcome.innerText = "未登录！请登录！"
+                                    //         container.removeChild(container.lastChild)
+                                    //         container.appendChild(createLi("登录/注册"));
+                                    //     })
+                                    //     .catch(error => console.error('Error:', error));
+
+                                    // 创建一个对象来表示请求体
+                                    const requestBody = {
+                                        username: "jc",
+                                        password: 123,
+                                        email: "12345@qq.com",
+                                        isVip: true
+                                    };
+
+                                    // 使用fetch API发送POST请求
+                                    fetch('http://localhost:8080/user/logout', {
+                                        method: 'POST', // 指定请求方法为POST
+                                        headers: {
+                                            'Content-Type': 'application/json', // 设置请求头，表明发送的是JSON数据
+                                        },
+                                        body: JSON.stringify(requestBody) // 将请求体对象转换为JSON字符串
+                                    })
+                                        .then(response => response.text()) // 解析响应体为JSON
+                                        .then(data => {
+                                            console.log(data);
+                                            welcome.innerText = "未登录！请登录！"
+                                            container.removeChild(container.lastChild)
+                                            container.appendChild(createLi("登录/注册"));
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error); // 捕获并打印错误信息
+                                        });
+
+
+                                }
+
+                                // console.log(localStorage.getItem('islogin'))
+                                // const btn = document.querySelector('.header-btn');
+                                // // 判定登录状态
+                                // if(localStorage.getItem('islogin')) btn.addEventListener('click', create_login);
+                                // else btn.addEventListener('click', create_logout);
+
+                            </script>
 
                             <!-- Mobile Menu  -->
                             <div class="mobile-menu">
                                 <div class="close-btn"><i class="fas fa-times"></i></div>
 
                                 <nav class="menu-box">
-                                    <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
+                                    <div class="nav-logo"><a href="popular.html"><img src="/img/logo/logo.png" alt="" title=""></a>
                                     </div>
                                     <div class="menu-outer">
                                         <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
@@ -129,14 +406,26 @@
                             <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form>
+                                        <form id="search-form">
                                             <input type="text" placeholder="Search here...">
-                                            <button><i class="fas fa-search"></i></button>
+                                            <button onclick="performSearch()"><i class="fas fa-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                             <!-- Modal Search-end -->
+
+                            <script>
+                                function performSearch(e) {
+
+                                    e.preventDefault()
+                                    let searchInput = document.getElementById('search-input').value;
+                                    let url = '/movies/genre?genre=' + encodeURIComponent(searchInput) + '&pageNum=1&pageSize=10';
+
+                                    // window.location.href = url;
+                                    // return false; // Prevent form submission
+                                }
+                            </script>
 
                         </div>
                     </div>

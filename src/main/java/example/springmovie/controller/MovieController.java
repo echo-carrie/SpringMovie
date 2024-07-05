@@ -33,12 +33,18 @@ public class MovieController {
         return "popular";
     }
 
+    @GetMapping("/pricing")
+    public String pricing() {
+        return "pricing"; // 返回模板名称，不带扩展名
+    }
+
     @GetMapping("/genre")
 //    按照类型分页展示，根据类型，即genre进行搜索，分页展示类型相同的
 //    测试：http://localhost:8080/movies/genre?genre=科幻&pageNum=1&pageSize=10
     public String getMoviesByGenre(@RequestParam String genre, @RequestParam int pageNum, @RequestParam int pageSize, Model model) {
         System.out.println(movieService.getMoviesByGenre(genre, pageNum, pageSize).getList());
         model.addAttribute("reslist", movieService.getMoviesByGenre(genre, pageNum, pageSize).getList());
+        model.addAttribute("page", movieService.getMoviesByGenre(genre, pageNum, pageSize));
         return "movies";
     }
 
@@ -48,6 +54,7 @@ public class MovieController {
     public String getMoviesByRegion(@RequestParam String region, @RequestParam int pageNum, @RequestParam int pageSize, Model model) {
         System.out.println(movieService.getMoviesByRegion(region, pageNum, pageSize).getList());
         model.addAttribute("reslist", movieService.getMoviesByRegion(region, pageNum, pageSize).getList());
+        model.addAttribute("page", movieService.getMoviesByRegion(region, pageNum, pageSize));
         return "movies";
     }
 

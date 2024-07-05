@@ -29,12 +29,13 @@ public class PlayController {
     @Autowired
     private PlayRecordService playRecordService;
 
+
     @GetMapping("/plays")
-    public String plays( Long videoId, Model model,Long userId) {
-        boolean currentUser_isVip=StpUtil.hasPermission("VIP");
+    public String plays( Long videoId, Model model) {
+        boolean currentUser_isVip=userService.isVip();
         Movie movie = movieService.getMovieById(videoId);
 
-        if (movie.isVip() && currentUser_isVip) {
+        if (movie.isVip() && !currentUser_isVip) {
             // 如果视频是VIP视频且用户不是VIP用户，则重定向到错误页面
             model.addAttribute("message", "该视频仅VIP用户可观看。");
             return "error";

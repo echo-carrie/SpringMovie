@@ -77,7 +77,7 @@
                                     <div class="logo">
                                         <a href="popular.html">
                                             <img src="/img/logo/logo.png" alt="Logo">
-                                        </a>
+                                        </a>z
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
@@ -85,7 +85,7 @@
                                             </li>
                                             <li><a th:href="@{http://localhost:8080/movies/genre?genre=科幻&pageNum=1&pageSize=10}">Movie</a>
                                             </li>
-                                            <li><a th:href="@{../pricing.html}">Pricing</a></li>
+                                            <li><a th:href="@{http://localhost:8080/movies/pricing}">Pricing</a></li>
                                             <li><a th:href="@{../contact.html}">contacts</a></li>
                                             <li id="welcome" style="
                                                     font-size: 12px;
@@ -173,40 +173,14 @@
                                 }
                             </style>
                             <script>
-                                // const registerUser = async () => {
-                                //     const registerRequest = {
-                                //         username: 'jc',
-                                //         password: '123',
-                                //         isVip: true
-                                //     };
-                                //
-                                //     try {
-                                //         const response = await fetch('http://localhost:8080/user/register', {
-                                //             method: 'POST',
-                                //             headers: {
-                                //                 'Content-Type': 'application/json'
-                                //             },
-                                //             body: JSON.stringify(registerRequest)
-                                //         });
-                                //
-                                //         if (!response.ok) {
-                                //             throw new Error('Network response was not ok ' + response.statusText);
-                                //         }
-                                //
-                                //         const data = await response.text();
-                                //         console.log('Success:', data);
-                                //     } catch (error) {
-                                //         console.error('Error:', error);
-                                //     }
-                                // };
-                                //
-                                // registerUser();
 
                                 const searchIcon = document.querySelector('#header-search');
                                 const layout = document.querySelector('.layout');
                                 const input = document.querySelector('.search-box');
                                 const button = document.querySelector('#search-confirm');
                                 const type = ["科幻", "剧情", "犯罪", "喜剧", "爱情", "奇幻", "战争", "音乐"];
+                                const welcome = document.querySelector('#welcome');
+                                const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
 
                                 layout.addEventListener('click', (event)=>{
                                     // layout.style.display = 'none';
@@ -231,56 +205,199 @@
                                     layout.style.pointerEvents = 'auto';
                                 })
 
-                                const welcome = document.querySelector('#welcome');
-                                function createLi (){
+                                function check_status(){
+                                    const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
+                                    fetch('http://localhost:8080/user/check')
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            if(data !== "用户未登陆") {
+                                                fetch('http://localhost:8080/user/is_vip')
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        if(data === "true") {
+                                                            welcome.innerText = "欢迎！VIP用户！"
+                                                            // console.log(container)
+                                                            container.removeChild(container.lastChild);
+                                                            container.appendChild(createLi("退出登录"));
+                                                        }
+                                                        else {
+                                                            welcome.innerText = "欢迎！普通用户！"
+                                                            container.removeChild(container.lastChild)
+                                                            container.appendChild(createLi("退出登录"));
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error:', error));
+                                            }
+                                            else {
+                                                welcome.innerText = "未登录！请登录！"
+                                                container.removeChild(container.lastChild)
+                                                container.appendChild(createLi("登录/注册"));
+                                            }
+                                        })
+                                        .catch(error => console.error('Error:', error));
+                                }
+                                window.onload = () => {
+                                    check_status();
+                                }
+                                // check_status();
+
+                                function createLi (text){
                                     const li = document.createElement('li')
                                     const a = document.createElement('a')
                                     li.classList.add('header-btn')
-                                    a.href = '#'
-                                    a.classList.add('btn')
 
                                     fetch('http://localhost:8080/user/check')
-                                    .then(response => response.text())
-                                    .then(data => {
-                                        if(data === "User is not authenticated") {
-                                            a.innerText = '登录';
-                                            welcome.innerText = '未登录，请登录';
-                                        }
-                                        else {
-                                            a.innerText = '退出登录';
-                                            welcome.innerText = '欢迎！';
-                                        }
-                                    })
-                                    .catch(error => console.error('Error:', error));
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            if(data === "用户已登录"){
+                                                console.log(data);
+                                                li.removeEventListener('click', create_login);
+                                                li.addEventListener('click', create_logout);
+                                            } else{
+                                                console.log(data);
+                                                li.removeEventListener('click', create_logout);
+                                                li.addEventListener('click', create_login);
+                                            }
+                                        })
+                                        .catch(error => console.error('Error:', error));
 
+                                    a.href = '#'
+                                    a.classList.add('btn')
+                                    a.innerText = text;
                                     li.appendChild(a);
                                     return li
                                 }
-                                const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
-                                // console.log(container)
-                                container.appendChild(createLi());
+
+
+                                const loginBody = {
+                                    "username": "sjh",
+                                    "password": 123,
+                                };
+
+                                const loginvipBody = {
+                                    "username": "jc",
+                                    "password": 123,
+                                };
+
+                                const registerBody = {
+                                    "username": "sjh",
+                                    "password": 123,
+                                    "email": "1234567@qq.com",
+                                    "isVip": false
+                                };
+
+                                let target = loginBody;
 
                                 function create_login(){
-                                    const btn = document.querySelector('.header-btn');
-                                    localStorage.setItem('islogin', JSON.stringify(true))
-                                    btn.children[0].innerText = '退出登录'
-                                    btn.removeEventListener('click', create_login);
-                                    btn.addEventListener('click', create_logout);
+                                    console.log("in");
+                                    if(target === loginvipBody) target = loginBody;
+                                    else target = loginvipBody;
+                                    // 发送请求
+                                    fetch('http://localhost:8080/user/login', {
+                                        method: 'POST', // 指定请求方法为POST
+                                        headers: {
+                                            'Content-Type': 'application/json' // 设置请求头，指定内容类型为JSON
+                                        },
+                                        body: JSON.stringify(target) // 将请求体转换为JSON字符串
+                                    })
+                                        .then(response => response.text()) // 解析响应体为JSON格式
+                                        .then(data => {
+                                            console.log(data); // 处理响应数据
+                                            if (data === "登录成功"){
+                                                fetch('http://localhost:8080/user/is_vip')
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        if(data === "true") {
+                                                            welcome.innerText = '欢迎！VIP用户！';
+
+                                                        }
+                                                        else {
+                                                            welcome.innerText = '欢迎！普通用户！';
+                                                        }
+                                                    })
+                                                    .catch(error => console.error('Error:', error));
+                                                container.removeChild(container.lastChild)
+                                                container.appendChild(createLi("退出登录"));
+
+                                            }else{
+                                                console.log(data);
+                                                welcome.innerText = '未登录，请登录';
+                                                console.warn("不存在该用户！请注册！")
+
+                                                fetch('http://localhost:8080/user/register', {
+                                                    method: 'POST', // 指定请求方法为POST
+                                                    headers: {
+                                                        'Content-Type': 'application/json' // 设置请求头，指定内容类型为JSON
+                                                    },
+                                                    body: JSON.stringify(registerBody) // 将请求体转换为JSON字符串
+                                                })
+                                                    .then(response => response.text()) // 解析响应体为JSON格式
+                                                    .then(data => {
+                                                        console.log(data); // 处理响应数据
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error:', error); // 处理错误
+                                                    });
+
+                                                container.removeChild(container.lastChild)
+                                                container.appendChild(createLi("登录/注册"));
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error); // 处理错误
+                                        });
+
                                 }
 
                                 function create_logout(){
+                                    console.log("out");
                                     const btn = document.querySelector('.header-btn');
-                                    localStorage.setItem('islogin', JSON.stringify(false))
-                                    btn.children[0].innerText = '登录'
-                                    btn.removeEventListener('click', create_logout);
-                                    btn.addEventListener('click', create_login);
+
+                                    // fetch('http://localhost:8080/user/logout')
+                                    //     .then(response => response.text())
+                                    //     .then(data => {
+                                    //         console.log(data);
+                                    //         welcome.innerText = "未登录！请登录！"
+                                    //         container.removeChild(container.lastChild)
+                                    //         container.appendChild(createLi("登录/注册"));
+                                    //     })
+                                    //     .catch(error => console.error('Error:', error));
+
+                                    // 创建一个对象来表示请求体
+                                    const requestBody = {
+                                        username: "jc",
+                                        password: 123,
+                                        email: "12345@qq.com",
+                                        isVip: true
+                                    };
+
+                                    // 使用fetch API发送POST请求
+                                    fetch('http://localhost:8080/user/logout', {
+                                        method: 'POST', // 指定请求方法为POST
+                                        headers: {
+                                            'Content-Type': 'application/json', // 设置请求头，表明发送的是JSON数据
+                                        },
+                                        body: JSON.stringify(requestBody) // 将请求体对象转换为JSON字符串
+                                    })
+                                        .then(response => response.text()) // 解析响应体为JSON
+                                        .then(data => {
+                                            console.log(data);
+                                            welcome.innerText = "未登录！请登录！"
+                                            container.removeChild(container.lastChild)
+                                            container.appendChild(createLi("登录/注册"));
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error); // 捕获并打印错误信息
+                                        });
+
+
                                 }
 
                                 // console.log(localStorage.getItem('islogin'))
-                                const btn = document.querySelector('.header-btn');
-                                // 判定登录状态
-                                if(localStorage.getItem('islogin')) btn.addEventListener('click', create_login);
-                                else btn.addEventListener('click', create_logout);
+                                // const btn = document.querySelector('.header-btn');
+                                // // 判定登录状态
+                                // if(localStorage.getItem('islogin')) btn.addEventListener('click', create_login);
+                                // else btn.addEventListener('click', create_logout);
 
                             </script>
 
@@ -345,7 +462,7 @@
         <main>
 
             <!-- banner-area -->
-            <section class="banner-area banner-bg" data-background="/img/banner/banner_bg01.jpg">
+            <section class="banner-area banner-bg" data-background="../img/banner/s_slider_bg.jpg">
                 <div class="container custom-container">
                     <div class="row">
                         <div class="col-xl-6 col-lg-8">
@@ -408,7 +525,7 @@
                             <div class="ucm-active owl-carousel">
                                 <div class="movie-item mb-50">
                                     <div class="movie-poster">
-                                        <a th:href="@{../movie-details.html}"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
+                                        <a href="http://localhost:8080/plays?videoId=20&userId=1"><img src="/img/poster/ucm_poster01.jpg" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="top">
@@ -796,7 +913,7 @@
                             <div class="movie-item mb-60">
                                 <div class="movie-poster">
 <!--                                    <img src="/img/poster/ucm_poster01.jpg" alt="">-->
-                                    <a th:href="@{../movie-details.html}">
+                                    <a th:href="'http://localhost:8080/plays?videoId=' + ${movie.id}">
 <!--                                        <img th:src="@{'../' + ${movie.coverUrl}}" alt="">-->
                                         <img th:src="@{'../img/8.jpg'}" alt="">
                                     </a>
