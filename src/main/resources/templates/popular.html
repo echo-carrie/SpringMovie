@@ -160,7 +160,7 @@
                                     font-weight: 500;
                                 }
                                 .search-box{
-                                    border: 1px red solid;
+                                    /*border: 1px red solid;*/
                                     width: 400px;
                                     height: 60px;
                                     position: relative;
@@ -215,6 +215,7 @@
                                 const input = document.querySelector('.search-box');
                                 const button = document.querySelector('#search-confirm');
                                 const type = ["科幻", "剧情", "犯罪", "喜剧", "爱情", "奇幻", "战争", "音乐"];
+                                const zonetype = ["中国", "美国", "法国","意大利","日本","印度","英国","韩国"];
                                 const welcome = document.querySelector('#welcome');
                                 const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
 
@@ -234,10 +235,14 @@
 
                                 button.addEventListener('click', (event)=>{
                                     event.stopPropagation();
-                                    if (type.indexOf(input.value) === -1){
-                                        location.href = 'http://localhost:8080/movies/searchByName?name=' + input.value;
-                                    } else{
+                                    if (type.indexOf(input.value) !== -1){
                                         location.href = 'http://localhost:8080/movies/genre?genre=' + input.value + '&pageNum=1&pageSize=10';
+                                    }
+                                    if (zonetype.indexOf(input.value) !== -1){
+                                        location.href = 'http://localhost:8080/movies/region?region=' + input.value + '&pageNum=1&pageSize=2';
+                                    }
+                                    else{
+                                        location.href = 'http://localhost:8080/movies/searchByName?name=' + input.value;
                                     }
                                 })
                                 searchIcon.addEventListener('click', ()=>{
@@ -393,9 +398,9 @@
                                                 container.appendChild(createLi("退出登录"));
 
                                             }else{
-                                                console.warn(data);
+                                                // console.warn(data);
                                                 welcome.innerText = '未登录，请登录';
-                                                console.log(registerBody);
+                                                // console.log(registerBody);
 
                                                 fetch('http://localhost:8080/user/register', {
                                                     method: 'POST', // 指定请求方法为POST
@@ -406,7 +411,7 @@
                                                 })
                                                     .then(response => response.text()) // 解析响应体为JSON格式
                                                     .then(data => {
-                                                        console.log(data); // 处理响应数据
+                                                        alert(data); // 处理响应数据
                                                         // if (data === "用户注册成功"){
                                                         //     box_container.style.opacity = 0;
                                                         //     box_container.pointerEvents = 'none';
