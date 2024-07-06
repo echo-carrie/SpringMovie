@@ -36,7 +36,7 @@ public class MovieCreatorController {
             Model model) {
         System.out.println(movieCreatorService.searchMoviesByCreator(name, pageNum, pageSize).getList());
 //        PageInfo<Movie> page = movieCreatorService.searchMoviesByCreator(name, pageNum, pageSize);
-        model.addAttribute("SearchList", movieCreatorService.searchMoviesByCreator(name, pageNum, pageSize).getList());
+        model.addAttribute("reslist", movieCreatorService.searchMoviesByCreator(name, pageNum, pageSize).getList());
         return "movies";
     }
 

@@ -83,10 +83,10 @@
                                         <ul class="navigation">
                                             <li><a th:href="@{http://localhost:8080/movies/popular?pageNum=1&pageSize=10}">Home</a>
                                             </li>
-                                            <li><a th:href="@{http://localhost:8080/movies/genre?genre=科幻&pageNum=1&pageSize=10}">Movie</a>
+                                            <li><a th:href="@{http://localhost:8080/movies/genre?genre=科幻&pageNum=1&pageSize=3}">Movie</a>
                                             </li>
                                             <li><a th:href="@{http://localhost:8080/movies/pricing}">Pricing</a></li>
-                                            <li><a th:href="@{../contact.html}">contacts</a></li>
+                                            <li><a th:href="@{http://localhost:8080/movies/echarts}">contacts</a></li>
                                             <li id="welcome" style="
                                                     font-size: 12px;
                                                     font-weight: 500;
@@ -100,13 +100,19 @@
                                         </ul>
                                     </div>
 
+                                    <div class="box-container">
+                                        <input type="text" name="" id="name" placeholder="用户名">
+                                        <input type="text" name="" id="password" placeholder="密码">
+                                        <button id="yes">确认</button>
+                                    </div>
+
                                     <div class="header-action d-none d-md-block">
                                         <ul>
 <!--                                            <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal"><i class="fas fa-search"></i></a></li>-->
                                             <li id="header-search"><a href="#" ><i class="fas fa-search"></i></a></li>
 
                                             <div class="layout">
-                                                <input type="text" class="search-box">
+                                                <input type="text" class="search-box" id="one" >
                                                 <button id="search-confirm">确认</button>
                                             </div>
 
@@ -154,22 +160,52 @@
                                     font-weight: 500;
                                 }
                                 .search-box{
-                                    /*border: 1px red solid;*/
+                                    border: 1px red solid;
                                     width: 400px;
                                     height: 60px;
                                     position: relative;
                                     font-weight: 500;
                                     font-size: 20px;
                                     padding: 0 10px;
+                                    margin: 0px 10px;
                                 }
                                 .search-box::before{
                                     content: '123';
                                     position: absolute;
                                     right: 0;
-                                    top: 0;
+                                    top: 50px;
                                     /*border: 1px red solid;*/
                                     width: 100px;
                                     height: 100px;
+                                }
+                                .box-container{
+                                    border: 2px #e4d804 solid;
+                                    border-radius: 10px;
+                                    padding: 10px 5px;
+                                    background-color: rgba(255,255,255,0);
+                                    display: flex;
+                                    position: absolute;
+                                    top: 96px;
+                                    right: -213px;
+                                    transition: 0.5s linear;
+                                }
+                                .box-container input{
+                                    width: 200px;
+                                    height:40px;
+                                    margin: 0px 10px;
+                                    border-radius: 5px;
+                                    padding: 0px 5px;
+                                }
+                                .box-container #yes{
+                                    width: 100px;
+                                    height: 40px;
+                                    background-color: #e4d804;
+                                    color: #fff;
+                                    font-size: 16px;
+                                    font-weight: 500;
+                                    border-radius: 5px;
+                                    margin: 0px 10px;
+
                                 }
                             </style>
                             <script>
@@ -182,16 +218,20 @@
                                 const welcome = document.querySelector('#welcome');
                                 const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
 
+                                const box_container = document.querySelector('.box-container');
+                                const name = document.querySelector('#name');
+                                const password = document.querySelector('#password');
+
                                 layout.addEventListener('click', (event)=>{
                                     // layout.style.display = 'none';
                                     layout.style.opacity = 0;
                                     layout.style.pointerEvents = 'none';
-
                                 })
 
                                 input.addEventListener('click', (event)=>{
                                     event.stopPropagation();
                                 })
+
                                 button.addEventListener('click', (event)=>{
                                     event.stopPropagation();
                                     if (type.indexOf(input.value) === -1){
@@ -204,6 +244,16 @@
                                     layout.style.opacity = 1;
                                     layout.style.pointerEvents = 'auto';
                                 })
+
+                                function layout_appear(){
+                                    layout.style.opacity = 1;
+                                    layout.style.pointerEvents = 'auto';
+                                }
+
+                                function layout_disappear(){
+                                    layout.style.opacity = 0;
+                                    layout.style.pointerEvents = 'none';
+                                }
 
                                 function check_status(){
                                     const container = document.querySelector('.header-action.d-none.d-md-block').children[0];
@@ -279,19 +329,43 @@
                                     "password": 123,
                                 };
 
-                                const registerBody = {
-                                    "username": "sjh",
-                                    "password": 123,
-                                    "email": "1234567@qq.com",
+                                let registerBody = {
+                                    "username": name.value,
+                                    "password": password.value,
+                                    "email": name.value + "@qq.com",
                                     "isVip": false
                                 };
 
                                 let target = loginBody;
+                                const btn = document.querySelector('#yes');
+                                btn.addEventListener('click', ()=>{
+                                    target = {
+                                        "username": name.value,
+                                        "password": password.value
+                                    };
+                                    registerBody = {
+                                        "username": name.value,
+                                        "password": password.value,
+                                        "email": name.value + "@qq.com",
+                                        "isVip": false
+                                    };
+                                })
 
                                 function create_login(){
-                                    console.log("in");
-                                    if(target === loginvipBody) target = loginBody;
-                                    else target = loginvipBody;
+                                    box_container.style.opacity = 1;
+                                    box_container.pointerEvents = 'auto';
+
+                                    target = {
+                                        "username": name.value,
+                                        "password": password.value
+                                    };
+                                    registerBody = {
+                                        "username": name.value,
+                                        "password": password.value,
+                                        "email": name.value + "@qq.com",
+                                        "isVip": false
+                                    };
+
                                     // 发送请求
                                     fetch('http://localhost:8080/user/login', {
                                         method: 'POST', // 指定请求方法为POST
@@ -302,7 +376,6 @@
                                     })
                                         .then(response => response.text()) // 解析响应体为JSON格式
                                         .then(data => {
-                                            console.log(data); // 处理响应数据
                                             if (data === "登录成功"){
                                                 fetch('http://localhost:8080/user/is_vip')
                                                     .then(response => response.text())
@@ -320,9 +393,9 @@
                                                 container.appendChild(createLi("退出登录"));
 
                                             }else{
-                                                console.log(data);
+                                                console.warn(data);
                                                 welcome.innerText = '未登录，请登录';
-                                                console.warn("不存在该用户！请注册！")
+                                                console.log(registerBody);
 
                                                 fetch('http://localhost:8080/user/register', {
                                                     method: 'POST', // 指定请求方法为POST
@@ -334,6 +407,10 @@
                                                     .then(response => response.text()) // 解析响应体为JSON格式
                                                     .then(data => {
                                                         console.log(data); // 处理响应数据
+                                                        // if (data === "用户注册成功"){
+                                                        //     box_container.style.opacity = 0;
+                                                        //     box_container.pointerEvents = 'none';
+                                                        // }
                                                     })
                                                     .catch(error => {
                                                         console.error('Error:', error); // 处理错误
@@ -915,7 +992,7 @@
 <!--                                    <img src="/img/poster/ucm_poster01.jpg" alt="">-->
                                     <a th:href="'http://localhost:8080/plays?videoId=' + ${movie.id}">
 <!--                                        <img th:src="@{'../' + ${movie.coverUrl}}" alt="">-->
-                                        <img th:src="@{'../img/8.jpg'}" alt="">
+                                        <img th:src="@{'../../' + ${movie.coverUrl}}" alt="">
                                     </a>
                                 </div>
                                 <div class="movie-content">

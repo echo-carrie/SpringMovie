@@ -104,6 +104,7 @@
 
                                     <div class="layout">
                                         <input type="text" class="search-box">
+<!--                                        <input type="text" class="search-box">-->
                                         <button id="search-confirm">确认</button>
                                     </div>
 
@@ -778,11 +779,11 @@
                             <div class="pagination-wrap mt-30">
                                 <nav>
                                     <ul>
-                                        <li class="active"><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=1&pageSize=10'}">1</a></li>
-                                        <li><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=2&pageSize=10'}">2</a></li>
-                                        <li><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=3&pageSize=10'}">3</a></li>
-                                        <li><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=4&pageSize=10'}">4</a></li>
-                                        <li><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=' + ${page.pageNum + 1} + '&pageSize=10'}">Next</a></li>
+                                        <li th:classappend="(${page.pageNum == 1} ? 'active' : '') + ' flag'"><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=1&pageSize=3'}">1</a></li>
+                                        <li th:classappend="(${page.pageNum == 2} ? 'active' : '') + ' flag'"><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=2&pageSize=3'}">2</a></li>
+                                        <li th:classappend="(${page.pageNum == 3} ? 'active' : '') + ' flag'"><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=3&pageSize=3'}">3</a></li>
+                                        <li th:classappend="(${page.pageNum >= 4} ? 'active' : '') + ' flag'"><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=4&pageSize=3'}">4</a></li>
+                                        <li><a th:href="@{'http://localhost:8080/movies/genre?genre=' + ${reslist[0].genre} + '&pageNum=' + ${page.pageNum + 1} + '&pageSize=3'}">Next</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -791,6 +792,24 @@
                 </div>
             </section>
             <!-- movie-area-end -->
+            <script>
+                window.onload = ()=>{
+                    const flagbtn = document.querySelectorAll('.flag');
+                    console.log(flagbtn);
+
+                    // for(let i =0;i<flagbtn.length;i++){
+                    //     flagbtn[i].addEventListener('click', ()=>{
+                    //         flagbtn[0].className = 'flag'
+                    //         for(let j =0;j<flagbtn.length;j++) {
+                    //             flagbtn[j].classList.remove('active');
+                    //         }
+                    //         // flagbtn[i].classList.add('active');
+                    //     })
+                    // }
+
+
+                }
+            </script>
 
             <!-- newsletter-area -->
             <section class="newsletter-area newsletter-bg" data-background="/img/bg/newsletter_bg.jpg">

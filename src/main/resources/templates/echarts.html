@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Charts</title>
-    <script th:src="@{/js/echarts.min.js}"></script>
-    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{../js/echarts.min.js}"></script>
+    <script th:src="@{../js/jquery-3.6.0.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/animate.min.css}">
     <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
@@ -490,11 +490,11 @@
                         <div class="footer-menu">
                             <nav>
                                 <ul class="navigation">
-                                    <li><a th:href="@{../popular.html}">Home</a></li>
-                                    <li><a th:href="@{../popular.html}">Movie</a></li>
+                                    <li><a th:href="@{../popular.html}">主页</a></li>
+                                    <li><a th:href="@{../popular.html}">电影</a></li>
                                     <!--                                            <li><a th:href="@{../popular.html}">tv show</a></li>-->
-                                    <li><a th:href="@{../popular.html}">pages</a></li>
-                                    <li><a th:href="@{../pricing.html}">Pricing</a></li>
+                                    <li><a th:href="@{../popular.html}">页面</a></li>
+                                    <li><a th:href="@{http://localhost:8080/api/movies/export}">导出</a></li>
                                 </ul>
                                 <div class="footer-search">
                                     <form action="#">
